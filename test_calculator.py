@@ -1,5 +1,5 @@
 from calculator import add
-import math
+from pytest import approx
 
 def test_add_ex1():
     res = add(1, 2)
@@ -10,6 +10,6 @@ def test_add_ex1():
 def test_add_ex2():
     val1 = 0.1
     val2 = 0.2
-    res = abs(add(val1, val2))
-    assert abs(res) == 0.3, f"Expected the sum to be 0.3, not {res}" 
+    res = add(val1, val2)
+    assert res == approx(0.3), f"Expected the sum to be 0.3, not {res}" 
     
