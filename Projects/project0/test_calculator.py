@@ -10,4 +10,3 @@ import pytest
 def test_add(val1, val2, expected):
     res = add(val1, val2)
     assert res == pytest.approx(expected)
-   
