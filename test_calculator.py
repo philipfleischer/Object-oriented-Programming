@@ -1,8 +1,12 @@
 from calculator import add
+import pytest
 
-def test_add():
-    res = add(1, 2)
-    assert res == 3, f"Expected the sum to be 3, not {res}" 
+@pytest.mark.parametrize("val1, val2, expected", [
+    (1, 2, 3),
+    (-1, 1, 0),
+    (0.1, 0.2, 0.3)
+])
+def test_add(val1, val2, expected):
+    res = add(val1, val2)
+    assert res == pytest.approx(expected)
     
-
-test_add()
