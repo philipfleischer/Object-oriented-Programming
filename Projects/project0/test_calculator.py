@@ -1,4 +1,4 @@
-from calculator import add
+from calculator import *
 import pytest
 
 @pytest.mark.parametrize("val1, val2, expected", [
