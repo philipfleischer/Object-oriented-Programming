@@ -38,3 +38,17 @@ def test_factorial(val, expected):
 ])
 def test_sin(val, expected):
     assert sin(val, N=20) == pytest.approx(expected, rel=1e-6)
+
+def test_factorial_raises_ValueError_for_negatives():
+    with pytest.raises(ValueError):
+        factorial(-1)
+
+def test_factorial_raises_TypeError():
+    with pytest.raises(TypeError):
+        factorial(4/9)
+
+def test_divide_by_zero():
+    """We do not need this manually, since Python already
+    checks for this scenario"""
+    with pytest.raises(ZeroDivisionError):
+        divide(2, 0)
