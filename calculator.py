@@ -9,13 +9,11 @@ def divide(x: float, y: float) -> float:
     return x//y
 
 def factorial(x: int) -> int:
-    """Returns n! of input: n"""
+    """Returns n! of input: n, for non-negative int´s"""
     if type(x) != int: 
         raise TypeError("Factorial needs a number as argument")
     if x < 0:
         raise ValueError("Negative not allowed in factorial")
-    if x == 0 or x == 1:
-        return 1
 
     val = 1
     for i in range(0, x-1):
