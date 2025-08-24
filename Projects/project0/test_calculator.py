@@ -11,14 +11,29 @@ def test_add(val1, val2, expected):
     res = add(val1, val2)
     assert res == pytest.approx(expected)
    
+@pytest.mark.parametrize("val1, val2, expected", [
+    (10, 5, 2),
+    (10, -5, -2),
+    (10, 1, 10)
+])
 def test_divide(val1, val2, expected):
     res = divide(val1, val2)
     assert res == pytest.approx(expected)
 
+@pytest.mark.parametrize("val, expected", [
+    (9, 3265920),
+    (-2, -2),
+    (19, 2311256907767808000)
+])
 def test_factorial(val, expected):
     res = factorial(val)
-    assert res == pytest.approx(expected)
+    assert res == expected
 
+@pytest.mark.parametrize("val, N, expected", [
+    (10, 20, 100),
+    (-1, 20, 100),
+    (7, 20, -100)
+])
 def test_sin(val, N, expected):
     res = sin(val, N)
     assert res == pytest.approx(expected)

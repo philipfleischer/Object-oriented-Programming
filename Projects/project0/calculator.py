@@ -4,11 +4,14 @@ def add(x: float, y: float) -> float:
 
 def divide(x: float, y: float) -> float:
     """Returns the dividend of two numbers"""
-    pass
+    return x//y
 
 def factorial(x: int) -> int:
     """Returns n! of input: n"""
-    pass
+    val = x
+    for i in range(0, x-1):
+        val *= x-i
+    return val
 
 def sin(x: int, N: 20) -> int:
     pass
