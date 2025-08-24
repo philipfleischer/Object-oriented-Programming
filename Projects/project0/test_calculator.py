@@ -1,15 +1,13 @@
 from calculator import add
-from pytest import approx
+import pytest
 
-def test_add_ex1():
-    res = add(1, 2)
-    assert res == 3, f"Expected the sum to be 3, not {res}" 
-    
+@pytest.mark.parametrize("val1, val2, expected", [
+    (1, 2, 3),          #The same test case as test_add_ex1() in branch: exercise5
+    (-1, 1, 0),         #Test to check for negative numbers
+    (0.1, 0.2, 0.3)     #The same test case as test_add_ex2() in branch: exercise5
+])
 
-
-def test_add_ex2():
-    val1 = 0.1
-    val2 = 0.2
+def test_add(val1, val2, expected):
     res = add(val1, val2)
-    assert res == approx(0.3), f"Expected the sum to be 0.3, not {res}" 
-    
+    assert res == pytest.approx(expected)
+   
