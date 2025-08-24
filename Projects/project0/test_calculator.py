@@ -11,3 +11,14 @@ def test_add(val1, val2, expected):
     res = add(val1, val2)
     assert res == pytest.approx(expected)
    
+def test_divide(val1, val2, expected):
+    res = divide(val1, val2)
+    assert res == pytest.approx(expected)
+
+def test_factorial(val, expected):
+    res = factorial(val)
+    assert res == pytest.approx(expected)
+
+def test_sin(val, N, expected):
+    res = sin(val, N)
+    assert res == pytest.approx(expected)
