@@ -10,11 +10,7 @@ def count_chars(string: str) -> dict:
     """
     dict_char = {}
     list_char = []
-    for letter in string:
-        for char in letter:
-            list_char.append(char.lower())
-
-    for char in list_char:
+    for char in string.lower():
         if char in dict_char:
             dict_char[char] += 1
         else:
@@ -36,3 +32,18 @@ def main():
     print_counted_dict(dict_char_count)
 
 main()
+
+
+"""
+A better solution to the problem:
+
+from collections import defaultdict
+
+
+def count_chars_defaultdict(text):
+    count = defaultdict(int)
+    for char in text.lower():
+        count[char] += 1
+    return count
+
+"""
