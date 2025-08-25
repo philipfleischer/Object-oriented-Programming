@@ -36,7 +36,7 @@ main()
 
 """
 A better solution to the problem:
-
+""""
 from collections import defaultdict
 
 
@@ -46,4 +46,19 @@ def count_chars_defaultdict(text):
         count[char] += 1
     return count
 
-"""
+
+
+from collections import Counter
+
+
+def count_chars_str_count(text):
+    text = text.lower()
+    return {char: text.count(char) for char in set(text)}
+
+
+def count_chars_counter(text):
+    return Counter(text.lower())
+
+
+
+sorted(count.items(), key=lambda elem: elem[1], reverse=True)
