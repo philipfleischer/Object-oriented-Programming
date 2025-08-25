@@ -40,6 +40,7 @@ def print_deck(deck: list):
 def main():
     deck = make_card_deck()
     shuffled_deck = shuffle_deck(deck)
-    sort_deck(shuffled_deck)
+    sorted_deck = sort_deck(shuffled_deck)
+    print_deck(sorted_deck)
 
 main()
