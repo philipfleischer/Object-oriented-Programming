@@ -6,7 +6,7 @@
 
 import pytest
 import math
-from calculator import *
+import calculator as calc
 
 @pytest.mark.parametrize("val1, val2, expected", [
     (1, 2, 3),          #Simple test case
@@ -15,7 +15,7 @@ from calculator import *
 ])
 
 def test_add(val1: float, val2: float, expected: float) -> None:
-    res = add(val1, val2)
+    res = calc.add(val1, val2)
     assert res == pytest.approx(expected)
 
 @pytest.mark.parametrize("val1, val2, expected", [
@@ -24,7 +24,7 @@ def test_add(val1: float, val2: float, expected: float) -> None:
     (10, 1, 10)
 ])
 def test_divide(val1: float, val2: float, expected: float) -> None:
-    res = divide(val1, val2)
+    res = calc.divide(val1, val2)
     assert res == pytest.approx(expected)
 
 @pytest.mark.parametrize("val, expected", [
@@ -33,7 +33,7 @@ def test_divide(val1: float, val2: float, expected: float) -> None:
     (19, 121645100408832000)
 ])
 def test_factorial(val: int, expected: int) -> None:
-    res = factorial(val)
+    res = calc.factorial(val)
     assert res == expected
 
 @pytest.mark.parametrize("val, expected", [
@@ -43,7 +43,7 @@ def test_factorial(val: int, expected: int) -> None:
     (3*math.pi/2, -1)
 ])
 def test_sin(val: float, expected: float) -> None:
-    assert sin(val) == pytest.approx(expected, rel=1e-6)
+    assert calc.sin(val) == pytest.approx(expected, rel=1e-6)
 
 @pytest.mark.parametrize("inp, exp_exc", [
     (-1, ValueError),       #Negative value to get ValueError
@@ -52,11 +52,11 @@ def test_sin(val: float, expected: float) -> None:
 ])
 def test_factorial_exceptions(inp: int, exp_exc: int) -> None:
     with pytest.raises(exp_exc):
-        factorial(inp)
+        calc.factorial(inp)
 
 
 def test_divide_by_zero() -> None:
     """We do not need this manually, since Python already
     checks for this scenario"""
     with pytest.raises(ZeroDivisionError):
-        divide(2, 0)
+        calc.divide(2, 0)
