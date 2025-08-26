@@ -28,8 +28,8 @@ def sin(x: float, N=20) -> float:
     Uses factorial() function above.
     N should be small (e.g.: N=20)"""
     x = ((x + math.pi) % (2*math.pi)) - math.pi
-    sinValue = 0
+    sin_value = 0
     for i in range(N + 1):
-        sinValue += ((-1)**i) * (x**(2*i + 1)) / factorial(2*i + 1)
+        sin_value += ((-1)**i) * (x**(2*i + 1)) / factorial(2*i + 1)
 
-    return sinValue
+    return sin_value
