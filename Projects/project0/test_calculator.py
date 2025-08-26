@@ -14,7 +14,7 @@ from calculator import *
     (0.1, 0.2, 0.3)     #Test case for float values, use approx
 ])
 
-def test_add(val1: float, val2: float, expected: float):
+def test_add(val1: float, val2: float, expected: float) -> None:
     res = add(val1, val2)
     assert res == pytest.approx(expected)
 
@@ -23,7 +23,7 @@ def test_add(val1: float, val2: float, expected: float):
     (10, -5, -2),
     (10, 1, 10)
 ])
-def test_divide(val1: float, val2: float, expected: float):
+def test_divide(val1: float, val2: float, expected: float) -> None:
     res = divide(val1, val2)
     assert res == pytest.approx(expected)
 
@@ -32,7 +32,7 @@ def test_divide(val1: float, val2: float, expected: float):
     (2, 2),
     (19, 121645100408832000)
 ])
-def test_factorial(val: int, expected: int):
+def test_factorial(val: int, expected: int) -> None:
     res = factorial(val)
     assert res == expected
 
@@ -42,7 +42,7 @@ def test_factorial(val: int, expected: int):
     (math.pi/2, 1),
     (3*math.pi/2, -1)
 ])
-def test_sin(val: float, expected: float):
+def test_sin(val: float, expected: float) -> None:
     assert sin(val) == pytest.approx(expected, rel=1e-6)
 
 @pytest.mark.parametrize("inp, exp_exc", [
@@ -50,12 +50,12 @@ def test_sin(val: float, expected: float):
     (1.5, TypeError),       #Decimal value to get TypeError
     ("Hallo", TypeError)    #Non-integer value to get TypeError
 ])
-def test_factorial_exceptions(inp: int, exp_exc: int):
+def test_factorial_exceptions(inp: int, exp_exc: int) -> None:
     with pytest.raises(exp_exc):
         factorial(inp)
 
 
-def test_divide_by_zero():
+def test_divide_by_zero() -> None:
     """We do not need this manually, since Python already
     checks for this scenario"""
     with pytest.raises(ZeroDivisionError):
