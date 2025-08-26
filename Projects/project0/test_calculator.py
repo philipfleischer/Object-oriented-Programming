@@ -1,5 +1,6 @@
 import pytest
 import math
+from typing import Type
 import calculator as calc
 
 # To run test:
@@ -62,7 +63,7 @@ def test_sin(val: float, expected: float) -> None:
     (1.5, TypeError),       #Decimal value to get TypeError
     ("Hallo", TypeError)    #Non-integer value to get TypeError
 ])
-def test_factorial_exceptions(inp: int, exp_exc: int) -> None:
+def test_factorial_exceptions(inp: int, exp_exc: Type[BaseException]) -> None:
     with pytest.raises(exp_exc):
         calc.factorial(inp)
 
