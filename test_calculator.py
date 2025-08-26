@@ -66,10 +66,8 @@ def test_factorial_exceptions(inp: int, exp_exc: int) -> None:
     with pytest.raises(exp_exc):
         calc.factorial(inp)
 
-
 def test_divide_by_zero() -> None:
     """We do not need this manually, since Python already
     checks for this scenario"""
     with pytest.raises(ZeroDivisionError):
         calc.divide(2, 0)
-
