@@ -15,4 +15,22 @@ def test_vektor_addisjon_med_heltall() -> None:
 
     assert sum(w) == sum(u) + sum(v)
 
+def test_vektor_addisjon_med_ulik_lengde():
+    """Kjøres fra terminal: pytest test_lec4.py"""
+    u = [1,2]
+    v = [3,4,5,6]
+    w = vektor_addisjon(u,v)
+
+    korteste = min(len(u), len(v))
+    lengste = max(len(u), len(v))
+
+    assert len(w) == lengste
+
+    for i in range(korteste, lengste):
+        assert w[i] == v[i]
+    
+    u2 = [1,2,0,0]
+    w2 = vektor_addisjon(u2, v)
+    assert w == w2
+
     
