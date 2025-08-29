@@ -12,3 +12,14 @@ PEP8 og andre guider til kodestil.
 PEP8 er en veiledning til "best practices" laget av Python utviklere. Må ikke følges strent, finnes andre måter. Å ha et bevisst forhold til hvordor disse anbefalingene er slik de er.
 Må følge PEP8 for Prosjekt 0.
 
+Må ikke følge PEP8 og lignende slavisk, bruk intuisjonen for når det lønner og egener seg å bruke.
+
+Hva er vakker kode?
+Not: clever algorithm, sneaky language features, solving a problem with the least amount of key strokes.
+Because its not. Code like that is cute.
+
+Dokumentasjon:
+Hva er det som skjer her, ikke bare hvordan den gjør det.
+
+README.md
+Gir godt overblikk over koden i en mappe. GitHub har integrert dette godt.
