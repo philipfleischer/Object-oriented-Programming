@@ -6,5 +6,14 @@ def vektor_addisjon(u: list[int | float],
         w = []
         n = max(len(u), len(v))
         for i in range(n):
-            w.append(u[i] + v[i])
+            try:
+                #Antar lik lengde (litt naivt)
+                w.append(u[i] + v[i])
+            except IndexError:
+                #Antar v er for kort, bruker 0 som v-verdi
+                try:
+                    w.append(u[i] + 0)
+                except IndexError:
+                    #Antar u er for kort, bruker 0 som u-verdi
+                    w.append(0 + v[i])
         return w
