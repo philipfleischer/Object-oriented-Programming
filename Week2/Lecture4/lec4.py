@@ -4,6 +4,7 @@ def vektor_addisjon(u: list[int | float],
                     -> list[int | float]:
         """Tolker to lister som 3D-vektorer og adderer dem elementvis."""
         w = []
-        for i in range(3):
+        n = max(len(u), len(v))
+        for i in range(n):
             w.append(u[i] + v[i])
         return w

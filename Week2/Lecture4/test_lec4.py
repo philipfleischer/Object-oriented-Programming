@@ -17,6 +17,8 @@ def test_vektor_addisjon_med_heltall() -> None:
 
 def test_vektor_addisjon_med_ulik_lengde():
     """Kjøres fra terminal: pytest test_lec4.py"""
+    # TODO: Husk å teste hva som skjer hvis motsatt rekkefølge:
+    #       vektor_addisjon(v, u)
     u = [1,2]
     v = [3,4,5,6]
     w = vektor_addisjon(u,v)
@@ -33,4 +35,3 @@ def test_vektor_addisjon_med_ulik_lengde():
     w2 = vektor_addisjon(u2, v)
     assert w == w2
 
-    
