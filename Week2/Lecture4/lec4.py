@@ -1,3 +1,7 @@
+class LazyProgrammerError(Exception):
+    pass
+
+
 # \ betyr å fortsette på neste linje
 def vektor_addisjon(u: list[int | float], 
                     v: list[int | float]) \
@@ -16,4 +20,8 @@ def vektor_addisjon(u: list[int | float],
                 except IndexError:
                     #Antar u er for kort, bruker 0 som u-verdi
                     w.append(0 + v[i])
+                except NotImplementedError:
+                    print("Not implemented yet")
+                    raise LazyProgrammerError("Have you forgetten to implement code?")
         return w
+
