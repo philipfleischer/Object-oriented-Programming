@@ -32,6 +32,6 @@ if len(sys.argv) > 1:
         smart_logger.setLevel(logging.INFO)
     elif sys.argv[1] == "DEBUG":
         smart_logger.setLevel(logging.DEBUG)
-
+tall = 234543
 smart_logger.info("DEtte ser ikke brukeren vanligvis")
-smart_logger.debug("DEtte ser ikke brukeren vanligvis")
+smart_logger.debug(f"DEtte ser ikke brukeren vanligvis {tall}")
