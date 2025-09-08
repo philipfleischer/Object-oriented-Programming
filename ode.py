@@ -7,9 +7,11 @@ class ODEModel(abc.ABC):
     en løsningsmetode for en bestemt type ODE. """
     
     @abc.abstractmethod
-    def __call__(self, t: float, u: np.ndarray) -> np.ndarray:
+    def __call__(self, t: float, u: np.ndarray[float]) -> np.ndarray[float]:
         """Regne ut høre side (RHS) av difflikningen du/dt = f(t, u).
         Må implemeneteres av klasser som arver herfra, ellers får du 
         NotImplementetError. """
         raise NotImplementedError
+
+
     

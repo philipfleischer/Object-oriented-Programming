@@ -1,6 +1,8 @@
 import numpy as np
+from ode import ODEModel
 
-class ExponentialDecay:
+#ExponentialDecay inherits from ODEModel
+class ExponentialDecay(ODEModel):
     """Representerer en difflikning (ODE) på formen:
     du/dt = -au"""
     
