@@ -29,3 +29,8 @@ def test_negative_decay_raises_ValueError_constructor() -> None:
     a = -1.0
     with pytest.raises(ValueError):
         should_fail = ExponentialDecay(a)
+
+    a = 0.4
+    model = ExponentialDecay(a)
+    with pytest.raises(ValueError):
+        model.decay = -1.0
