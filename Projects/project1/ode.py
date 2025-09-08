@@ -6,6 +6,7 @@ class ODEModel(abc.ABC):
     Kan ikke brukes direkte - må arves fra og det må implementeres
     en løsningsmetode for en bestemt type ODE. """
     
+    @abc.abstractmethod
     def __call__(self, t: float, u: np.ndarray) -> np.ndarray:
         """Regne ut høre side (RHS) av difflikningen du/dt = f(t, u).
         Må implemeneteres av klasser som arver herfra, ellers får du 
