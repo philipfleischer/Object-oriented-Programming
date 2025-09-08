@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 from exp_decay import ExponentialDecay
 
 #Test right hand side = test_rhs
@@ -19,7 +20,6 @@ def test_rhs() -> None:
      callable call, but an object in every other instance.) """
     du_dt = model(t, u)
     #Using np.isclose on float numbers, to get approx values
-    #assert np.isclose(du_dt == -1.28)   # u'(t) = -1.28
     assert np.isclose(du_dt, -1.28)   # u'(t) = -1.28
 
 def test_negative_decay_raises_ValueError_constructor() -> None:
@@ -27,8 +27,5 @@ def test_negative_decay_raises_ValueError_constructor() -> None:
     Kjøres med: pytest test_exp_decay.py"""
 
     a = -1.0
-    try:
+    with pytest.raises(ValueError):
         should_fail = ExponentialDecay(a)
-        assert False    #Hvis vi kommer hit, gikk det dårlig
-    except ValueError:
-        assert True     #Hvis vi kommer hit, gikk det bra
