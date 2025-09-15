@@ -25,14 +25,23 @@ class Duck(Swimming, Flying):
 
 class Penguin(Swimming):
     def swim(self) -> None:
-        print("The penguin is swimming,")
+        print("The penguin is swimming.")
 
+
+class Frigatebird(Flying):
+    def fly(self) -> None:
+        print("The frigate bird is flying.")
+
+
+class Dodo:
+    pass
 
 if __name__ == "__main__":
     #testObject = Swimming()
     #testObject.swim()
 
-    objects: list[object] = [Duck(), "not a bird", Penguin()]
+    objects: list[object] = [Duck(), "not a bird", 
+                             Penguin(), Frigatebird(), Dodo()]
 
     for obj in objects:
         # isinstance sjekker om objektet er av type Flying

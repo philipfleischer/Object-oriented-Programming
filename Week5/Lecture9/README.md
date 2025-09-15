@@ -14,3 +14,5 @@ Type sjekking kan bli rotete, b: Bird er enklere enn b: Albatross, Dove, osv.
 Hva er alternativet?
 Duck typing (py):
 - "if it.swim() like a Duck and .fly() like a Duck, it must be a Duck".
+
+
