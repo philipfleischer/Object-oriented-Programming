@@ -16,3 +16,28 @@ Duck typing (py):
 - "if it.swim() like a Duck and .fly() like a Duck, it must be a Duck".
 
 
+Fordeler med duck typing i py:
+Koden blir enklere og fleksibel når du kan fokusere på hva objektene gjør og ikke hva de er
+Du kan lage enkler prototyper av mer kompliserte klasser for å teste anenn kode i en tidlig fase
+Du kan gjenbruke en klasse et annet sted uten å importere alle kalassene som arver fra hverandre.
+
+
+Ulemper med duck typing:
+Programmet kan kræsje elelr gi feilmelding nåpr det kjøres sinden det mangler en modetode eller atrbiutt som man antok var der.
+...
+
+
+Definere grensesnitt med abstract base class, (interface, ABCs):
+En anen måte å bruke arv på
+lager en abstrakt klasse = en du ikek kan lage objetker av (du kan ikke lage en swimming, men du kan lage en Duck).
+En klasse som arver fra denne klasessen må implementere alle metodene i grensesnittet.
+hvis du glemmer en får du NotImplementedError
+Kan dermed tvinge et objekt til å ha bestemte moder fra et eller flere grensesnitt.
+
+
+Kan arve fra flere klasser og ikke bare én.
+Python støtter generelt arv fra flere kalasser samtidig. Det er viktig å eksplisitt si hvilke klasser vi arver fra når, istedet for å bare skrive super().__init__(), så må man skrive f.eks: Student.__init__(self) (ta med self også).
+
+
+
+
