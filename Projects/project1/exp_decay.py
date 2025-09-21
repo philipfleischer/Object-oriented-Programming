@@ -7,20 +7,36 @@ import matplotlib.pyplot as plt
 #ExponentialDecay inherits from ODEModel
 class ExponentialDecay(ODEModel):
     """
-    Represents a differntial equation (ODE) on the form:
-    du/dt = -au"""
+    A simple model of exponential decay.
+    This represents the differntial equation (ODE):
+        du/dt = -au
+    Where 'u' is the quantity that decays, and 'a' is the decay constant.
+    """
     
     def __init__(self, a: float):
         """
-        a is a decay-constant, it can not be negative (-> ValueError)."""
+        Creates a new exponential decay model.
+
+        Parameters:
+        a:  float
+            The decay constant. It controls how fast 'u' decays.
+            It must be non-negative, otherwise an error is raised.
+        """
         self.decay = a
 
 
     def __call__(self, t: float, u: np.ndarray[float]) -> np.ndarray[float]:
         """
-        When we call an object as a function, du/dt will be 
-        calculated for the values of t and u (u can be an array
-        with many different elements, and du/dt might have common elements)."""
+        Calculates how quickly the system changes at a given time.
+        
+        Paraters:
+        t:  float
+            The time at which to evaluate the rate of change.
+            (Note: 't' is not actually used here because we do not
+            depend on the time variabel directly).
+        u:  np.ndarray
+            The rate of change that du/dt has at this time and state.
+        """
         du_dt = -self.decay * u
         return du_dt
 
@@ -28,20 +44,36 @@ class ExponentialDecay(ODEModel):
     @property
     def decay(self) -> float:
         """
-        Returns decay-constant a."""
+        The decay constant 'a'.
+
+        This class property tells us how quickly the quantity
+        decays, where larger values results in faster decays.
+        """
         return self._a
 
     @decay.setter
     def decay(self, value: float) -> None:
         """
-        Changes decay-constant a < ValueError if not positive."""
+        Sets a new value for the decay constant.
+
+        Parameters:
+        value:  float
+                The new decay constant given, must be Non-Negative.
+        
+        Raises:
+        ValueError -> If value is negative.
+        """
         if value < 0:
             raise ValueError(f"ExponentialDecay.__init__: value is negative ({value})")
         self._a = value
 
     @property
     def num_states(self):
-        """Exponention decay has one state variable: u."""
+        """
+        The number of state variabels in the model is returned.
+        The Exponential decay ODE only has one state var (u), so
+        it always returns 1.
+        """
         return 1
 
 
@@ -54,19 +86,13 @@ if __name__ == "__main__":
     model = ExponentialDecay(a)
 
     #Initial condition and time span
-    u0 = [3.2]
+    u0 = np.array([3.2])
     T = 10.0
-    t_eval = np.arange(0, T, 0.01)
-
-    #This returns an object with .t for time points, 
-    # .y for solution arrays, .success to check for 
-    # RunTimeErrors, etc.
-    results = solve_ivp(model, (0, T), u0, t_eval=t_eval)
-    #Solution is the single state ExponentialDecay can be, var u.
-    solution = results.y[0]
+    dt = 0.01
+    result = model.solve(u0, T=10, dt=0.01)
 
     #Plotting the result and solution into a figure
-    plt.plot(results.t, solution, label="Numerical solution")
+    plt.plot(result.time, result.solution[0], label="Decay")
     plt.xlabel("t")
     plt.ylabel("u(t)")
     plt.legend()
