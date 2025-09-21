@@ -22,6 +22,7 @@ class ExponentialDecay(ODEModel):
             The decay constant. It controls how fast 'u' decays.
             It must be non-negative, otherwise an error is raised.
         """
+        if a < 0: raise ValueError("decay constant cannot be a negative integer value")
         self.decay = a
 
 
@@ -68,7 +69,7 @@ class ExponentialDecay(ODEModel):
         self._a = value
 
     @property
-    def num_states(self):
+    def num_states(self) -> int:
         """
         The number of state variabels in the model is returned.
         The Exponential decay ODE only has one state var (u), so
