@@ -2,15 +2,22 @@ import numpy as np
 import abc
 #Sier at ODEModel skal arve fra abc:
 class ODEModel(abc.ABC):
-    """Felles grensesnitt for alle ODE'er (ordinære difflikninger).
-    Kan ikke brukes direkte - må arves fra og det må implementeres
-    en løsningsmetode for en bestemt type ODE. """
+    """
+    Common interface for all ODE´s (ordinary differntial equations).
+    Can not be used directly - have to be inherited and it must
+    be implemented a solution for a particular type of ODE."""
     
     @abc.abstractmethod
-    def __call__(self, t: float, u: np.ndarray[float]) -> np.ndarray[float]:
-        """Regne ut høre side (RHS) av difflikningen du/dt = f(t, u).
-        Må implemeneteres av klasser som arver herfra, ellers får du 
-        NotImplementetError. """
+    def __call__(self, t: float, u: np.ndarray) -> np.ndarray:
+        """
+        Calculate right side of the diff equation du/dt = f(t, u).
+        Must be implemented from classes that inherits, or
+        else we will get NotImplementedError."""
+        raise NotImplementedError
+    
+    def num_states(self) -> int:
+        """Number of state variables in a ODE system.
+        This will differ on from different ODEModels."""
         raise NotImplementedError
 
 

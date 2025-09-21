@@ -3,36 +3,45 @@ from ode import ODEModel
 
 #ExponentialDecay inherits from ODEModel
 class ExponentialDecay(ODEModel):
-    """Representerer en difflikning (ODE) på formen:
+    """
+    Represents a differntial equation (ODE) on the form:
     du/dt = -au"""
     
     def __init__(self, a: float):
-        """a er decay-konstanten, kan ikke være negativ (da får mann
-        ValueError)."""
+        """
+        a is a decay-constant, it can not be negative (-> ValueError)."""
         self.decay = a
 
 
-    def __call__(self, t: float, u: np.ndarray[float]) ->np.ndarray[float]:
-        """Når vi kallet et objekt som en funksjon regnes du/dt ut for 
-        disse verdiene av t og u (u kan være en array med mange elementer,
-        og du/dt vil ha like mange elementer).)"""
+    def __call__(self, t: float, u: np.ndarray[float]) -> np.ndarray[float]:
+        """
+        When we call an object as a function, du/dt will be 
+        calculated for the values of t and u (u can be an array
+        with many different elements, and du/dt might have common elements)."""
         du_dt = -self.decay * u
         return du_dt
 
     #With this, the decay works as a variable instead of a function
     @property
     def decay(self) -> float:
-        """Returnerer decay-konstanten a."""
+        """
+        Returns decay-constant a."""
         return self._a
 
-    @decay.setter #Run on writing it in code?
+    @decay.setter
     def decay(self, value: float) -> None:
-        """Endrer decay-konstanten a < ValueError hvis ikke positiv verdi"""
+        """
+        Changes decay-constant a < ValueError if not positive."""
         if value < 0:
-            raise ValueError(f"ExponentialDecay.__init__: value er negativ ({value})")
+            raise ValueError(f"ExponentialDecay.__init__: value is negative ({value})")
         self._a = value
 
-#Eksempel-kode (kjøres ikke ved import)
+    @property
+    def num_states(self):
+        """Exponention decay has one state variable: u."""
+        return 1
+
+
 if __name__ == "__main__":
     eksempel = ExponentialDecay(2.0)
     print(eksempel.decay)
