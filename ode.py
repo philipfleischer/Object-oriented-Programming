@@ -12,6 +12,12 @@ class ODEResult(NamedTuple):
     """
     time: np.ndarray
     solution: np.ndarray
+
+class InvalidInitialConditionError(RuntimeError):
+    """
+    Raised when the initial condition u0 has the wrong shape/type.
+    """
+    pass
 class ODEModel(abc.ABC):
     """
     Common interface for all ODE´s (ordinary differntial equations).
@@ -58,9 +64,19 @@ class ODEModel(abc.ABC):
         - dt: How often we want results (time steps).
         - method: Which numerical method to use (Default is RK45).
 
+        Validates that u0 matches the model's number of states.
+
         solve() reutrns the times and the corresponding values of the system,
         so we can inspect or plot how the system changes over time.
         """
+
+        if not isinstance(u0, np.ndarray): raise InvalidInitialConditionError("u0 must be a numpy.ndarray")
+        if u0.ndim != 1: raise InvalidInitialConditionError("u0 must be a 1D numpy array.")
+        if len(u0) != self.num_states:
+            raise InvalidInitialConditionError(
+                f"u0 has length {len(u0)} but model expects {self.num_states} states"
+            )
+
         t_eval = np.arange(0, T + dt, dt)
         solution = solve_ivp(self, (0, T), u0, t_eval=t_eval, method=method)
         return self._create_result(solution)
