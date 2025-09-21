@@ -1,5 +1,8 @@
 import numpy as np
 from ode import ODEModel
+import scipy as sp
+from scipy.integrate import solve_ivp
+import matplotlib.pyplot as plt
 
 #ExponentialDecay inherits from ODEModel
 class ExponentialDecay(ODEModel):
@@ -45,3 +48,28 @@ class ExponentialDecay(ODEModel):
 if __name__ == "__main__":
     eksempel = ExponentialDecay(2.0)
     print(eksempel.decay)
+
+    #Parameter setup:
+    a = 0.4
+    model = ExponentialDecay(a)
+
+    #Initial condition and time span
+    u0 = [3.2]
+    T = 10.0
+    t_eval = np.arange(0, T, 0.01)
+
+    #This returns an object with .t for time points, 
+    # .y for solution arrays, .success to check for 
+    # RunTimeErrors, etc.
+    results = solve_ivp(model, (0, T), u0, t_eval=t_eval)
+    #Solution is the single state ExponentialDecay can be, var u.
+    solution = results.y[0]
+
+    #Plotting the result and solution into a figure
+    plt.plot(results.t, solution, label="Numerical solution")
+    plt.xlabel("t")
+    plt.ylabel("u(t)")
+    plt.legend()
+    plt.show()
+
+    
