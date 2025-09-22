@@ -1,7 +1,8 @@
 import numpy as np
 import pytest
 from exp_decay import ExponentialDecay
-from ode import InvalidInitialConditionError
+from ode import InvalidInitialConditionError, plot_ode_solution
+from pathlib import Path
 
 #Cases for testing: (a, u0_scalar, T, dt)
 TEST_CASES = [
@@ -105,3 +106,24 @@ def test_solve_solution(a: float, u0_s: float, T: float, dt: float) -> None:
     relative_error = np.linalg.norm(y - y_exact) / np.linalg.norm(y_exact)
     #Checking for 1% or less difference
     assert relative_error <= 0.01
+
+def test_plot_ode_solution_saves_file() -> None:
+    #initialize the test file, experiment now
+    #filename = Path("exponential_decay.png")
+    filename = Path("test_plot.png")
+
+    #Check if the file is already existing
+    if filename.is_file():
+        filename.unlink()
+
+    model = ExponentialDecay(0.4)
+    u0 = np.array([2.0])
+    result = model.solve(u0, T=2.0, dt=0.1)
+
+    #Here we call the plotting funciton we want to test
+    plot_ode_solution(results=result, state_labels=["u"], filename=filename)
+
+    #Check the file is created
+    assert filename.is_file()
+    #Delete the file
+    filename.unlink()

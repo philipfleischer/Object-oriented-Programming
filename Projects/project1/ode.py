@@ -104,14 +104,17 @@ def plot_ode_solution(
     result_time = np.array(results.time)
 
     solu = np.array(results.solution)
+    #If solu is a 1D, we reshape it to 2D array here
     if solu.ndim == 1:
         solu = solu.reshape(1, -1)
 
+    #extracting number of states (rows) and num time points (column)
     num_states, num_time = solu.shape
     if result_time.ndim != 1 or result_time.shape[0] != num_time:
         raise ValueError("result.time must be a 1D and match resiult.solutions time dimension.")
         
     if state_labels is None:
+        #If no labels, we construct them for {"State1", "State2", ... "StateK"}
         labels = [f"State {i + 1}" for i in range(num_states)]
     else:
         if len(state_labels) != num_states:
@@ -123,6 +126,7 @@ def plot_ode_solution(
     #Plotting the figure:
     #Instantiate the figure
     plt.figure()
+    #Plot in the states and time points
     for i in range(num_states):
         plt.plot(result_time, solu[i, :], label=labels[i])
         
