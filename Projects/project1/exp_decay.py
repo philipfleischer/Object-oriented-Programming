@@ -1,5 +1,5 @@
 import numpy as np
-from ode import ODEModel
+from ode import ODEModel, ODEResult, plot_ode_solution
 import scipy as sp
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
@@ -79,7 +79,7 @@ class ExponentialDecay(ODEModel):
 
 
 if __name__ == "__main__":
-    eksempel = ExponentialDecay(2.0)
+    """eksempel = ExponentialDecay(2.0)
     print(eksempel.decay)
 
     #Parameter setup:
@@ -97,6 +97,9 @@ if __name__ == "__main__":
     plt.xlabel("t")
     plt.ylabel("u(t)")
     plt.legend()
-    plt.show()
-
+    plt.show()"""
+    model = ExponentialDecay(0.4)
+    result = model.solve(u0=np.array([4.0]), T=10.0, dt=0.01)
+    print(type(result))
+    plot_ode_solution(results=result, state_labels=["u"], filename="exponential_decay.png")
     
