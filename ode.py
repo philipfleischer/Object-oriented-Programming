@@ -1,7 +1,8 @@
 import numpy as np
 import abc
-from typing import NamedTuple, Any
+from typing import NamedTuple, Any, Optional
 from scipy.integrate import solve_ivp
+import matplotlib.pyplot as plt
 
 class ODEResult(NamedTuple):
     """The result of solving an ODE.
@@ -80,3 +81,60 @@ class ODEModel(abc.ABC):
         t_eval = np.arange(0, T + dt, dt)
         solution = solve_ivp(self, (0, T), u0, t_eval=t_eval, method=method)
         return self._create_result(solution)
+
+def plot_ode_solution(
+    results: ODEResult,
+    state_labels: Optional[list[str]] = None,
+    filename: Optional[str] = None,
+    ) -> None:
+    """Plotting the solution of an ODE system.
+        
+        Parameters:
+        results:    ODEResult
+                Ouput from ODEModel.solve(), must have:
+                    - result.time: 1D array of time points T
+                    - result.solution: 2D array with shape num_states and T
+        state_labels:   list[str] | None, optional
+                Labels for each state.
+        filename:   str | None, optional
+            If not None, the plot is saved to file path.
+            Else: plot window is displayed.
+        Returns:    None
+        """
+    result_time = np.array(results.time)
+
+    solu = np.array(results.solution)
+    if solu.ndim == 1:
+        solu = solu.reshape(1, -1)
+
+    num_states, num_time = solu.shape
+    if result_time.ndim != 1 or result_time.shape[0] != num_time:
+        raise ValueError("result.time must be a 1D and match resiult.solutions time dimension.")
+        
+    if state_labels is None:
+        labels = [f"State {i + 1}" for i in range(num_states)]
+    else:
+        if len(state_labels) != num_states:
+            raise ValueError(
+                f"state_labels length ({len(state_labels)}) must be equal to the number of states: ({num_states})."
+            )
+        labels = state_labels
+
+    #Plotting the figure:
+    #Instantiate the figure
+    plt.figure()
+    for i in range(num_states):
+        plt.plot(result_time, solu[i, :], label=labels[i])
+        
+    plt.xlabel("Time")
+    plt.ylabel("State Value")
+    plt.grid(True, which="both", linestyle="--", alpha=0.4)
+    plt.legend()
+
+    if filename:
+        plt.savefig(filename, dpi=150, bbox_inches="tight")
+        plt.close()
+    else:
+        plt.show()
+
+            
