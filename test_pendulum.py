@@ -80,3 +80,24 @@ def test_solve_pendulum_function_zero_ic(L: float, g: float, T: float, dt: float
     assert np.allclose(result.x, 0.0)
     #Cartesion y -> -L
     assert np.allclose(result.y, -L)
+
+@pytest.mark.parametrize(
+    "L,g,u0,T,dt",
+    [   (1.0, 9.81, np.array([0.0, 0.0]), 2.0, 0.01),
+        (2.0, 9.81, np.array([0.1, 0.2]), 3.0, 0.01),  ]
+)
+def test_pendulum_energy_and_velocities(L: float, 
+                                        g: float, 
+                                        u0: float, 
+                                        T: float, 
+                                        dt: float) -> None:
+    model = Pendulum(L=L, g=g)
+    result = model.solve(u0=u0, T=T, dt=dt)
+
+    #Checking that each property can be computed and returns
+    # correct shapes for (potential_energy, vy, vx, kinetic_energy)
+    assert result.potential_energy.shape == result.time.shape
+    assert result.vx.shape == result.time.shape
+    assert result.vy.shape == result.time.shape
+    assert result.kinetic_energy.shape == result.time.shape
+    assert result.total_energy.shape == result.time.shape
