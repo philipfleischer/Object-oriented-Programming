@@ -135,6 +135,66 @@ class DoublePendulumResults:
         """
         return self.y1 - self.L2 * np.cos(self.theta2)
     
+    #Velocities
+    @property
+    def vx1(self) -> np.ndarray:
+        """
+        Velocity for x of pendulum 1.
+        """
+        return np.gradient(self.x1, self.time)
+
+    @property
+    def vy1(self) -> np.ndarray:
+        """
+        Velocity for y of pendulum 1.
+        """
+        return np.gradient(self.y1, self.time)
+    
+    @property
+    def vx2(self) -> np.ndarray:
+        """
+        Velocity for x of pendulum 2.
+        """
+        return np.gradient(self.x2, self.time)
+    
+    @property
+    def vy2(self) -> np.ndarray:
+        """
+        Velocity for y of pendulum 2.
+        """
+        return np.gradient(self.y2, self.time)
+    
+    #Energies
+    @property
+    def potential_energy(self) -> np.ndarray:
+        """
+        P = P1 + P2
+            P1 = g * (y1 + L1)
+            P2 = g * (y2 + L1 + L2)
+        """
+        P1 = self.g * (self.y1 + self.L1)
+        P2 = self.g * (self.y2 + self.L1 + self.L2)
+        return P1 + P2
+    
+    @property
+    def kinetic_energy(self) -> np.ndarray:
+        """
+        K = K1 + K2
+            K1 = 0.5 * (y1 + L1)
+            K2 = 0.5 * (y2 + L1 + L2)
+        """
+        K1 = 0.5 * (self.vx1**2 + self.vy1**2)
+        K2 = 0.5 * (self.vx2**2 + self.vy2**2)
+        return K1 + K2
+    
+    @property
+    def total_energy(self) -> np.ndarray:
+        """
+        Total energy = Kinetic energy + potential energy.
+        E = K + P.
+        """
+        return self.kinetic_energy + self.potential_energy
+
 class DoublePendulum(ODEModel):
     """
     Double pendulum with unit masses (M1 = M2 = 1). 
@@ -288,7 +348,45 @@ class DoublePendulum(ODEModel):
             L2=self.L2,
             g=self.g
         )
+    
+    def plot_energy(self, results: DoublePendulumResults, filename: Optional[str]=None) -> None:
+        t = results.time
+        P = results.potential_energy
+        K = results.kinetic_energy
+        E = results.total_energy
 
-        
-      
+        plt.figure()
+        plt.plot(t, P, label="Potential Energy")
+        plt.plot(t, K, label="Kinetic Energy")
+        plt.plot(t, E, label="Total Energy", linewidth=2)
+
+        plt.xlabel("Time [s]")
+        plt.ylabel("Energy [J]")
+        plt.title("Pendulum Energy VS. Time")
+        plt.grid(True, linestyle="--", alpha=0.4)
+        plt.legend()
+
+        if filename:
+            plt.savefig(filename, dpi=150, bbox_inches="tight")
+            plt.close()
+        else:
+            plt.show()
+
+
+def exercise_3d() -> None:
+    model = DoublePendulum(L1=1.0, L2=1.0, g=DEFAULT_G)
+
+    #u0 = theta1, omega1, theta2, omega2
+    u0 = np.array([np.pi/6, 0.35, 0.0, 0.0], dtype=float)
+    T = 10.0
+    dt = 0.01
+
+    #Radau used for stiff solver, energy behavior improvement
+    result = model.solve(u0=u0, T=T, dt=dt, method="Radau")
+
+    model.plot_energy(result, filename="energy_double.png")
+
+if __name__ == "__main__":
+    exercise_3d()
+
 
