@@ -349,29 +349,7 @@ class DoublePendulum(ODEModel):
             g=self.g
         )
     
-    def plot_energy(self, results: DoublePendulumResults, filename: Optional[str]=None) -> None:
-        t = results.time
-        P = results.potential_energy
-        K = results.kinetic_energy
-        E = results.total_energy
-
-        plt.figure()
-        plt.plot(t, P, label="Potential Energy")
-        plt.plot(t, K, label="Kinetic Energy")
-        plt.plot(t, E, label="Total Energy", linewidth=2)
-
-        plt.xlabel("Time [s]")
-        plt.ylabel("Energy [J]")
-        plt.title("Pendulum Energy VS. Time")
-        plt.grid(True, linestyle="--", alpha=0.4)
-        plt.legend()
-
-        if filename:
-            plt.savefig(filename, dpi=150, bbox_inches="tight")
-            plt.close()
-        else:
-            plt.show()
-
+    
 
 def exercise_3d() -> None:
     model = DoublePendulum(L1=1.0, L2=1.0, g=DEFAULT_G)
@@ -384,7 +362,7 @@ def exercise_3d() -> None:
     #Radau used for stiff solver, energy behavior improvement
     result = model.solve(u0=u0, T=T, dt=dt, method="Radau")
 
-    model.plot_energy(result, filename="energy_double.png")
+    plot_energy(result, filename="energy_double.png")
 
 if __name__ == "__main__":
     exercise_3d()
