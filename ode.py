@@ -33,6 +33,8 @@ class ODEModel(abc.ABC):
         else we will get NotImplementedError."""
         raise NotImplementedError
     
+    @property
+    @abc.abstractmethod
     def num_states(self) -> int:
         """
         Tells how many variables the system keeps track of.
