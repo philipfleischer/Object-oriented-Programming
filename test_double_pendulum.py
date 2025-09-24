@@ -96,3 +96,33 @@ def test_solve_double_pendulum_zero_ic() -> None:
     
     assert result.solution.shape[0] == 4
     assert np.allclose(result.solution, 0.0, rtol=1e-12, atol=1e-12)
+
+  
+@pytest.mark.parametrize(
+    "L1, L2, g, T, dt",
+    [
+        (1.0, 1.0, 9.81, 5.0, 0.01),
+        (1.5, 0.7, 9.81, 3.0, 0.02),
+        (2.0, 1.0, 3.71, 2.0, 0.05),
+    ],
+)
+def test_solve_double_pendulum_function_zero_ic(L1: float, L2: float, g: float, T: float, dt: float) -> None:
+    """
+    Check that a double pendulum with zero initial conditions stays at rest.
+    """
+    model = DoublePendulum(L1=L1, L2=L2, g=g)
+    u0 = np.array([0.0, 0.0, 0.0, 0.0], dtype=float)
+
+    result = model.solve(u0=u0, T=T, dt=dt)
+
+    #All angular states zero
+    assert np.allclose(result.theta1, 0.0)
+    assert np.allclose(result.omega1, 0.0)
+    assert np.allclose(result.theta2, 0.0)
+    assert np.allclose(result.omega2, 0.0)
+
+    #Cartesian coordinates
+    assert np.allclose(result.x1, 0.0)
+    assert np.allclose(result.x2, 0.0)
+    assert np.allclose(result.y1, -L1)
+    assert np.allclose(result.y2, -(L1 + L2))

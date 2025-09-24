@@ -51,10 +51,90 @@ Dependencies:
 
 import numpy as np
 from typing import Final
+from dataclasses import dataclass
 from ode import *
 
 DEFAULT_G: Final[float] = 9.81
 
+@dataclass
+class DoublePendulumResults:
+    """
+    Container for double pendulum simulation output
+    + system parameters.
+
+    Attributes:
+        time (np.ndarray): 1D array of time points.
+        solution (np.ndarray): 
+            2D array of shape (4, T) with rows: 
+                [theta1, omega1, theta2, omega2]
+        L1 (float): Length of first pendulum
+        L2 (float): Length of second pendulum
+        g (float): Gravitational acceleration
+    """
+    time: np.ndarray
+    solution: np.ndarray
+    L1: float
+    L2: float
+    g: float
+
+    #States
+    @property
+    def theta1(self) -> np.ndarray:
+        """
+        Returns first theta value.
+        """
+        return self.solution[0]
+
+    @property
+    def omega1(self) -> np.ndarray:
+        """
+        Returns first omega value.
+        """
+        return self.solution[1]
+    
+    @property
+    def theta2(self) -> np.ndarray:
+        """
+        Returns second theta value.
+        """
+        return self.solution[2]
+    
+    @property
+    def omega2(self) -> np.ndarray:
+        """
+        Returns second omega value.
+        """
+        return self.solution[3]
+    
+    #Cartesian coordinates
+    @property
+    def x1(self) -> np.ndarray:
+        """
+        x of mass 1.
+        """
+        return self.L1 * np.sin(self.theta1)
+    
+    @property
+    def y1(self) -> np.ndarray:
+        """
+        y f mass 1
+        """
+        return -self.L1 * np.cos(self.theta1)
+    
+    @property
+    def x2(self) -> np.ndarray:
+        """
+        x of mass 2 = x1 + L2*sin(theta2).
+        """
+        return self.x1 + self.L2 * np.sin(self.theta2)
+    
+    @property
+    def y2(self) -> np.ndarray:
+        """
+        y of mass 2 = y1 + L2*cos(theta2).
+        """
+        return self.y1 - self.L2 * np.cos(self.theta2)
+    
 class DoublePendulum(ODEModel):
     """
     Double pendulum with unit masses (M1 = M2 = 1). 
@@ -183,6 +263,31 @@ class DoublePendulum(ODEModel):
 
         #We return an array in the same vector ordering form: [θ1, ω1, θ2, ω2]
         return np.array([dtheta1_dt, domega1_dt, dtheta2_dt, domega2_dt], dtype=float)
+    
+    
+    def _create_result(self, solution: Any) -> DoublePendulumResults:
+        """
+        Adapt SciPy solve_ivp output to our DoublePendulumResults.
+        This overrides the parent _create_result method and return 
+        DoublePendulumResults object.
+
+        Parameters:
+            solution: Any
+                The result object from solve_ivp from scipy: time and solution
+            
+        Returns: 
+            DoublePendulumResults: A dataclass holding time, solution and parameters.
+        """
+        if not hasattr(solution, "t") or not hasattr(solution, "y"):
+            raise AttributeError("Solution object must have t and y attributes.")
+        #Returning DoublePendulumResults dataclass
+        return DoublePendulumResults(
+            time=solution.t,
+            solution=solution.y,
+            L1=self.L1,
+            L2=self.L2,
+            g=self.g
+        )
 
         
       
