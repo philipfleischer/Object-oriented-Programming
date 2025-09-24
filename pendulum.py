@@ -246,38 +246,7 @@ class Pendulum(ODEModel):
             time=solution.t, solution=solution.y, L=self.L, g=self.g
         )
     
-    def plot_energy(self, results: PendulumResults, filename: Optional[str]=None) -> None:
-        """
-        Plot potential, kinetic and total energy for pendulum solution.
-
-        Parameters:
-        results: PendulumResults
-            The output we get from the solve() function for pendulums.
-        filename: str | None
-            If provided, save the figure to the path; else shoe the plot.
-        """
-        t = results.time
-        P = results.potential_energy
-        K = results.kinetic_energy
-        E = results.total_energy
-
-        plt.figure()
-        plt.plot(t, P, label="Potential Energy")
-        plt.plot(t, K, label="Kinetic Energy")
-        plt.plot(t, E, label="Total Energy", linewidth=2)
-
-        plt.xlabel("Time [s]")      #s: seconds
-        plt.ylabel("Energy [J]")    #J: Joule
-        plt.title("Pendulum Energy VS. Time")
-        plt.grid(True, linestyle="--", alpha=0.4)
-        plt.legend()
-
-        if filename:
-            plt.savefig(filename, dpi=150, bbox_inches="tight")
-            plt.close()
-        else:
-            plt.show()
-
+    
 class DampenedPendulum(Pendulum):
     """
     Dampened singled pendulum:
@@ -343,7 +312,7 @@ def exercise_2g() -> None:
     model = Pendulum(L=1.0, g=DEFAULT_G)
     u0 = np.array([np.pi/6, 0.35], dtype=float)
     result = model.solve(u0=u0, T=10.0, dt=0.01)
-    model.plot_energy(result, filename="energy_single.png")
+    plot_energy(result, filename="energy_single.png")
 
 def exercise_2h() -> None:
     """
@@ -354,7 +323,7 @@ def exercise_2h() -> None:
     u0 = np.array([np.pi/6, 0.35], dtype=float)
     result = model.solve(u0=u0, T=10.0, dt=0.01)
 
-    model.plot_energy(result, filename="energy_damped.png")
+    plot_energy(result, filename="energy_damped.png")
 
 if __name__ == "__main__":
     model = Pendulum(L=1.42, g=9.81)
