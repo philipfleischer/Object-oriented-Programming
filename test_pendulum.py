@@ -1,4 +1,47 @@
-"""Tests for the single pendulum ODE model with parametrization."""
+"""
+test_pendulum.py
+================
+
+This file contains unit tests for the 'Pendulum' class and its associated
+'PendulumResults' data structure, implemented in the file 'pendulum.py'.  
+The tests use 'pytest' with parameterization to cover multiple values of 
+pendulum parameters (length L, gravity g, initial conditions, etc.).
+
+Overview of Tests
+1. test_pendulum_derivatives_correct
+   - Verifies that the right-hand side of the ODE (0 = ω, ω = -(g/L)sinθ)
+     is computed correctly for different pendulum configurations.
+2. test_pendulum_equilibrium_at_rest
+   - Checks that when the pendulum is at equilibrium (θ = 0, ω = 0), both
+     derivatives remain zero, regardless of L and g.
+3. test_solve_pendulum_ode_with_zero_ic
+   - Ensures that solving the ODE with initial conditions θ = 0, ω = 0 
+     results in θ(t) = 0 and ω(t) = 0 for all times.
+4. test_solve_pendulum_function_zero_ic
+   - Parameterized version of the zero initial condition test, verifying
+     that θ, ω remain zero, and that Cartesian positions (x = 0, y = -L) 
+     are correctly computed.
+5. test_pendulum_energy_and_velocities
+   - Verifies that computed arrays for potential energy, velocities 
+     (vx, vy), kinetic energy, and total energy all exist and have the 
+     correct shape relative to the time array.
+
+Testing Approach
+- Uses 'pytest.mark.parametrize' for compact coverage of different 
+  pendulum lengths, gravitational constants, and simulation parameters.
+- Relies on NumPy for array creation, trigonometric functions, and 
+  floating-point comparisons.
+- All tests are designed to check correctness of the ODE implementation,
+  equilibrium behavior, solution stability under zero initial conditions,
+  and consistency of derived quantities like energy and velocity.
+
+Usage
+Run all tests with:
+    pytest test_pendulum.py -v
+
+This will validate the correctness of the pendulum model and its 
+associated helper functions.
+"""
 
 import numpy as np
 import pytest
