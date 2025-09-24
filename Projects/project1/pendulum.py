@@ -291,7 +291,7 @@ def exercise_2b() -> ODEResult:
     """
     Create a Pendulum, solve with u0=[pi/6], T=10, dt=0.01, ans save plot.
     """
-    model = Pendulum(L=1.0, g=9.81)
+    model = Pendulum(L=1.0, g=DEFAULT_G)
 
     u0 = np.array([np.pi / 6.0, 0.35], dtype=float) #[Tetha, Omega]
     T = 10.0
@@ -326,7 +326,7 @@ def exercise_2h() -> None:
     plot_energy(result, filename="energy_damped.png")
 
 if __name__ == "__main__":
-    model = Pendulum(L=1.42, g=9.81)
+    model = Pendulum(L=1.42, g=DEFAULT_G)
     u0 = np.array([np.pi/6, 0.35])
     result = model.solve(u0=u0, T=10, dt=0.01)
     print(isinstance(result, PendulumResults))

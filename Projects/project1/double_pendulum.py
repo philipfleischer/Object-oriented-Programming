@@ -286,16 +286,16 @@ class DoublePendulum(ODEModel):
         dtheta = theta2 - theta1
 
         #Computing the sinus and cosinus values
-        sin_theta = np.sin(dtheta)
-        cos_theta = np.cos(dtheta)
+        sin_dtheta = np.sin(dtheta)
+        cos_dtheta = np.cos(dtheta)
         sin_theta1 = np.sin(theta1)
         sin_theta2 = np.sin(theta2)
 
         #Adding epsilon to avoid division by zero
         eps = 1e-12
         #Denominators in the formulae
-        denom1 = (2.0 * self.L1 - self.L1 * cos_theta * cos_theta) + eps
-        denom2 = (2.0 * self.L2 - self.L2 * cos_theta * cos_theta) + eps
+        denom1 = (2.0 * self.L1 - self.L1 * cos_dtheta * cos_dtheta) + eps
+        denom2 = (2.0 * self.L2 - self.L2 * cos_dtheta * cos_dtheta) + eps
 
         #Derivate of angels are angular velocity
         dtheta1_dt = omega1
@@ -306,18 +306,18 @@ class DoublePendulum(ODEModel):
         # Gravity acting on the pendulums
         # cos and sin terms
         domega1_dt = (
-            self.L1 * omega1 * omega1 * sin_theta * cos_theta
-            + self.g * np.sin(theta2) * cos_theta
-            + self.L2 * omega2 * omega2 * sin_theta
+            self.L1 * omega1 * omega1 * sin_dtheta * cos_dtheta
+            + self.g * np.sin(theta2) * cos_dtheta
+            + self.L2 * omega2 * omega2 * sin_dtheta
             - 2.0 * self.g * sin_theta1
         ) / denom1
 
         #Equation for angular acceleration of pendelum 2
         # Same as domega1_dt.
         domega2_dt = (
-            - self.L2 * omega2 * omega2 * sin_theta * cos_theta
-            + 2.0 * self.g * sin_theta1 * cos_theta
-            - 2.0 * self.L1 * omega1 * omega1 * sin_theta
+            - self.L2 * omega2 * omega2 * sin_dtheta * cos_dtheta
+            + 2.0 * self.g * sin_theta1 * cos_dtheta
+            - 2.0 * self.L1 * omega1 * omega1 * sin_dtheta
             - 2.0 * self.g * sin_theta2
         ) / denom2
 
