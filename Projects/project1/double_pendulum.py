@@ -325,7 +325,7 @@ class DoublePendulum(ODEModel):
         return np.array([dtheta1_dt, domega1_dt, dtheta2_dt, domega2_dt], dtype=float)
     
     
-    def _create_result(self, solution: Any) -> DoublePendulumResults:
+    def _create_result(self, solution: Any) -> Any:
         """
         Adapt SciPy solve_ivp output to our DoublePendulumResults.
         This overrides the parent _create_result method and return 

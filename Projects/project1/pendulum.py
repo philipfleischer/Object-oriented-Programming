@@ -180,7 +180,7 @@ class Pendulum(ODEModel):
         return self._g
 
     @property
-    def num_states(self) -> float:
+    def num_states(self) -> int:
         """
         This class property returns number of states, 
         which should be the number of state variables:
@@ -213,7 +213,7 @@ class Pendulum(ODEModel):
         domega_dt = -(self.g / self.L) * np.sin(theta)
         return np.array([dtheta_dt, domega_dt], dtype=float)
     
-    def _create_result(self, solution: Any) -> PendulumResults:
+    def _create_result(self, solution: Any) -> Any:
         """
         This method converts the raw numerical solution from SciPy into a
         PendulumResults object.
