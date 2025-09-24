@@ -33,6 +33,24 @@ class PendulumResults:
         The angular velocity over time.
         """
         return self.solution[1]
+    
+    @property
+    def x(self) -> np.ndarray:
+        """
+        Computes the horizontal position of the pendulum (x-axis).
+        Returns: 
+            np.ndarray - array of x coordinates for the time steps.
+        """
+        return self.L * np.sin(self.theta)
+
+    @property
+    def y(self) -> np.ndarray:
+        """
+        Computes the vertical position of the pendulum (x-axis).
+        Returns: 
+            np.ndarray - array of x coordinates for the time steps.
+        """
+        return -self.L * np.cos(self.theta)
 
 class Pendulum(ODEModel):
     """
