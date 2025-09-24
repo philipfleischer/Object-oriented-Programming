@@ -37,3 +37,19 @@ def test_pendulum_equilibrium_at_rest() -> None:
 
     assert np.isclose(d[0], 0.0, rtol=1e-12, atol=1e-12)
     assert np.isclose(d[1], 0.0, rtol=1e-12, atol=1e-12)
+
+def test_solve_pendulum_ode_with_zero_ic() -> None:
+    """
+    if u0 = (0,0), both theta and omega should remain zero.
+    """
+    model = Pendulum()  #Default values for now
+    u0 = np.array([0.0, 0.0], dtype=float)
+    result = model.solve(u0=u0, T=5.0, dt=0.01)
+
+    #result.solution: (num_states, num_times)
+    theta = result.solution[0]
+    omega = result.solution[1]
+
+    #Check if theta and omega consists of 0's
+    assert np.allclose(theta, 0.0)
+    assert np.allclose(omega, 0.0)
