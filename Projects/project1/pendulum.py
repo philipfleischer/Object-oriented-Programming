@@ -52,6 +52,45 @@ class PendulumResults:
         """
         return -self.L * np.cos(self.theta)
 
+    @property
+    def potential_energy(self) -> np.ndarray:
+        """
+        Potential energy: P(t) = g * (y + L) = g*L*(1 - cos theta).
+        Sero at the lowest point.
+        """
+        return self.g * (self.y + self.L)
+    
+    @property
+    def vx(self) -> np.ndarray:
+        """
+        x-velocity v_x(t) = dx/dt.
+        Uses np.gradient with time points array.
+        """
+        return np.gradient(self.x, self.time)
+    
+    @property
+    def vy(self) -> np.ndarray:
+        """
+        y-velocity v_y(t) = dy/dt.
+        """
+        return np.gradient(self.y, self.time)
+    
+    @property
+    def kinetic_energy(self) -> np.ndarray:
+        """
+        Kinetic energy K(t) = dy/dt.
+        """
+        return 0.5 * (self.vx**2 + self.vy**2)
+    
+    @property
+    def total_energy(self) -> np.ndarray:
+        """
+        Total energy: Potential energy + Kinetic energy.
+        E(t) = P(t) + K(t).
+        """
+        return self.potential_energy + self.kinetic_energy
+
+
 class Pendulum(ODEModel):
     """
     Single pendulum governed by (teta = θ):
