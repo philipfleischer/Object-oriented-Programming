@@ -33,6 +33,8 @@ class ODEModel(abc.ABC):
         else we will get NotImplementedError."""
         raise NotImplementedError
     
+    @property
+    @abc.abstractmethod
     def num_states(self) -> int:
         """
         Tells how many variables the system keeps track of.
@@ -81,6 +83,7 @@ class ODEModel(abc.ABC):
         t_eval = np.arange(0, T + dt, dt)
         solution = solve_ivp(self, (0, T), u0, t_eval=t_eval, method=method)
         return self._create_result(solution)
+          
 
 def plot_ode_solution(
     results: ODEResult,
@@ -141,4 +144,48 @@ def plot_ode_solution(
     else:
         plt.show()
 
-            
+def plot_energy(results, filename: Optional[str]=None) -> None:
+        """
+        This function plots the potential, kinetic, and 
+        total energy of a pendulum system.
+        plot_energy() works for both single and double pendulum
+        system results. It uses 'duck typing' which means that it
+        only relies on the attributes, namely - time, potential_energy,
+        kinetic_energy and total_energy, rather than the class types.
+        The function will work as long as it is provided with these 
+        attributes.
+
+        Parameters:
+        results: object
+            A result object with the attributes:
+                time (np.ndarray): array of time points.
+                potential_energy (np.ndarray)
+                kinetic_energy (np.ndarray)
+                total_energy (np.ndarray)
+            Ex: PendulumResults and DoublePendulumResults
+
+        filename: str or None, Optional
+            If provided, plot saved to filename
+            If not provided, plot window displayed
+        """
+        t = results.time
+        P = results.potential_energy
+        K = results.kinetic_energy
+        E = results.total_energy
+
+        plt.figure()
+        plt.plot(t, P, label="Potential Energy")
+        plt.plot(t, K, label="Kinetic Energy")
+        plt.plot(t, E, label="Total Energy", linewidth=2)
+
+        plt.xlabel("Time [s]")
+        plt.ylabel("Energy [J]")
+        plt.title("Pendulum Energy VS. Time")
+        plt.grid(True, linestyle="--", alpha=0.4)
+        plt.legend()
+
+        if filename:
+            plt.savefig(filename, dpi=150, bbox_inches="tight")
+            plt.close()
+        else:
+            plt.show()      
