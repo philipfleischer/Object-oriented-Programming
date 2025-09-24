@@ -1,3 +1,56 @@
+"""
+pendulum.py
+===========
+
+This module implements classes and helper functions for modeling and solving 
+the dynamics of a simple pendulum and its dampened variant using ordinary 
+differential equations (ODEs).
+
+Core components:
+1. **PendulumResults (dataclass)**
+   - Stores the solution of the pendulum problem after numerical integration.
+   - Contains time array, state array (θ, ω), and pendulum parameters (L, g).
+   - Provides convenient properties:
+     - 'theta', 'omega': angular displacement and velocity over time.
+     - 'x', 'y': Cartesian coordinates of the pendulum bob.
+     - 'vx', 'vy': Cartesian velocities (computed via 'np.gradient').
+     - 'potential_energy', 'kinetic_energy', 'total_energy': derived energy values.
+2. **Pendulum (ODEModel subclass)**
+   - Models a single undamped pendulum with length 'L' and gravity 'g'.
+   - Implements:
+     - '__call__': right-hand side of the ODE system:
+         dθ/dt = ω,
+         dω/dt = -(g/L) * sin(θ).
+     - 'num_states': always 2 (θ and ω).
+     - '_create_result': wraps the solver output into a 'PendulumResults' object.
+     - 'plot_energy': plots potential, kinetic, and total energy vs. time.
+3. **DampenedPendulum (Pendulum subclass)**
+   - Extends the simple pendulum with a linear damping term 'B':
+         dθ/dt = ω,
+         dω/dt = -(g/L) * sin(θ) - B*ω.
+   - Useful for simulating more realistic pendulum behavior where energy is not conserved.
+
+Exercises implemented:
+- **exercise_2b**: Solve the simple pendulum with initial conditions θ = π/6, ω = 0.35,
+  simulate for T=10 s, dt=0.01, and save the solution plot to 'exercise_2b.png'.
+- **exercise_2g**: Solve the simple pendulum as above and plot energy curves,
+  saving to 'energy_single.png'.
+- **exercise_2h**: Solve the dampened pendulum with damping B=1.0 and save the 
+  energy plot to 'energy_damped.png'.
+
+Usage:
+This file can be run directly. When executed as a script, it will:
+- Create and solve a sample Pendulum model,
+- Verify that the result is stored as a 'PendulumResults' object,
+- Run exercises 2b, 2g, and 2h, saving plots to the current directory.
+
+Dependencies:
+- numpy
+- matplotlib
+- scipy (for numerical integration via 'solve_ivp')
+- ode.py (provides the abstract ODEModel base class and plotting utilities)
+"""
+
 import numpy as np
 from typing import Final, Any, Optional
 from dataclasses import dataclass
@@ -225,6 +278,45 @@ class Pendulum(ODEModel):
         else:
             plt.show()
 
+class DampenedPendulum(Pendulum):
+    """
+    Dampened singled pendulum:
+        dθ/dt = ω
+        dω/dt = -(g/L)*sin(θ)-B*ω
+    
+    This class inherits from Pendulum and adds the damping 
+    parameter B, also overrides RHS.
+    """
+    def __init__(self, *, L: float=1.0, g:float=DEFAULT_G, B: float=1.0) -> None:
+        super().__init__(L=L, g=g)
+        if B < 0: raise ValueError("Damping B can not be negative")
+        self._B = float(B)
+    
+    @property
+    def B(self) -> float:
+        """
+        Linear damping coefficient.
+        """
+        return self._B
+
+    def __call__(self, t: float, u: np.ndarray) -> np.ndarray:
+        """
+        RHS for the damped pendulum.
+        
+        Parameters:
+        t: float
+            Time
+        u: np.ndarray
+            State vector [theta, omega]
+
+        Returns:
+            np.ndarray - Derivatives with linear damping.
+        """
+        theta, omega = u
+        dtheta_dt = omega
+        domega_dt = -(self.g / self.L) * np.sin(theta) - self.B * omega
+        return np.array([dtheta_dt, domega_dt], dtype=float)
+
 
 def exercise_2b() -> ODEResult:
     """
@@ -253,6 +345,16 @@ def exercise_2g() -> None:
     result = model.solve(u0=u0, T=10.0, dt=0.01)
     model.plot_energy(result, filename="energy_single.png")
 
+def exercise_2h() -> None:
+    """
+    Solve the dampened pendulum with initialized values.
+    Save the energy plot to file: energy_damped.png.
+    """
+    model = DampenedPendulum(L=1.0, g=DEFAULT_G, B=1.0)
+    u0 = np.array([np.pi/6, 0.35], dtype=float)
+    result = model.solve(u0=u0, T=10.0, dt=0.01)
+
+    model.plot_energy(result, filename="energy_damped.png")
 
 if __name__ == "__main__":
     model = Pendulum(L=1.42, g=9.81)
@@ -261,3 +363,4 @@ if __name__ == "__main__":
     print(isinstance(result, PendulumResults))
     exercise_2b()
     exercise_2g()
+    exercise_2h()
