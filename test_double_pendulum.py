@@ -3,8 +3,8 @@ test_double_pendulum.py
 =======================
 
 This file contains unit tests for the 'DoublePendulum' class.
-The double pendulum is a nonlinear and chaotic system, so correctness 
-of the equations of motion is verified using carefully chosen test 
+The double pendulum is a nonlinear and chaotic system, so correctness
+of the equations of motion is verified using carefully chosen test
 cases with known expected results.
 
 Overview of Tests:
@@ -36,7 +36,6 @@ Run all tests with:
 To run a specific test (example):
     pytest test_double_pendulum.py -k test_domega1_dt
 """
-
 
 import numpy as np
 import pytest
@@ -90,6 +89,7 @@ def test_domega2_dt(theta1: float, theta2: float, expected: float) -> None:
     assert np.isclose(dtheta2_dt, 0.15)
     assert np.isclose(domega2_dt, expected)
 
+
 def test_solve_double_pendulum_zero_ic() -> None:
     """
     Solve the DoublePendulum ODE with zero initial conditions
@@ -101,11 +101,11 @@ def test_solve_double_pendulum_zero_ic() -> None:
     model = DoublePendulum()
     u0 = np.array([0.0, 0.0, 0.0, 0.0], dtype=float)
     result = model.solve(u0=u0, T=5.0, dt=0.01)
-    
+
     assert result.solution.shape[0] == 4
     assert np.allclose(result.solution, 0.0, rtol=1e-12, atol=1e-12)
 
-  
+
 @pytest.mark.parametrize(
     "L1, L2, g, T, dt",
     [
@@ -114,7 +114,9 @@ def test_solve_double_pendulum_zero_ic() -> None:
         (2.0, 1.0, 3.71, 2.0, 0.05),
     ],
 )
-def test_solve_double_pendulum_function_zero_ic(L1: float, L2: float, g: float, T: float, dt: float) -> None:
+def test_solve_double_pendulum_function_zero_ic(
+    L1: float, L2: float, g: float, T: float, dt: float
+) -> None:
     """
     Check that a double pendulum with zero initial conditions stays at rest.
 
@@ -126,13 +128,13 @@ def test_solve_double_pendulum_function_zero_ic(L1: float, L2: float, g: float, 
 
     result = model.solve(u0=u0, T=T, dt=dt)
 
-    #All angular states zero
+    # All angular states zero
     assert np.allclose(result.theta1, 0.0)
     assert np.allclose(result.omega1, 0.0)
     assert np.allclose(result.theta2, 0.0)
     assert np.allclose(result.omega2, 0.0)
 
-    #Cartesian coordinates
+    # Cartesian coordinates
     assert np.allclose(result.x1, 0.0)
     assert np.allclose(result.x2, 0.0)
     assert np.allclose(result.y1, -L1)

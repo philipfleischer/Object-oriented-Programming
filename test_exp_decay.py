@@ -56,48 +56,51 @@ from exp_decay import ExponentialDecay
 from ode import InvalidInitialConditionError, plot_ode_solution
 
 
-#Cases for testing: (a, u0_scalar, T, dt)
+# Cases for testing: (a, u0_scalar, T, dt)
 TEST_CASES: List[Tuple[float, float, float, float]] = [
     (0.4, 3.2, 10.0, 0.01),
     (1.0, 2.0, 2.0, 0.05),
-    (0.2, 1.5, 5.0, 0.10)
+    (0.2, 1.5, 5.0, 0.10),
 ]
 
-#Test right hand side = test_rhs
+
+# Test right hand side = test_rhs
 def test_rhs() -> None:
     """
     Testing right hand side (RHS) of the diff equation du/dt = -au
-    
-    Run with: 
+
+    Run with:
         pytest test_exp_decay.py::test_rhs
     """
-    #Right side does not contain t, so t can be variable
+    # Right side does not contain t, so t can be variable
     t = 0.0
 
     # pointing to new ExponentialDecay object
-    model = ExponentialDecay(0.4)       #a = 0.4
-    u = np.array([3.2])                 #u = 3.2
+    model = ExponentialDecay(0.4)  # a = 0.4
+    u = np.array([3.2])  # u = 3.2
 
     """using model as a function. Trying to do two 
      things simulataneously. We make an object model and use it as
      a function (callable, to function like a function in the 
      callable call, but an object in every other instance.) """
     du_dt = model(t, u)
-    #Using np.isclose on float numbers, to get approx values
-    assert np.isclose(du_dt, -1.28)   # u'(t) = -1.28
+    # Using np.isclose on float numbers, to get approx values
+    assert np.isclose(du_dt, -1.28)  # u'(t) = -1.28
+
 
 def test_negative_decay_raises_ValueError_constructor() -> None:
     """
-    Run with: 
+    Run with:
         pytest test_exp_decay.py::test_negative_decay_raises_ValueError_constructor
     """
     a = -1.0
     with pytest.raises(ValueError):
         should_fail = ExponentialDecay(a)
 
+
 def test_negative_decay_raises_ValueError() -> None:
     """
-    Run with: 
+    Run with:
         pytest test_exp_decay.py::test_negative_decay_raises_ValueError
     """
     a = 0.4
@@ -105,9 +108,10 @@ def test_negative_decay_raises_ValueError() -> None:
     with pytest.raises(ValueError):
         model.decay = -1.0
 
+
 def test_num_states() -> None:
     """
-    Run with: 
+    Run with:
         pytest test_exp_decay.py::test_num_states
     """
     a = 0.4
@@ -115,10 +119,11 @@ def test_num_states() -> None:
     assert model.num_states == 1
     with pytest.raises(AttributeError):
         model.num_states = 2
-    
+
+
 def test_solve_with_different_number_of_initial_states() -> None:
     """
-    Run with: 
+    Run with:
         pytest test_exp_decay.py::test_solve_with_different_number_of_initial_states
     """
     a = 0.4
@@ -129,18 +134,19 @@ def test_solve_with_different_number_of_initial_states() -> None:
         model.solve(u0_wrong, T=1.0, dt=0.1)
     u0_right = np.array([1.0])
     result = model.solve(u0_right, T=1.0, dt=0.1)
-    #Check number of dimensions is 1
+    # Check number of dimensions is 1
     assert result.time.ndim == 1
-    #Check if the state variable u has one state
+    # Check if the state variable u has one state
     assert result.solution.shape[0] == 1
-    #Checking property num_states for the ODERESULT class
+    # Checking property num_states for the ODERESULT class
     assert result.num_states == 1
+
 
 @pytest.mark.parametrize("a,u0_s,T,dt", TEST_CASES)
 def test_solve_time(a: float, u0_s: float, T: float, dt: float) -> None:
     """
     Check that time grid starts at 0, ends at T, and steps by dt.
-    
+
     Run with:
         pytest test_exp_decay.py::test_solve_time
     """
@@ -150,19 +156,20 @@ def test_solve_time(a: float, u0_s: float, T: float, dt: float) -> None:
     result = model.solve(u0, T=T, dt=dt)
     result_time = result.time
 
-    #Sanity checks for dimensions and length
+    # Sanity checks for dimensions and length
     assert result_time.ndim == 1
     assert len(result_time) >= 2
 
     assert len(result.time) == result.num_timepoints
 
-    #Assert the checkpoints exactly and also the steps
-    #The first time point is zero
+    # Assert the checkpoints exactly and also the steps
+    # The first time point is zero
     assert result_time[0] == pytest.approx(0.0, rel=0, abs=1e-12)
-    #The last time point is T
+    # The last time point is T
     assert result_time[-1] == pytest.approx(T, rel=0, abs=1e-12)
-    #The difference between the second and first time point is dt.
+    # The difference between the second and first time point is dt.
     assert (result_time[1] - result_time[0]) == pytest.approx(dt, rel=0, abs=1e-12)
+
 
 @pytest.mark.parametrize("a,u0_s,T,dt", TEST_CASES)
 def test_solve_solution(a: float, u0_s: float, T: float, dt: float) -> None:
@@ -171,34 +178,35 @@ def test_solve_solution(a: float, u0_s: float, T: float, dt: float) -> None:
         pytest test_exp_decay.py::test_solve_solution
     """
     model = ExponentialDecay(a)
-    #The initialized 1-element np array
+    # The initialized 1-element np array
     u0 = np.array([u0_s], dtype=float)
 
-    #Solving the ODE with end time T and step dt
+    # Solving the ODE with end time T and step dt
     result = model.solve(u0, T=T, dt=dt)
-    #Extracting the time points
+    # Extracting the time points
     result_time = result.time
-    #result.solution = (num_states, num_time_points)
+    # result.solution = (num_states, num_time_points)
     #   result.solution[0] = num_states
     y = result.solution[0]
-    #We compute the exact solution at the given time point
-    y_exact = u0_s * np.exp(-a*result_time)
+    # We compute the exact solution at the given time point
+    y_exact = u0_s * np.exp(-a * result_time)
 
-    #Computing the rel_err between num and exact solution
+    # Computing the rel_err between num and exact solution
     relative_error = np.linalg.norm(y - y_exact) / np.linalg.norm(y_exact)
-    #Checking for 1% or less difference
+    # Checking for 1% or less difference
     assert relative_error <= 0.01
+
 
 def test_plot_ode_solution_saves_file() -> None:
     """
     Run with:
         pytest test_exp_decay.py::test_plot_ode_solution_saves_files
     """
-    #initialize the test file, experiment now
-    #filename = Path("exponential_decay.png")
+    # initialize the test file, experiment now
+    # filename = Path("exponential_decay.png")
     filename = Path("test_plot.png")
 
-    #Check if the file is already existing
+    # Check if the file is already existing
     if filename.is_file():
         filename.unlink()
 
@@ -206,10 +214,10 @@ def test_plot_ode_solution_saves_file() -> None:
     u0 = np.array([2.0])
     result = model.solve(u0, T=2.0, dt=0.1)
 
-    #Here we call the plotting funciton we want to test
+    # Here we call the plotting funciton we want to test
     plot_ode_solution(results=result, state_labels=["u"], filename=filename)
 
-    #Check the file is created
+    # Check the file is created
     assert filename.is_file()
-    #Delete the file
+    # Delete the file
     filename.unlink()
