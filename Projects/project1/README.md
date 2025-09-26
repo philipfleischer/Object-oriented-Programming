@@ -1,11 +1,18 @@
 # H25_project1_philipef_stanisok
 Project 1 for philipef (philipef@mail.uio.no) and stanisok (stanisok@mail.uio.no) and susanhop (susanhop@mail.uio.no)
 
-Exercise 2h Question:
-How does the energy compared to the energy that you plotted in Exercise 2d?
+URL to GitHub: https://github.uio.no/IN1910/H25_project1_philipef_stanisok_susanhop
 
+
+Exercise 2g Question:
+    Is the energy conserved?
+Answer:
+    Yes, the energy is conserved, because the potential and kinetic energies oscillate, but the total energy curve stays essentially flat.Any tiny deviations are due to numerical errors from the solver and finite-difference velocity calculation
+Exercise 2h Question:
+    How does the energy compared to the energy that you plotted in Exercise 2d?
 Answer:
     - The energy in the undamped 2d is nearly conserved for the whole duration, but in the dampened 2h solution it looks like it gets halved for each time point, that leads me to believe it is decreasing in exponential time.
+
 
 
 ## What this project contains

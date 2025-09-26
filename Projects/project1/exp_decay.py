@@ -1,3 +1,42 @@
+"""
+exp_decay.py
+============
+
+This module implements a simple model of exponential decay using the
+object-oriented ODE framework defined in 'ode.py'.
+
+The exponential decay is described by the first-order ODE:
+    du/dt = -a * u
+
+where:
+    - u(t) is the decaying quantity,
+    - a ≥ 0 is the decay constant controlling how fast u decreases.
+
+Contents:
+- ExponentialDecay:
+    A class that inherits from ODEModel and represents the exponential
+    decay system. It provides:
+        - A constructor that validates the decay constant.
+        - A __call__ method implementing the right-hand side of the ODE.
+        - A property 'decay' with getter and setter for validation.
+        - A 'num_states' property returning 1 (since the model only has one state).
+
+Usage:
+This file can be run directly. When executed, it creates an instance of
+ExponentialDecay with a = 0.4, solves the ODE with initial condition
+u0 = 4.0 over T = 10 seconds with timestep dt = 0.01, and saves the
+resulting trajectory to the file 'exponential_decay.png'.
+
+Run file with:
+    python exp_decay.py
+
+Dependencies:
+- numpy
+- scipy.integrate.solve_ivp
+- matplotlib
+- ode.py
+"""
+
 import numpy as np
 from ode import ODEModel, ODEResult, plot_ode_solution
 import scipy as sp
@@ -13,14 +52,14 @@ class ExponentialDecay(ODEModel):
     Where 'u' is the quantity that decays, and 'a' is the decay constant.
     """
     
-    def __init__(self, a: float):
+    def __init__(self, a: float) -> None:
         """
         Creates a new exponential decay model.
 
         Parameters:
         a:  float
             The decay constant. It controls how fast 'u' decays.
-            It must be non-negative, otherwise an error is raised.
+            It must positive, otherwise a value error is raised.
         """
         if a < 0: raise ValueError("decay constant cannot be a negative integer value")
         self.decay = a
@@ -33,10 +72,11 @@ class ExponentialDecay(ODEModel):
         Paraters:
         t:  float
             The time at which to evaluate the rate of change.
-            (Note: 't' is not actually used here because we do not
-            depend on the time variabel directly).
         u:  np.ndarray
             The rate of change that du/dt has at this time and state.
+
+        Return
+            np.ndarray[float]
         """
         du_dt = -self.decay * u
         return du_dt
@@ -49,6 +89,9 @@ class ExponentialDecay(ODEModel):
 
         This class property tells us how quickly the quantity
         decays, where larger values results in faster decays.
+
+        Return
+            float
         """
         return self._a
 
@@ -59,10 +102,13 @@ class ExponentialDecay(ODEModel):
 
         Parameters:
         value:  float
-                The new decay constant given, must be Non-Negative.
+                The new decay constant given, must be positive.
         
         Raises:
         ValueError -> If value is negative.
+
+        Returns:
+            None
         """
         if value < 0:
             raise ValueError(f"ExponentialDecay.__init__: value is negative ({value})")
@@ -72,32 +118,16 @@ class ExponentialDecay(ODEModel):
     def num_states(self) -> int:
         """
         The number of state variabels in the model is returned.
-        The Exponential decay ODE only has one state var (u), so
-        it always returns 1.
+        The Exponential decay ODE only has one state var (u), returns 1.
+        
+        Return
+            int
+
         """
         return 1
 
 
 if __name__ == "__main__":
-    """eksempel = ExponentialDecay(2.0)
-    print(eksempel.decay)
-
-    #Parameter setup:
-    a = 0.4
-    model = ExponentialDecay(a)
-
-    #Initial condition and time span
-    u0 = np.array([3.2])
-    T = 10.0
-    dt = 0.01
-    result = model.solve(u0, T=10, dt=0.01)
-
-    #Plotting the result and solution into a figure
-    plt.plot(result.time, result.solution[0], label="Decay")
-    plt.xlabel("t")
-    plt.ylabel("u(t)")
-    plt.legend()
-    plt.show()"""
     model = ExponentialDecay(0.4)
     result = model.solve(u0=np.array([4.0]), T=10.0, dt=0.01)
     print(type(result))

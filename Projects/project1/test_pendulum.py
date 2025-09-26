@@ -2,9 +2,9 @@
 test_pendulum.py
 ================
 
-This file contains unit tests for the 'Pendulum' class and its associated
-'PendulumResults' data structure, implemented in the file 'pendulum.py'.  
-The tests use 'pytest' with parameterization to cover multiple values of 
+This file contains unit tests for the Pendulum class and its associated
+PendulumResults data structure, implemented in the file pendulum.py.  
+The tests use pytest with parameterization to cover multiple values of 
 pendulum parameters (length L, gravity g, initial conditions, etc.).
 
 Overview of Tests
@@ -27,7 +27,7 @@ Overview of Tests
      correct shape relative to the time array.
 
 Testing Approach
-- Uses 'pytest.mark.parametrize' for compact coverage of different 
+- Uses pytest.mark.parametrize for compact coverage of different 
   pendulum lengths, gravitational constants, and simulation parameters.
 - Relies on NumPy for array creation, trigonometric functions, and 
   floating-point comparisons.
@@ -38,9 +38,8 @@ Testing Approach
 Usage
 Run all tests with:
     pytest test_pendulum.py -v
-
-This will validate the correctness of the pendulum model and its 
-associated helper functions.
+To run a specific test (example):
+    pytest test_pendulum.py::test_pendulum_derivatives_correct
 """
 
 import numpy as np
@@ -57,6 +56,9 @@ from pendulum import *
 def test_pendulum_derivatives_correct(L: float, g: float, theta: float, omega: float) -> None:
     """
     Check that the RHS matches for different derivate values.
+
+    Run with:
+        pytest test_pendulum.py::test_pendulum_derivatives_correct
     """
     u = np.array([theta, omega], dtype=float)
     model = Pendulum(L=L, g=g)
@@ -78,7 +80,10 @@ def test_pendulum_derivatives_correct(L: float, g: float, theta: float, omega: f
 )
 def test_pendulum_equilibrium_at_rest(L: float, g: float) -> None:
     """
-    At equilibrium (0=0, w=0) the derivatives should be zero
+    At equilibrium (0=0, w=0) the derivatives should be zero.
+
+    Run with:
+        pytest test_pendulum.py::test_pendulum_equilibrium_at_rest
     """
     model = Pendulum(L=L, g=g)
     u = np.array([0.0, 0.0], dtype=float)
@@ -90,6 +95,9 @@ def test_pendulum_equilibrium_at_rest(L: float, g: float) -> None:
 def test_solve_pendulum_ode_with_zero_ic() -> None:
     """
     if u0 = (0,0), both theta and omega should remain zero.
+
+    Run with:
+        pytest test_pendulum.py::test_solve_pendulum_ode_with_zero_ic
     """
     model = Pendulum()  #Default values for now
     u0 = np.array([0.0, 0.0], dtype=float)
@@ -99,7 +107,7 @@ def test_solve_pendulum_ode_with_zero_ic() -> None:
     theta = result.solution[0]
     omega = result.solution[1]
 
-    #Check if theta and omega consists of 0's
+    #Check if theta and omega consists of 0s
     assert np.allclose(theta, 0.0)
     assert np.allclose(omega, 0.0)
 
@@ -111,6 +119,10 @@ def test_solve_pendulum_ode_with_zero_ic() -> None:
         (0.5, 1.62, 2.0, 0.02) ]
 )
 def test_solve_pendulum_function_zero_ic(L: float, g: float, T: float, dt: float) -> None:
+    """
+    Run with:
+        pytest test_pendulum.py::test_solve_pendulum_function_zero_ic
+    """
     model = Pendulum(L=L, g=g)
     u0=np.array([0.0, 0.0], dtype=float)
     result = model.solve(u0=u0, T=T, dt=dt)
@@ -134,6 +146,10 @@ def test_pendulum_energy_and_velocities(L: float,
                                         u0: float, 
                                         T: float, 
                                         dt: float) -> None:
+    """
+    Run with:
+        pytest test_pendulum.py::test_pendulum_energy_and_velocities
+    """
     model = Pendulum(L=L, g=g)
     result = model.solve(u0=u0, T=T, dt=dt)
 
