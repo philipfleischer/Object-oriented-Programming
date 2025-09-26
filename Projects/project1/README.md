@@ -1,9 +1,6 @@
 # H25_project1_philipef_stanisok
 Project 1 for philipef (philipef@mail.uio.no) and stanisok (stanisok@mail.uio.no) and susanhop (susanhop@mail.uio.no)
 
-
-ERRORs are allowed for numpy and scipy in this project!
-
 Exercise 2h Question:
 How does the energy compared to the energy that you plotted in Exercise 2d?
 
@@ -24,6 +21,7 @@ Test files:
     - test_double_pendulum.py - Parametrized tests for double pendulum derivatives and zero-IC behavior.
 
 Figures (made by scripts in code files):
+    - exponential_decay.png
     - exercise_2b.png
     - energy_single.png
     - energy_damped.png

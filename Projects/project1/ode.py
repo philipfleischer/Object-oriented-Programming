@@ -41,15 +41,15 @@ class ODEModel(abc.ABC):
         
         For example, in the exponential decay model there is only one
         variable (u). More complicated models can have several variables
-        chanigng over time. Each of these is counted as a 'state'."""
+        changing over time. Each of these is counted as a 'state'."""
         raise NotImplementedError
     
-    def _create_result(self, solution: Any) -> ODEResult:
+    def _create_result(self, solution: Any) -> Any:
         """
         Converts the raw output from the mathematical solver into a simple 
         result with two parts.
         1. Time: The points in time where the solution was calculated.
-        2. Solution: The values of the sustem at those time.
+        2. Solution: The values of the system at those time.
 
         This makes the result easier to work with and understand.
         """
@@ -57,7 +57,7 @@ class ODEModel(abc.ABC):
             raise AttributeError("Solution object must have attributes t and y")
         return ODEResult(time=solution.t, solution=solution.y)
     
-    def solve(self, u0: np.ndarray, T: float, dt: float, method: str = "RK45") -> ODEResult:
+    def solve(self, u0: np.ndarray, T: float, dt: float, method: str = "RK45") -> Any:
         """
         Works out how the systen develops over time.
         
@@ -69,10 +69,11 @@ class ODEModel(abc.ABC):
 
         Validates that u0 matches the model's number of states.
 
-        solve() reutrns the times and the corresponding values of the system,
+        solve() returns the times and the corresponding values of the system,
         so we can inspect or plot how the system changes over time.
         """
-
+        if T < 0: raise ValueError("T must be positive.")
+        if dt <= 0: raise ValueError("dt must be positive.")
         if not isinstance(u0, np.ndarray): raise InvalidInitialConditionError("u0 must be a numpy.ndarray")
         if u0.ndim != 1: raise InvalidInitialConditionError("u0 must be a 1D numpy array.")
         if len(u0) != self.num_states:
@@ -114,7 +115,7 @@ def plot_ode_solution(
     #extracting number of states (rows) and num time points (column)
     num_states, num_time = solu.shape
     if result_time.ndim != 1 or result_time.shape[0] != num_time:
-        raise ValueError("result.time must be a 1D and match resiult.solutions time dimension.")
+        raise ValueError("result.time must be a 1D and match result.solutions time dimension.")
         
     if state_labels is None:
         #If no labels, we construct them for {"State1", "State2", ... "StateK"}
