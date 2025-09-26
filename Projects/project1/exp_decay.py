@@ -43,7 +43,8 @@ import scipy as sp
 from scipy.integrate import solve_ivp
 import matplotlib.pyplot as plt
 
-#ExponentialDecay inherits from ODEModel
+
+# ExponentialDecay inherits from ODEModel
 class ExponentialDecay(ODEModel):
     """
     A simple model of exponential decay.
@@ -51,7 +52,7 @@ class ExponentialDecay(ODEModel):
         du/dt = -au
     Where 'u' is the quantity that decays, and 'a' is the decay constant.
     """
-    
+
     def __init__(self, a: float) -> None:
         """
         Creates a new exponential decay model.
@@ -61,14 +62,14 @@ class ExponentialDecay(ODEModel):
             The decay constant. It controls how fast 'u' decays.
             It must positive, otherwise a value error is raised.
         """
-        if a < 0: raise ValueError("decay constant cannot be a negative integer value")
+        if a < 0:
+            raise ValueError("decay constant cannot be a negative integer value")
         self.decay = a
-
 
     def __call__(self, t: float, u: np.ndarray[float]) -> np.ndarray[float]:
         """
         Calculates how quickly the system changes at a given time.
-        
+
         Paraters:
         t:  float
             The time at which to evaluate the rate of change.
@@ -81,7 +82,7 @@ class ExponentialDecay(ODEModel):
         du_dt = -self.decay * u
         return du_dt
 
-    #With this, the decay works as a variable instead of a function
+    # With this, the decay works as a variable instead of a function
     @property
     def decay(self) -> float:
         """
@@ -103,7 +104,7 @@ class ExponentialDecay(ODEModel):
         Parameters:
         value:  float
                 The new decay constant given, must be positive.
-        
+
         Raises:
         ValueError -> If value is negative.
 
@@ -119,7 +120,7 @@ class ExponentialDecay(ODEModel):
         """
         The number of state variabels in the model is returned.
         The Exponential decay ODE only has one state var (u), returns 1.
-        
+
         Return
             int
 
@@ -131,5 +132,6 @@ if __name__ == "__main__":
     model = ExponentialDecay(0.4)
     result = model.solve(u0=np.array([4.0]), T=10.0, dt=0.01)
     print(type(result))
-    plot_ode_solution(results=result, state_labels=["u"], filename="exponential_decay.png")
-    
+    plot_ode_solution(
+        results=result, state_labels=["u"], filename="exponential_decay.png"
+    )
