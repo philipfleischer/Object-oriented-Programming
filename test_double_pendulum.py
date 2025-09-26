@@ -2,12 +2,12 @@
 test_double_pendulum.py
 =======================
 
-This file contains unit tests for the 'DoublePendulum' class implemented
-in the file 'double_pendulum.py'. The double pendulum is a nonlinear and 
-chaotic system, so correctness of the equations of motion is verified using
-carefully chosen test cases with known expected results.
+This file contains unit tests for the 'DoublePendulum' class.
+The double pendulum is a nonlinear and chaotic system, so correctness 
+of the equations of motion is verified using carefully chosen test 
+cases with known expected results.
 
-Overview of Tests
+Overview of Tests:
 1. test_domega1_dt
    - Parameterized test for verifying that the derivative of ω1 (angular
      velocity of pendulum 1) is computed correctly.
@@ -27,15 +27,14 @@ Structure
   in the computed derivatives.
 
 Dependencies
-- numpy: for math and floating-point comparisons
-- pytest: for parameterized test framework
-- double_pendulum: module under test
+- numpy
+- pytest
+- double_pendulum
 
 Run all tests with:
     pytest test_double_pendulum.py -v
-
-This will check that the implementation of the double pendulum ODE
-matches expected reference values for the angular accelerations.
+To run a specific test (example):
+    pytest test_double_pendulum.py -k test_domega1_dt
 """
 
 
@@ -56,6 +55,9 @@ from double_pendulum import *
 def test_domega1_dt(theta1: float, theta2: float, expected: float) -> None:
     """
     Function for testing that domega_1/dt is computed correctly.
+
+    Run test:
+        pytest test_double_pendulum.py::test_domega1_dt
     """
     model = DoublePendulum()
     t = 0
@@ -77,6 +79,9 @@ def test_domega1_dt(theta1: float, theta2: float, expected: float) -> None:
 def test_domega2_dt(theta1: float, theta2: float, expected: float) -> None:
     """
     Function for testing that domega_2/dt is computed correctly
+
+    Run test:
+        pytest test_double_pendulum.py::test_domega2_dt
     """
     model = DoublePendulum()
     t = 0
@@ -89,6 +94,9 @@ def test_solve_double_pendulum_zero_ic() -> None:
     """
     Solve the DoublePendulum ODE with zero initial conditions
     for all state variables.
+
+    Run test:
+        pytest test_double_pendulum.py::test_solve_double_pendulum_zero_ic
     """
     model = DoublePendulum()
     u0 = np.array([0.0, 0.0, 0.0, 0.0], dtype=float)
@@ -109,6 +117,9 @@ def test_solve_double_pendulum_zero_ic() -> None:
 def test_solve_double_pendulum_function_zero_ic(L1: float, L2: float, g: float, T: float, dt: float) -> None:
     """
     Check that a double pendulum with zero initial conditions stays at rest.
+
+    Run test:
+        pytest test_double_pendulum.py::test_solve_double_pendulum_function_zero_ic
     """
     model = DoublePendulum(L1=L1, L2=L2, g=g)
     u0 = np.array([0.0, 0.0, 0.0, 0.0], dtype=float)

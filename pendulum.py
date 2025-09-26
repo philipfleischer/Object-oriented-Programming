@@ -7,48 +7,53 @@ the dynamics of a simple pendulum and its dampened variant using ordinary
 differential equations (ODEs).
 
 Core components:
-1. **PendulumResults (dataclass)**
+- PendulumResults (dataclass)
    - Stores the solution of the pendulum problem after numerical integration.
    - Contains time array, state array (θ, ω), and pendulum parameters (L, g).
    - Provides convenient properties:
-     - 'theta', 'omega': angular displacement and velocity over time.
-     - 'x', 'y': Cartesian coordinates of the pendulum bob.
-     - 'vx', 'vy': Cartesian velocities (computed via 'np.gradient').
-     - 'potential_energy', 'kinetic_energy', 'total_energy': derived energy values.
-2. **Pendulum (ODEModel subclass)**
-   - Models a single undamped pendulum with length 'L' and gravity 'g'.
+     - theta, omega: angular displacement and velocity over time.
+     - x, y: Cartesian coordinates of the pendulum bob.
+     - vx, vy: Cartesian velocities (computed via np.gradient).
+     - potential_energy, kinetic_energy, total_energy: derived energy values.
+- Pendulum (ODEModel subclass)
+   - Models a single undamped pendulum with length L and gravity g.
    - Implements:
-     - '__call__': right-hand side of the ODE system:
+     - __call__: right-hand side of the ODE system:
          dθ/dt = ω,
          dω/dt = -(g/L) * sin(θ).
-     - 'num_states': always 2 (θ and ω).
-     - '_create_result': wraps the solver output into a 'PendulumResults' object.
-     - 'plot_energy': plots potential, kinetic, and total energy vs. time.
-3. **DampenedPendulum (Pendulum subclass)**
-   - Extends the simple pendulum with a linear damping term 'B':
+     - num_states: always 2 (θ and ω).
+     - _create_result: wraps the solver output into a PendulumResults object.
+     - plot_energy: plots potential, kinetic and total energy vs. time, in the grid.
+- DampenedPendulum (Pendulum subclass)
+   - Extends the simple pendulum with a linear damping term B:
          dθ/dt = ω,
          dω/dt = -(g/L) * sin(θ) - B*ω.
-   - Useful for simulating more realistic pendulum behavior where energy is not conserved.
 
 Exercises implemented:
-- **exercise_2b**: Solve the simple pendulum with initial conditions θ = π/6, ω = 0.35,
-  simulate for T=10 s, dt=0.01, and save the solution plot to 'exercise_2b.png'.
-- **exercise_2g**: Solve the simple pendulum as above and plot energy curves,
-  saving to 'energy_single.png'.
-- **exercise_2h**: Solve the dampened pendulum with damping B=1.0 and save the 
-  energy plot to 'energy_damped.png'.
+- exercise_2b: 
+    Solve the simple pendulum with initial conditions θ = π/6, ω = 0.35,
+    simulate for T=10, dt=0.01, and save the solution plot to file exercise_2b.png.
+- exercise_2g:
+    Solve the simple pendulum as above and plot energy curves,
+    saving to file energy_single.png.
+- exercise_2h:
+    Solve the dampened pendulum with damping B=1.0 and save the 
+    energy plot to file energy_damped.png.
 
 Usage:
 This file can be run directly. When executed as a script, it will:
 - Create and solve a sample Pendulum model,
-- Verify that the result is stored as a 'PendulumResults' object,
+- Verify that the result is stored as a PendulumResults object,
 - Run exercises 2b, 2g, and 2h, saving plots to the current directory.
 
 Dependencies:
 - numpy
 - matplotlib
-- scipy (for numerical integration via 'solve_ivp')
-- ode.py (provides the abstract ODEModel base class and plotting utilities)
+- scipy
+- ode.py
+
+Run file with:
+    python pendulum.py
 """
 
 import numpy as np
@@ -63,10 +68,14 @@ class PendulumResults:
     """Results from solving the pendulum problem.
     
     Args:
-        time (np.ndarray): The timesteps of the solution.
-        solution (np.ndarray): The values of the solution at the given timesteps.
-        L (float): The length of the pendulum rod.
-        g (float): The gravitational acceleration.
+        time (np.ndarray): 
+            The timesteps of the solution.
+        solution (np.ndarray): 
+            The values of the solution at the given timesteps.
+        L (float): 
+            The length of the pendulum rod.
+        g (float):
+            The gravitational acceleration.
     """
     time: np.ndarray
     solution: np.ndarray
@@ -74,9 +83,32 @@ class PendulumResults:
     g: float
 
     @property
+    def num_states(self) -> int:
+        """
+        Number of state variables.
+
+        Returns
+            int
+        """
+        return int(self.solution.shape[0])
+
+    @property
+    def num_timepoints(self) -> int:
+        """
+        Number of time points.
+
+        Returns
+            int
+        """
+        return int(self.solution.shape[1])
+
+    @property
     def theta(self) -> np.ndarray:
         """
         The angular displacement over time.
+
+        Returns
+            np.ndarray
         """
         return self.solution[0]
 
@@ -84,6 +116,9 @@ class PendulumResults:
     def omega(self) -> np.ndarray:
         """
         The angular velocity over time.
+
+        Returns
+            np.ndarray
         """
         return self.solution[1]
     
@@ -91,6 +126,7 @@ class PendulumResults:
     def x(self) -> np.ndarray:
         """
         Computes the horizontal position of the pendulum (x-axis).
+        
         Returns: 
             np.ndarray - array of x coordinates for the time steps.
         """
@@ -99,9 +135,10 @@ class PendulumResults:
     @property
     def y(self) -> np.ndarray:
         """
-        Computes the vertical position of the pendulum (x-axis).
+        Computes the vertical position of the pendulum (y-axis).
+        
         Returns: 
-            np.ndarray - array of x coordinates for the time steps.
+            np.ndarray - array of y coordinates for the time steps.
         """
         return -self.L * np.cos(self.theta)
 
@@ -109,7 +146,10 @@ class PendulumResults:
     def potential_energy(self) -> np.ndarray:
         """
         Potential energy: P(t) = g * (y + L) = g*L*(1 - cos theta).
-        Sero at the lowest point.
+        Zero at the lowest point.
+
+        Returns
+            np.ndarray
         """
         return self.g * (self.y + self.L)
     
@@ -118,6 +158,9 @@ class PendulumResults:
         """
         x-velocity v_x(t) = dx/dt.
         Uses np.gradient with time points array.
+
+        Returns
+            np.ndarray
         """
         return np.gradient(self.x, self.time)
     
@@ -125,6 +168,9 @@ class PendulumResults:
     def vy(self) -> np.ndarray:
         """
         y-velocity v_y(t) = dy/dt.
+
+        Returns
+            np.ndarray
         """
         return np.gradient(self.y, self.time)
     
@@ -132,6 +178,9 @@ class PendulumResults:
     def kinetic_energy(self) -> np.ndarray:
         """
         Kinetic energy K(t) = dy/dt.
+
+        Returns
+            np.ndarray
         """
         return 0.5 * (self.vx**2 + self.vy**2)
     
@@ -140,13 +189,15 @@ class PendulumResults:
         """
         Total energy: Potential energy + Kinetic energy.
         E(t) = P(t) + K(t).
+
+        Returns
+            np.ndarray
         """
         return self.potential_energy + self.kinetic_energy
 
-
 class Pendulum(ODEModel):
     """
-    Single pendulum governed by (teta = θ):
+    Single pendulum governed by (theta = θ):
     - dθ/dt = w
     dw/dt = -(g/L) * sin(θ)
 
@@ -160,6 +211,22 @@ class Pendulum(ODEModel):
         Gravitational accelaration (m/s^2), default 9.81.
     """
     def __init__(self, *, L: float=1.0, g: float=DEFAULT_G) -> None:
+        """
+        Initialize a simple pendulum model.
+
+        Parameters:
+        L : float, optional (default=1.0)
+            Length of the pendulum rod in meters. Must be > 0.
+        g : float, optional (default=DEFAULT_G = 9.81)
+            Gravitational acceleration in m/s^2. Must be >= 0.
+
+        Raises:
+        ValueError
+            If L <= 0 or g < 0.
+    
+        Returns
+            None
+        """
         if L <= 0: raise ValueError("Pendulum length L must be a positivie integer.")
         if g < 0: raise ValueError("Gravitational acceleration g must be positive.")
         self._L = float(L)
@@ -169,6 +236,9 @@ class Pendulum(ODEModel):
     def L(self) -> float:
         """
         This class property returns the length og the rod in meter.
+
+        Returns
+            float
         """
         return self._L
     
@@ -176,6 +246,9 @@ class Pendulum(ODEModel):
     def g(self) -> float:
         """
         This class property returns the Gravitational accelaration m/s^2
+
+        Returns
+            float
         """
         return self._g
 
@@ -185,6 +258,9 @@ class Pendulum(ODEModel):
         This class property returns number of states, 
         which should be the number of state variables:
         (θ, w) -> 2
+
+        Returns
+            int
         """
         return 2
     
@@ -192,7 +268,7 @@ class Pendulum(ODEModel):
         """
         Calculates how the pendulum changes at a given moment in time.
         This function defines the right-hand side of the differential
-        equation that describe the pendulum's motion.
+        equation that describe the pendulums motion.
         Right-hand side f(t, u) of the ODE system.
 
         Parameters:
@@ -223,7 +299,7 @@ class Pendulum(ODEModel):
         to extract fields and combine them wit L and g, thereby making a 
         simpler and defined data class to store the data in.
 
-        When returning PendulumResults object, it is tied to the current
+        When returning Any (e.g: PendulumResults) object, it is tied to the current
         Pendulum object. This results in us having a fast and efficient 
         way of accessing theta and omega, and also to the time points and
         solution points.
@@ -234,29 +310,46 @@ class Pendulum(ODEModel):
                 t: np.array of time points
                 y: np.array of solution values
         
-        Return:
-            PendulumResults: time, solution and pendulum params
-        
         Raises:
             AttributeError: If .t and .y is not correct in Pendulum object
+
+        Returns
+            Any: time, solution and pendulum params
         """
         if not hasattr(solution, "t") or not hasattr(solution, "y"):
             raise AttributeError("Solution object must have attributes t and y.")
         return PendulumResults(
             time=solution.t, solution=solution.y, L=self.L, g=self.g
         )
-    
-    
+   
 class DampenedPendulum(Pendulum):
     """
     Dampened singled pendulum:
         dθ/dt = ω
-        dω/dt = -(g/L)*sin(θ)-B*ω
+        dω/dt = -(g/L) * sin(θ) - B * ω
     
     This class inherits from Pendulum and adds the damping 
     parameter B, also overrides RHS.
     """
     def __init__(self, *, L: float=1.0, g:float=DEFAULT_G, B: float=1.0) -> None:
+        """
+        Initialize a damped pendulum model.
+        
+        Parameters
+        L : float, optional (default=1.0)
+            Length of the pendulum rod in meters. Must be > 0.
+        g : float, optional (default=DEFAULT_G = 9.81)
+            Gravitational acceleration in m/s^2. Must be >= 0.
+        B : float, optional (default=1.0)
+            Linear damping coefficient. Must be >= 0.
+
+        Raises
+            ValueError
+            If L <= 0, g < 0, or B < 0.
+        
+        Returns
+            None
+        """
         super().__init__(L=L, g=g)
         if B < 0: raise ValueError("Damping B can not be negative")
         self._B = float(B)
@@ -265,6 +358,9 @@ class DampenedPendulum(Pendulum):
     def B(self) -> float:
         """
         Linear damping coefficient.
+
+        Returns 
+            float
         """
         return self._B
 
@@ -289,7 +385,10 @@ class DampenedPendulum(Pendulum):
 
 def exercise_2b() -> ODEResult:
     """
-    Create a Pendulum, solve with u0=[pi/6], T=10, dt=0.01, ans save plot.
+    Create a Pendulum, solve with u0=[pi/6], T=10, dt=0.01, and save plot.
+
+    Returns:
+        ODEResult
     """
     model = Pendulum(L=1.0, g=DEFAULT_G)
 
@@ -308,6 +407,9 @@ def exercise_2g() -> None:
     """
     Solve the pendulum with u0=(pi/6, 0.35), T=10.0, dt=0.01
     and save the energy plotting to file energy_single.png.
+
+    Returns:
+        None
     """
     model = Pendulum(L=1.0, g=DEFAULT_G)
     u0 = np.array([np.pi/6, 0.35], dtype=float)
@@ -318,6 +420,9 @@ def exercise_2h() -> None:
     """
     Solve the dampened pendulum with initialized values.
     Save the energy plot to file: energy_damped.png.
+
+    Returns:
+        None
     """
     model = DampenedPendulum(L=1.0, g=DEFAULT_G, B=1.0)
     u0 = np.array([np.pi/6, 0.35], dtype=float)
