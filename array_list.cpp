@@ -2,6 +2,24 @@
 #include <stdexcept>
 #include "array_list.h"
 
+void ArrayList::_resize() {
+    _capacity *= _growth_factor;
+
+    //New array (pointer)
+    int *new_data = new int[_capacity];
+    
+    // Copy data old --> new array
+    for (int i = 0; i < _size; i++) {
+        new_data[i] = _data[i];
+    }
+    
+    //Deleting old array - cleaning up after new
+    delete _data;
+
+    //Using new array hereafter
+    _data = new_data;
+}
+
 ArrayList::ArrayList()
 {
     _capacity = 1;
