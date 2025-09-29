@@ -38,6 +38,13 @@ int ArrayList::length()
     return _size;
 }
 
+void ArrayList::append(int element) {
+    //Check if array _data need to be resized _resize
+    if (_size == _capacity) {   _resize(); }
+    _data[_size] = element;
+    _size++;
+}
+
 int ArrayList::get(int index)
 {
     if ((index < 0) || (index >= _size))
