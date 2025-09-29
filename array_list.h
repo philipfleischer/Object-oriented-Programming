@@ -31,6 +31,13 @@ class ArrayList
     int length();
 
     /**
+     * Appends a new element to the end of the ArrayList.
+     * 
+     * @param element An integer to append.
+     */
+    void append(int element);
+
+    /**
      * Get value at a given index.
      * Throws a range error in index if out of bounds
      *
