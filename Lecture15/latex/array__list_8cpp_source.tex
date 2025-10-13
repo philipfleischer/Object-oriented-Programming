@@ -1,0 +1,85 @@
+\doxysection{array\+\_\+list.\+cpp}
+\hypertarget{array__list_8cpp_source}{}\label{array__list_8cpp_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}array\_list.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keywordtype}{void}\ ArrayList::\_resize()}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \ \ \ \ \_capacity\ *=\ \_growth\_factor;}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{comment}{//\ New\ array\ (pointer)}}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{int}\ *new\_data\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{int}[\_capacity];}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{comment}{//\ Copy\ data\ old\ -\/-\/>\ new\ array}}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \_size;\ i++)}
+\DoxyCodeLine{00014\ \ \ \ \ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ new\_data[i]\ =\ \_data[i];}
+\DoxyCodeLine{00016\ \ \ \ \ \}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ Deleting\ old\ array\ -\/\ cleaning\ up\ after\ new}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{delete}\ \_data;}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{comment}{//\ Using\ new\ array\ hereafter}}
+\DoxyCodeLine{00022\ \ \ \ \ \_data\ =\ new\_data;}
+\DoxyCodeLine{00023\ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ ArrayList::ArrayList()}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \_capacity\ =\ 1;}
+\DoxyCodeLine{00028\ \ \ \ \ \_size\ =\ 0;}
+\DoxyCodeLine{00029\ \ \ \ \ \_data\ =\ \textcolor{keyword}{new}\ \textcolor{keywordtype}{int}[\_capacity];}
+\DoxyCodeLine{00030\ \ \ \ \ \_growth\_factor\ =\ 2;}
+\DoxyCodeLine{00031\ \}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ ArrayList::\string~ArrayList()}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{delete}[]\ \_data;}
+\DoxyCodeLine{00036\ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_array_list_ae54946fed62e0f4bd65653e76d04914f}{ArrayList::length}}()}
+\DoxyCodeLine{00039\ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordflow}{return}\ \_size;}
+\DoxyCodeLine{00041\ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_array_list_a59cabf7b863031b0d9e71fea5899816b}{ArrayList::append}}(\textcolor{keywordtype}{int}\ element)}
+\DoxyCodeLine{00044\ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{comment}{//\ Check\ if\ array\ \_data\ need\ to\ be\ resized\ \_resize}}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{if}\ (\_size\ ==\ \_capacity)}
+\DoxyCodeLine{00047\ \ \ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \_resize();}
+\DoxyCodeLine{00049\ \ \ \ \ \}}
+\DoxyCodeLine{00050\ \ \ \ \ \_data[\_size]\ =\ element;}
+\DoxyCodeLine{00051\ \ \ \ \ \_size++;}
+\DoxyCodeLine{00052\ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_array_list_ad07ebe1df85ddc13b0afc4e95d5f5514}{ArrayList::get}}(\textcolor{keywordtype}{int}\ index)}
+\DoxyCodeLine{00055\ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordflow}{if}\ ((index\ <\ 0)\ ||\ (index\ >=\ \_size))}
+\DoxyCodeLine{00057\ \ \ \ \ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::range\_error(\textcolor{stringliteral}{"{}Index\ is\ out\ of\ bounds"{}});}
+\DoxyCodeLine{00059\ \ \ \ \ \}}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordflow}{return}\ \_data[index];}
+\DoxyCodeLine{00061\ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_array_list_accc0d88f535d5723c5bf4ab649992333}{ArrayList::print}}()}
+\DoxyCodeLine{00064\ \{}
+\DoxyCodeLine{00065\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}ArrayList(["{}};}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \_size\ -\/\ 1;\ i++)}
+\DoxyCodeLine{00067\ \ \ \ \ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ std::cout\ <<\ \_data[i]\ <<\ \textcolor{stringliteral}{"{},\ "{}};}
+\DoxyCodeLine{00069\ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ std::cout\ <<\ \_data[\_size\ -\/\ 1]\ <<\ \textcolor{stringliteral}{"{}])"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00071\ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \textcolor{keywordtype}{int}\ \&\mbox{\hyperlink{class_array_list_a4917d2eafedd05ef52ad01ea00232cb5}{ArrayList::operator[]}}(\textcolor{keywordtype}{int}\ index)}
+\DoxyCodeLine{00074\ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordflow}{if}\ ((index\ <\ 0)\ ||\ (index\ >=\ \_size))}
+\DoxyCodeLine{00076\ \ \ \ \ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::range\_error(\textcolor{stringliteral}{"{}Index\ is\ out\ of\ bounds"{}});}
+\DoxyCodeLine{00078\ \ \ \ \ \}}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordflow}{return}\ \_data[index];}
+\DoxyCodeLine{00080\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,93 @@
+\doxysection{Array\+List Class Reference}
+\hypertarget{class_array_list}{}\label{class_array_list}\index{ArrayList@{ArrayList}}
+
+
+{\ttfamily \#include $<$array\+\_\+list.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_array_list_ae54946fed62e0f4bd65653e76d04914f}{length}} ()
+\item 
+void \mbox{\hyperlink{class_array_list_a59cabf7b863031b0d9e71fea5899816b}{append}} (int element)
+\item 
+int \mbox{\hyperlink{class_array_list_ad07ebe1df85ddc13b0afc4e95d5f5514}{get}} (int index)
+\item 
+void \mbox{\hyperlink{class_array_list_accc0d88f535d5723c5bf4ab649992333}{print}} ()
+\item 
+int \& \mbox{\hyperlink{class_array_list_a4917d2eafedd05ef52ad01ea00232cb5}{operator\mbox{[}$\,$\mbox{]}}} (int index)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An array-\/based list that shrinks and grows as needed. Supports indexing. 
+
+\label{doc-func-members}
+\Hypertarget{class_array_list_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_array_list_a59cabf7b863031b0d9e71fea5899816b}\index{ArrayList@{ArrayList}!append@{append}}
+\index{append@{append}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{append()}{append()}}
+{\footnotesize\ttfamily \label{class_array_list_a59cabf7b863031b0d9e71fea5899816b} 
+void Array\+List\+::append (\begin{DoxyParamCaption}\item[{int}]{element}{}\end{DoxyParamCaption})}
+
+Appends a new element to the end of the \doxylink{class_array_list}{Array\+List}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em element} & An integer to append. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_array_list_ad07ebe1df85ddc13b0afc4e95d5f5514}\index{ArrayList@{ArrayList}!get@{get}}
+\index{get@{get}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily \label{class_array_list_ad07ebe1df85ddc13b0afc4e95d5f5514} 
+int Array\+List\+::get (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption})}
+
+Get value at a given index. Throws a range error in index if out of bounds
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int The value at that index 
+\end{DoxyReturn}
+\Hypertarget{class_array_list_ae54946fed62e0f4bd65653e76d04914f}\index{ArrayList@{ArrayList}!length@{length}}
+\index{length@{length}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{length()}{length()}}
+{\footnotesize\ttfamily \label{class_array_list_ae54946fed62e0f4bd65653e76d04914f} 
+int Array\+List\+::length (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+Length of array 
+\end{DoxyReturn}
+\Hypertarget{class_array_list_a4917d2eafedd05ef52ad01ea00232cb5}\index{ArrayList@{ArrayList}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \label{class_array_list_a4917d2eafedd05ef52ad01ea00232cb5} 
+int \& Array\+List\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption})}
+
+Get a reference to the value at a given index. Throws a range error in index if out of bounds
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int The value at that index 
+\end{DoxyReturn}
+\Hypertarget{class_array_list_accc0d88f535d5723c5bf4ab649992333}\index{ArrayList@{ArrayList}!print@{print}}
+\index{print@{print}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily \label{class_array_list_accc0d88f535d5723c5bf4ab649992333} 
+void Array\+List\+::print (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Prints the array 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+array\+\_\+list.\+h\item 
+array\+\_\+list.\+cpp\end{DoxyCompactItemize}
