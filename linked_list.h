@@ -161,4 +161,26 @@ public:
      * @note The function has linear time complexity in the worst case, O(n).
      */
     void insert(int value, int index);
+
+    /**
+     * @brief Removes the element at the given position index.
+     * @param index The index of the element to remove.
+     * @throws std::range_errir if index is out of bounds.
+     */
+    void remove(int index);
+
+    /**
+     * @brief Remove and return the element at the given index.
+     * @param index The index of the elemenet to pop.
+     * @return The value of the removed element.
+     * @throws std::range_error if the list is empty.
+     */
+    int pop(int index);
+
+    /**
+     * @brief Remove and return the element at the list.
+     * @return The value of the removed element.
+     * @throws std::range_error if the list is empty.
+     */
+    int pop();
 };

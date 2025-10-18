@@ -188,3 +188,72 @@ LinkedList::LinkedList(const std::vector<int> &values)
     for (int value : values)
         append(value);
 }
+
+void LinkedList::remove(int index)
+{
+    _check_index_out_of_bounds(index);
+
+    Node *target_node = _node_at(index);
+
+    if (target_node->prev != nullptr)
+        target_node->prev->next = target_node->next;
+    else
+        // Removing the head
+        _head = target_node->next;
+
+    if (target_node->next != nullptr)
+        target_node->next->prev = target_node->prev;
+    else
+        // Removing the tail
+        _tail = target_node->prev;
+
+    delete target_node;
+    _size--;
+}
+
+int LinkedList::pop(int index)
+{
+    _check_index_out_of_bounds(index);
+    Node *target_node = _node_at(index);
+    int node_value = target_node->value;
+
+    if (target_node->prev != nullptr)
+        target_node->prev->next = target_node->next;
+    else
+        _head = target_node->next;
+
+    if (target_node->next != nullptr)
+        target_node->next->prev = target_node->prev;
+    else
+        _tail = target_node->prev;
+
+    delete target_node;
+    _size--;
+
+    return node_value;
+}
+
+int LinkedList::pop()
+{
+    if (_size == 0)
+        throw std::range_error("Cannot pop from empty list.");
+
+    Node *target_node = _tail;
+    int node_value = target_node->value;
+
+    if (target_node->prev != nullptr)
+    {
+        target_node->prev->next = nullptr;
+        _tail = target_node->prev;
+    }
+    else
+    {
+        _head = nullptr;
+        _tail = nullptr;
+    }
+
+    delete target_node;
+    _size--;
+
+    return node_value;
+}
