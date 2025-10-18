@@ -94,6 +94,45 @@ void test_vector_constructor()
               << std::endl;
 }
 
+void test_remove()
+{
+    std::cout << "Test remove\n";
+    LinkedList ll({10, 20, 30, 40});
+    ll.remove(1);
+    assert(ll.length() == 3);
+    assert(ll[0] == 10);
+    assert(ll[1] == 30);
+    assert(ll[2] == 40);
+    std::cout << " - Success: test_remove()\n"
+              << std::endl;
+}
+
+void test_pop_at_index()
+{
+    std::cout << "Test pop at index\n";
+    LinkedList ll({1, 2, 3});
+    int val = ll.pop(1);
+    assert(val == 2);
+    assert(ll.length() == 2);
+    assert(ll[0] == 1);
+    assert(ll[1] == 3);
+    std::cout << " - Success: test_pop_at_index()\n"
+              << std::endl;
+}
+
+void test_pop()
+{
+    std::cout << "Test pop last element\n";
+    LinkedList ll({5, 6, 7});
+    int val = ll.pop();
+    assert(val == 7);
+    assert(ll.length() == 2);
+    assert(ll[0] == 5);
+    assert(ll[1] == 6);
+    std::cout << " - Success: test_pop()\n"
+              << std::endl;
+}
+
 int main()
 {
     test_empty_list_has_zero_length();
@@ -102,6 +141,9 @@ int main()
     test_index_operator();
     test_insert();
     test_vector_constructor();
+    test_remove();
+    test_pop_at_index();
+    test_pop();
     std::cout << "All linked list tests passed.\n";
     return 0;
 }
