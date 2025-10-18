@@ -98,4 +98,22 @@ public:
    * @param index The position in the ArrayList object to insert at.
    */
   void insert(int val, int index);
+
+  /**
+   * @brief Remove element at index.
+   * @throws std::range_error if index is out of bounds.
+   */
+  void remove(int index);
+
+  /**
+   * @brief Remove and return element at index.
+   * @throws std::range_error if index is out of bounds.
+   */
+  int pop(int index);
+
+  /**
+   * @brief Remove and return the last element.
+   * @throws std::range_error if the ArrayList list object is empty.
+   */
+  int pop();
 };

@@ -12,9 +12,7 @@ void ArrayList::_resize()
 
     // Copy data old --> new array
     for (int i = 0; i < _size; i++)
-    {
         new_data[i] = _data[i];
-    }
 
     // Deleting old array - cleaning up after new
     delete[] _data;
@@ -58,9 +56,8 @@ void ArrayList::append(int element)
 {
     // Check if array _data need to be resized _resize
     if (_size == _capacity)
-    {
         _resize();
-    }
+
     _data[_size] = element;
     _size++;
 }
@@ -68,27 +65,24 @@ void ArrayList::append(int element)
 int ArrayList::get(int index)
 {
     if ((index < 0) || (index >= _size))
-    {
         throw std::range_error("Index is out of bounds");
-    }
+
     return _data[index];
 }
 
 int &ArrayList::operator[](int index)
 {
     if (index < 0 || index >= _size)
-    {
         throw std::range_error("Index is out of bounds");
-    }
+
     return _data[index];
 }
 
 const int &ArrayList::operator[](int index) const
 {
     if (index < 0 || index >= _size)
-    {
         throw std::range_error("Index is out of bounds");
-    }
+
     return _data[index];
 }
 
@@ -111,9 +105,7 @@ void ArrayList::insert(int val, int index)
 {
     // Allowing insertions at the end of list
     if (index < 0 || index > _size)
-    {
         throw std::range_error("Index out of bounds in insertion.\n");
-    }
 
     // We resize the array if necessary
     if (_size == _capacity)
@@ -123,7 +115,43 @@ void ArrayList::insert(int val, int index)
     for (int i = _size; i > index; i--)
         _data[i] = _data[i - 1];
 
-    // Inserting the new value into the array
+    // Inserting the new value into the array, at the correct now duplicated value position
     _data[index] = val;
     _size++;
+}
+
+void ArrayList::remove(int index)
+{
+    if (index < 0 || index >= _size)
+        throw std::range_error("Index out of bounds in remove.\n");
+
+    // Removing the element at ArrayList of index, with its right element, doing this until we are at the end of the list
+    for (int i = index + 1; i < _size; i++)
+        _data[i - 1] = _data[i];
+    _size--;
+}
+
+int ArrayList::pop(int index)
+{
+    if (index < 0 || index >= _size)
+        throw std::range_error("Index out of bounds for pop(int index).");
+
+    int value = _data[index];
+
+    // Shifting left
+    for (int i = index + 1; i < _size; i++)
+        _data[i - 1] = _data[i];
+
+    _size--;
+    return value;
+}
+
+int ArrayList::pop()
+{
+    if (_size == 0)
+        throw std::range_error("pop() from empty ArrayList");
+
+    int value = _data[_size - 1];
+    _size--;
+    return value;
 }

@@ -92,6 +92,92 @@ void test_insert()
               << std::endl;
 }
 
+void test_remove()
+{
+    std::cout << "Test remove by index.\n";
+    ArrayList a({10, 20, 30, 40});
+    assert(a.length() == 4);
+
+    // Remove middle element in list
+    a.remove(1); // Should remove 20
+    assert(a.length() == 3);
+    assert(a[0] == 10);
+    assert(a[1] == 30);
+    assert(a[2] == 40);
+
+    // Remove front element in list
+    a.remove(0); // Should remove 10
+    assert(a.length() == 2);
+    assert(a[0] == 30);
+    assert(a[1] == 40);
+
+    // Remove last element in list
+    a.remove(1); // Should remove 40
+    assert(a.length() == 1);
+    assert(a[0] == 30);
+
+    std::cout << "- Success: test_remove()\n"
+              << std::endl;
+}
+
+void test_pop_at_index()
+{
+    std::cout << "Test pop(index) returns removed element.\n";
+    ArrayList a({5, 6, 7, 8});
+    assert(a.length() == 4);
+
+    int v = a.pop(2); // Should remove element 7
+    assert(v == 7);
+    assert(a.length() == 3);
+    assert(a[0] == 5);
+    assert(a[1] == 6);
+    assert(a[2] == 8);
+
+    // pop from front of array
+    v = a.pop(0);
+    assert(v == 5);
+    assert(a.length() == 2);
+    assert(a[0] == 6);
+    assert(a[1] == 8);
+
+    std::cout << "- Success: test_pop_at_index()\n"
+              << std::endl;
+}
+
+void test_pop()
+{
+    std::cout << "Test pop() removes last and returns it.\n";
+    ArrayList a({1, 2, 3});
+    assert(a.length() == 3);
+
+    int v = a.pop();
+    assert(v == 3);
+    assert(a.length() == 2);
+
+    v = a.pop();
+    assert(v == 2);
+    assert(a.length() == 1);
+
+    v = a.pop();
+    assert(v == 1);
+    assert(a.length() == 0);
+
+    // popping from an empty list should throw range_error
+    bool threw = false;
+    try
+    {
+        a.pop();
+    }
+    catch (const std::range_error &)
+    {
+        threw = true;
+    }
+    assert(threw && "pop() on empty should throw");
+
+    std::cout << "- Success: test_pop()\n"
+              << std::endl;
+}
+
 int main()
 {
     test_empty_array_has_length_zero();
@@ -100,6 +186,9 @@ int main()
     test_indexing_operator();
     test_vector_constructor();
     test_insert();
+    test_remove();
+    test_pop_at_index();
+    test_pop();
     std::cout << "All tests passed.\n";
     return 0;
 }
