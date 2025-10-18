@@ -27,6 +27,13 @@ private:
    */
   void _resize();
 
+  /**
+   * @brief Shrinks th einternal storage of the arraylist to the smalles power of 2 that can fit all the elements currently in the list.
+   *
+   * For example: if _size = 47 and _capacity = 1024, shrink_to_fit will set _capacity = 64.
+   */
+  void _shrink_to_fit();
+
 public:
   /// @brief Constructs an empty ArrayList with an initial capacity of 1
   ArrayList();
@@ -45,31 +52,6 @@ public:
   int capacity();
 
   /**
-   * @brief Appends a new element to the end of the ArrayList.
-   *
-   * If the internal array is full, it is automatically resized.
-   *
-   * @param element An integer to be appended.
-   */
-  void append(int element);
-
-  /**
-   * @brief Returns value at a given index.
-   * Throws a std::range_errorif index out of bounds.
-   *
-   * @param index The index to access the ArrayList object.
-   * @return The value at that index.
-   */
-  int get(int index);
-
-  /**
-   * @brief prints the contents of the list to standard output.
-   *
-   * Print-Format: ArrayList([a, b, c]).
-   */
-  void print();
-
-  /**
    * @brief Returns a reference to the element at a given index.
    *
    * The function allows for both reading and writing to the mutable element.
@@ -78,17 +60,7 @@ public:
    * @param index The index to access the ArrayList object.
    * @return A reference to the integer at the given index.
    */
-  int &operator[](int index);
-  /**
-   * @brief Returns a const reference to the element at a given index.
-   *
-   * Can only be used for reading, not modifying.
-   * Throws std::range_error if the index is out of bounds.
-   *
-   * @param index The index to access in the ArrayList object.
-   * @return A const reference to the integer at the given index.
-   */
-  const int &operator[](int index) const;
+  int &operator[](int);
 
   /**
    * @brief Inserts a value val at the index index in the list.
@@ -109,10 +81,26 @@ public:
   void remove(int index);
 
   /**
+   * @brief Appends a new element to the end of the ArrayList.
+   *
+   * If the internal array is full, it is automatically resized.
+   *
+   * @param element An integer to be appended.
+   */
+  void append(int element);
+
+  /**
+   * @brief prints the contents of the list to standard output.
+   *
+   * Print-Format: ArrayList([a, b, c]).
+   */
+  void print();
+
+  /**
    * @brief Remove and return element at index.
    * @throws std::range_error if index is out of bounds.
    */
-  int pop(int index);
+  int pop(int);
 
   /**
    * @brief Remove and return the last element.
@@ -121,9 +109,33 @@ public:
   int pop();
 
   /**
-   * @brief Shrinks th einternal storage of the arraylist to the smalles power of 2 that can fit all the elements currently in the list.
-   *
-   * For example: if _size = 47 and _capacity = 1024, shrink_to_fit will set _capacity = 64.
+   * @brief Returns the index of the smallest element in the array.
+   * @throws std::runtime_error if the list is empty.
    */
-  void _shrink_to_fit();
+  int argmin();
+
+  /**
+   * @brief Returns the index of the largest element in the array.
+   * @throws std::runtime_error if the list is empty.
+   */
+  int argmax();
+
+  /**
+   * @brief Returns the smallest element in the array.
+   * @throws std::runtime_error if the list is empty.
+   */
+  int min();
+
+  /**
+   * @brief Returns the largest element in the array.
+   * @throws std::runtime_error if the list is empty.
+   */
+  int max();
+
+  /**
+   * @brief Returns the number of times a given element occurs in the array.
+   * @param value Value to be counted in the array.
+   * @return Returns number of occurences.
+   */
+  int count(int);
 };

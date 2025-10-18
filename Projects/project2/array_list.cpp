@@ -97,14 +97,6 @@ void ArrayList::append(int element)
     _size++;
 }
 
-int ArrayList::get(int index)
-{
-    if ((index < 0) || (index >= _size))
-        throw std::range_error("Index is out of bounds");
-
-    return _data[index];
-}
-
 void ArrayList::insert(int val, int index)
 {
     // Allowing insertions at the end of list
@@ -185,10 +177,76 @@ int &ArrayList::operator[](int index)
     return _data[index];
 }
 
-const int &ArrayList::operator[](int index) const
+int ArrayList::argmin()
 {
-    if (index < 0 || index >= _size)
-        throw std::range_error("Index is out of bounds");
+    if (_size == 0)
+        throw std::range_error("argmin on empty ArrayList object");
 
-    return _data[index];
+    int min_elem_index = 0;
+    int min_elem_value = _data[0];
+    for (int i = 1; i < _size; i++)
+    {
+        if (_data[i] < min_elem_value)
+        {
+            min_elem_value = _data[i];
+            min_elem_index = i;
+        }
+    }
+
+    return min_elem_index;
+}
+
+int ArrayList::argmax()
+{
+    if (_size == 0)
+        throw std::range_error("argmax on empty ArrayList object");
+
+    int max_elem_index = 0;
+    int max_elem_value = _data[0];
+    for (int i = 1; i < _size; i++)
+    {
+        if (_data[i] > max_elem_value)
+        {
+            max_elem_value = _data[i];
+            max_elem_index = i;
+        }
+    }
+
+    return max_elem_index;
+}
+
+int ArrayList::min()
+{
+    if (_size == 0)
+        throw std::range_error("min on empty ArrayList object");
+
+    int min_value = _data[0];
+    for (int i = 1; i < _size; i++)
+        if (_data[i] < min_value)
+            min_value = _data[i];
+
+    return min_value;
+}
+
+int ArrayList::max()
+{
+    if (_size == 0)
+        throw std::range_error("max on empty ArrayList object");
+
+    int max_value = _data[0];
+    for (int i = 1; i < _size; i++)
+        if (_data[i] > max_value)
+            max_value = _data[i];
+
+    return max_value;
+}
+
+int ArrayList::count(int value)
+{
+    int counter = 0;
+    for (int i = 0; i < _size; i++)
+        if (_data[i] == value)
+            counter++;
+
+    return counter;
 }

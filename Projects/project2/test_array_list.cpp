@@ -24,18 +24,6 @@ void test_array_with_two_elements_appended_has_length_two()
               << std::endl;
 }
 
-void test_print()
-{
-    std::cout << "Test print.\n";
-    ArrayList a;
-    a.append(12);
-    a.append(2);
-    a.append(4);
-    a.print();
-    std::cout << " - Success: test_print()\n"
-              << std::endl;
-}
-
 void test_indexing_operator()
 {
     std::cout << "Test indexing operator.\n";
@@ -178,6 +166,18 @@ void test_pop()
               << std::endl;
 }
 
+void test_print()
+{
+    std::cout << "Test print.\n";
+    ArrayList a;
+    a.append(12);
+    a.append(2);
+    a.append(4);
+    a.print();
+    std::cout << " - Success: test_print()\n"
+              << std::endl;
+}
+
 void test_shrink_to_fit()
 {
     std::cout << "Test shrinking capacity to fit elements.\n";
@@ -198,6 +198,56 @@ void test_shrink_to_fit()
               << std::endl;
 }
 
+void test_argmin()
+{
+    std::cout << "Test argmin.\n";
+    ArrayList a({5, -2, 7, -2, 3});
+    // Should find that the first smallest occurrence is on index 1
+    assert(a.argmin() == 1);
+    std::cout << "- Success: test_argmin()\n"
+              << std::endl;
+}
+
+void test_argmax()
+{
+    std::cout << "Test argmax.\n";
+    ArrayList a({5, 42, 7, 42, 3});
+    // Should find that the first largest occurrence is on index 1
+    assert(a.argmax() == 1);
+    std::cout << "- Success: test_argmax()\n"
+              << std::endl;
+}
+
+void test_min()
+{
+    std::cout << "Test min.\n";
+    ArrayList a({5, -2, 7, -2, 3});
+    // Should find that the smallest element is -2
+    assert(a.min() == -2);
+    std::cout << "- Success: test_min()\n"
+              << std::endl;
+}
+
+void test_max()
+{
+    std::cout << "Test max.\n";
+    ArrayList a({5, 42, 7, 42, 3});
+    // Should find that the largest element is 42
+    assert(a.max() == 42);
+    std::cout << "- Success: test_max()\n"
+              << std::endl;
+}
+
+void test_count()
+{
+    std::cout << "Test count.\n";
+    ArrayList a({1, 2, 2, 3, 2, 4, 2});
+    assert(a.count(2) == 4);
+    assert(a.count(5) == 0);
+    std::cout << "- Success: test_count()\n"
+              << std::endl;
+}
+
 int main()
 {
     test_empty_array_has_length_zero();
@@ -210,6 +260,11 @@ int main()
     test_pop_at_index();
     test_pop();
     test_shrink_to_fit();
+    test_argmin();
+    test_argmax();
+    test_min();
+    test_max();
+    test_count();
     std::cout << "All tests passed.\n";
     return 0;
 }
