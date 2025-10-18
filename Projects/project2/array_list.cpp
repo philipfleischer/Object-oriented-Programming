@@ -2,24 +2,28 @@
 #include <stdexcept>
 #include "array_list.h"
 
-void ArrayList::_resize() {
+/// @brief Resizes the internal array to a larger capacity.
+void ArrayList::_resize()
+{
     _capacity *= _growth_factor;
 
-    //New array (pointer)
+    // New array (pointer), allocating a new larger array
     int *new_data = new int[_capacity];
-    
+
     // Copy data old --> new array
-    for (int i = 0; i < _size; i++) {
+    for (int i = 0; i < _size; i++)
+    {
         new_data[i] = _data[i];
     }
-    
-    //Deleting old array - cleaning up after new
-    delete _data;
 
-    //Using new array hereafter
+    // Deleting old array - cleaning up after new
+    delete[] _data;
+
+    // Using new array hereafter
     _data = new_data;
 }
 
+/// @brief Default constructor for ArrayList: it initializes an empty ArrayList list object.
 ArrayList::ArrayList()
 {
     _capacity = 1;
@@ -28,6 +32,18 @@ ArrayList::ArrayList()
     _growth_factor = 2;
 }
 
+/// @brief Constructs ArrayList list with initial vector values.
+ArrayList::ArrayList(const std::vector<int> &init)
+{
+    _growth_factor = 2;
+    _size = static_cast<int>(init.size());
+    _capacity = (_size == 0) ? 1 : _size;
+    _data = new int[_capacity];
+    for (int i = 0; i < _size; i++)
+        _data[i] = init[static_cast<size_t>(i)];
+}
+
+/// @brief Destructor that frees the allocated memory.
 ArrayList::~ArrayList()
 {
     delete[] _data;
@@ -38,9 +54,13 @@ int ArrayList::length()
     return _size;
 }
 
-void ArrayList::append(int element) {
-    //Check if array _data need to be resized _resize
-    if (_size == _capacity) {   _resize(); }
+void ArrayList::append(int element)
+{
+    // Check if array _data need to be resized _resize
+    if (_size == _capacity)
+    {
+        _resize();
+    }
     _data[_size] = element;
     _size++;
 }
@@ -54,21 +74,35 @@ int ArrayList::get(int index)
     return _data[index];
 }
 
-void ArrayList::print()
+int &ArrayList::operator[](int index)
 {
-    std::cout << "ArrayList([";
-    for (int i = 0; i < _size - 1; i++)
-    {
-        std::cout << _data[i] << ", ";
-    }
-    std::cout << _data[_size - 1] << "])" << std::endl;
-}
-
-int& ArrayList::operator[](int index)
-{
-    if ((index < 0) || (index >= _size))
+    if (index < 0 || index >= _size)
     {
         throw std::range_error("Index is out of bounds");
     }
     return _data[index];
+}
+
+const int &ArrayList::operator[](int index) const
+{
+    if (index < 0 || index >= _size)
+    {
+        throw std::range_error("Index is out of bounds");
+    }
+    return _data[index];
+}
+
+void ArrayList::print()
+{
+    std::cout << "ArrayList([";
+    if (_size > 0)
+    {
+        for (int i = 0; i < _size; i++)
+        {
+            std::cout << _data[i];
+            if (i + 1 < _size)
+                std::cout << ", ";
+        }
+    }
+    std::cout << "])\n";
 }
