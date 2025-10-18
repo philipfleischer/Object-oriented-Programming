@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <stdexcept>
+#include <vector>
 
 /**
  * @brief Node in a doubly linked list.
@@ -71,6 +72,17 @@ private:
      */
     void _check_index_out_of_bounds(int index);
 
+    /**
+     * @brief Returns a pointer to the node at the index.
+     *
+     * Used internally to access the ndoe corresponding to an index.
+     * Traversing from head or tail, depending on whhich is the closes one, this is done to reduce the average time complexity.
+     *
+     * @param index The index of the node to be retrieved.
+     * @return A pointer to the node at the given index.
+     */
+    Node *_node_at(int index);
+
 public:
     /**
      * @brief Constructs an empty list.
@@ -112,4 +124,41 @@ public:
      * @post length increments by 1 and new value at index 0.
      */
     void push_front(int val);
+
+    /**
+     * @brief Constructs a LinkedList object and initializes it with elements from the integer values vector.
+     *
+     * Each element in the vector gets appended to the dll in order, thereby presereving the order of inserts.
+     *
+     * @param value A std::vector containing the initial values for the list.
+     *
+     * @note If the vector is empty, the constructed list will also be empty.
+     */
+    LinkedList(const std::vector<int> &values);
+
+    /**
+     * @brief Accesses the element at the specified index in the list.
+     *
+     * Provides both read and write functionality to telements using the brackets. Operation running in linear time complexity, O(n) in worst case if we need to traverse through the whole list from head to tail.
+     *
+     * @param index The position of the element to access.
+     * @return A reference to the element at the given index.
+     *
+     * @throws std::range_error if the index is out of bounds.
+     */
+    int &operator[](int index);
+
+    /**
+     * @brief Inserts a value at a specific index in the list.
+     *
+     * The element at the given index and all elements to the right of it will be shifted one position forward. Insertion at head is the same as push_front() and insertion at tail is the same as append().
+     *
+     * @param value The value to insert into the linked list.
+     * @param index The position to insert the value.
+     *
+     * @throws std::range_error if the index is out of range.
+     *
+     * @note The function has linear time complexity in the worst case, O(n).
+     */
+    void insert(int value, int index);
 };
