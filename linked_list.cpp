@@ -12,6 +12,27 @@ void LinkedList::_check_index_out_of_bounds(int index)
         throw std::range_error("Index out of bounds");
 }
 
+// Return pointer to node at index (0.._size-1). Assumes index is valid.
+Node *LinkedList::_node_at(int index)
+{
+    // Choose shortest direction
+    if (index <= _size / 2)
+    {
+        Node *current_node = _head;
+        for (int i = 0; i < index; i++)
+            current_node = current_node->next;
+        return current_node;
+    }
+    else
+    {
+        Node *current_node = _tail;
+        for (int i = _size - 1; i > index; i--)
+            current_node = current_node->prev;
+
+        return current_node;
+    }
+}
+
 /**
  * @brief Constructs an empty LinkedList
  * @note Sets head and tail to nullptr and size to 0.
@@ -120,4 +141,50 @@ void LinkedList::append(int val)
     }
 
     _size++;
+}
+
+int &LinkedList::operator[](int index)
+{
+    _check_index_out_of_bounds(index);
+    return _node_at(index)->value;
+}
+
+void LinkedList::insert(int val, int index)
+{
+    // Allowed range is 0.._size
+    if (index < 0 || index > _size)
+        throw std::range_error("Insert index out of bounds");
+
+    if (index == 0)
+    {
+        push_front(val);
+        return;
+    }
+
+    if (index == _size)
+    {
+        append(val);
+        return;
+    }
+
+    // Insert before node at index
+    Node *current_node = _node_at(index);
+    Node *prev_node = current_node->prev;
+
+    Node *new_node = new Node();
+    new_node->value = val;
+
+    new_node->prev = prev_node;
+    new_node->next = current_node;
+    prev_node->next = new_node;
+    current_node->prev = new_node;
+
+    _size++;
+}
+
+LinkedList::LinkedList(const std::vector<int> &values)
+    : _head(nullptr), _tail(nullptr), _size(0)
+{
+    for (int value : values)
+        append(value);
 }
