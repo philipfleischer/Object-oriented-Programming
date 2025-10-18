@@ -45,7 +45,7 @@ LinkedList::LinkedList()
 }
 
 /**
- * @brief Destructur: Deletes all nodes and resets the states.
+ * @brief Destructor: Deletes all nodes and resets the states.
  */
 LinkedList::~LinkedList()
 {
@@ -62,7 +62,7 @@ LinkedList::~LinkedList()
 }
 
 /**
- * @brief Prints list contents int the format [a0, a1, ..., an].
+ * @brief Prints list contents in the format [a0, a1, ..., an].
  */
 void LinkedList::print()
 {
@@ -256,4 +256,36 @@ int LinkedList::pop()
     _size--;
 
     return node_value;
+}
+
+int LinkedList::min()
+{
+    if (_size == 0)
+        throw std::range_error("Cannot get min from empty list");
+
+    Node *current_node = _head;
+    int min_value = current_node->value;
+    while (current_node != nullptr)
+    {
+        if (current_node->value < min_value)
+            min_value = current_node->value;
+        current_node = current_node->next;
+    }
+    return min_value;
+}
+
+int LinkedList::max()
+{
+    if (_size == 0)
+        throw std::range_error("Cannot get max from empty list");
+
+    Node *current_node = _head;
+    int max_value = current_node->value;
+    while (current_node != nullptr)
+    {
+        if (current_node->value > max_value)
+            max_value = current_node->value;
+        current_node = current_node->next;
+    }
+    return max_value;
 }

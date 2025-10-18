@@ -19,7 +19,7 @@ struct Node
      *
      * @note Value of an element in the list (default: most negative 32-bit int). Real values are set by the linked list.
      */
-    int value = -2147483647;
+    int value = 0;
 
     /**
      * @brief Pointer to the next node in the list.
@@ -37,16 +37,17 @@ struct Node
 };
 
 /**
- * @brief A doubly linmked list.
+ * @brief A doubly linked list.
  *
  * @details
  * Supports push to front, append to back, printing, and length queries.
  * The list maintains pointers to both head and tail to make front/back operations efficient.
  *
  * @invariant
- * - If the list is empty, that means: _head == nullptr && _tail == nullptr && _size == nullptr.
- * - If the list is not empty, then: _head->next != nullptr && _tail->prev != nullptr.
- * - _size is equal to the number of nodes counted from _head->next until it equals nullptr.
+ *  - (_size == 0) - (_head == nullptr && _tail == nullptr)
+ *  - (_size > 0) - (_head != nullptr && _tail != nullptr)
+ *  - (_size == 1) - (_head == _tail)
+ *  - For any list not empty: _head->prev == nullptr and _tail->next == nullptr
  */
 class LinkedList
 {
@@ -64,7 +65,7 @@ private:
     int _size;
 
     /**
-     * Check wheter the given index is out of bounds and throw a range error if it is.
+     * Check whether the given index is out of bounds and throw a range error if it is.
      *
      * @param index The index to be checked
      * @throws std::range_error Thrown if the index is negative or
@@ -75,8 +76,8 @@ private:
     /**
      * @brief Returns a pointer to the node at the index.
      *
-     * Used internally to access the ndoe corresponding to an index.
-     * Traversing from head or tail, depending on whhich is the closes one, this is done to reduce the average time complexity.
+     * Used internally to access the node corresponding to an index.
+     * Traversing from head or tail, depending on which is the closest one, this is done to reduce the average time complexity.
      *
      * @param index The index of the node to be retrieved.
      * @return A pointer to the node at the given index.
@@ -90,6 +91,17 @@ public:
      * @post length == 0, _head == nullptr, _tail == nullptr.
      */
     LinkedList();
+
+    /**
+     * @brief Constructs a LinkedList object and initializes it with elements from the integer values vector.
+     *
+     * Each element in the vector gets appended to the dll in order, thereby preserving the order of inserts.
+     *
+     * @param value A std::vector containing the initial values for the list.
+     *
+     * @note If the vector is empty, the constructed list will also be empty.
+     */
+    LinkedList(const std::vector<int> &values);
 
     /**
      * @brief Destroys the list and releases all nodes.
@@ -126,17 +138,6 @@ public:
     void push_front(int val);
 
     /**
-     * @brief Constructs a LinkedList object and initializes it with elements from the integer values vector.
-     *
-     * Each element in the vector gets appended to the dll in order, thereby presereving the order of inserts.
-     *
-     * @param value A std::vector containing the initial values for the list.
-     *
-     * @note If the vector is empty, the constructed list will also be empty.
-     */
-    LinkedList(const std::vector<int> &values);
-
-    /**
      * @brief Accesses the element at the specified index in the list.
      *
      * Provides both read and write functionality to telements using the brackets. Operation running in linear time complexity, O(n) in worst case if we need to traverse through the whole list from head to tail.
@@ -151,7 +152,7 @@ public:
     /**
      * @brief Inserts a value at a specific index in the list.
      *
-     * The element at the given index and all elements to the right of it will be shifted one position forward. Insertion at head is the same as push_front() and insertion at tail is the same as append().
+     * The element at the given index and all elements to the to its right will be shifted one position forward. Insertion at head is the same as push_front() and insertion at tail is the same as append().
      *
      * @param value The value to insert into the linked list.
      * @param index The position to insert the value.
@@ -165,22 +166,36 @@ public:
     /**
      * @brief Removes the element at the given position index.
      * @param index The index of the element to remove.
-     * @throws std::range_errir if index is out of bounds.
+     * @throws std::range_error if index is out of bounds.
      */
     void remove(int index);
 
     /**
      * @brief Remove and return the element at the given index.
-     * @param index The index of the elemenet to pop.
+     * @param index The index of the element to pop.
      * @return The value of the removed element.
      * @throws std::range_error if the list is empty.
      */
     int pop(int index);
 
     /**
-     * @brief Remove and return the element at the list.
+     * @brief Remove and return the element at the end of the list.
      * @return The value of the removed element.
      * @throws std::range_error if the list is empty.
      */
     int pop();
+
+    /**
+     * @brief Return the smallest element in the list.
+     * @return The smallest element value.
+     * @throws std::range_error if the list is empty.
+     */
+    int min();
+
+    /**
+     * @brief Return the largest element in the list.
+     * @return The largest element value.
+     * @throws std::range_error if the list is empty.
+     */
+    int max();
 };

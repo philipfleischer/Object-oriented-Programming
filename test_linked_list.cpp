@@ -41,6 +41,19 @@ void test_append()
               << std::endl;
 }
 
+void test_print()
+{
+    std::cout << "Test print.\n";
+    LinkedList dll;
+    dll.append(1);
+    dll.append(2);
+    dll.append(3);
+
+    std::cout << "- Expected:\n[1, 2, 3]\nResult:\n";
+    dll.print();
+    std::cout << "- Success: test_print()\n";
+}
+
 void test_index_operator()
 {
     LinkedList dll;
@@ -133,17 +146,38 @@ void test_pop()
               << std::endl;
 }
 
+void test_min()
+{
+    std::cout << "Test min\n";
+    LinkedList ll({5, 2, 9, 1, 7});
+    assert(ll.min() == 1);
+    std::cout << " - Success: test_min()\n"
+              << std::endl;
+}
+
+void test_max()
+{
+    std::cout << "Test max\n";
+    LinkedList ll({5, 2, 9, 1, 7});
+    assert(ll.max() == 9);
+    std::cout << " - Success: test_max()\n"
+              << std::endl;
+}
+
 int main()
 {
     test_empty_list_has_zero_length();
     test_push_front();
     test_append();
+    test_print();
     test_index_operator();
     test_insert();
     test_vector_constructor();
     test_remove();
     test_pop_at_index();
     test_pop();
-    std::cout << "All linked list tests passed.\n";
+    test_min();
+    test_max();
+    std::cout << "All Doubly Linked List tests passed.\n";
     return 0;
 }
