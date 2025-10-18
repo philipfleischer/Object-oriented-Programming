@@ -21,6 +21,36 @@ void ArrayList::_resize()
     _data = new_data;
 }
 
+void ArrayList::_shrink_to_fit()
+{
+    if (_size == 0)
+    {
+        // The minimum capacity should be 1 here
+        delete[] _data;
+        _capacity = 1;
+        _data = new int[_capacity];
+        return;
+    }
+
+    // Finding the smallest pwer of 2 to contain elements
+    int new_capacity = 1;
+    while (new_capacity < _size)
+        new_capacity *= 2;
+
+    if (new_capacity == _capacity)
+        return;
+
+    int *new_data = new int[new_capacity];
+
+    // Copying over the exisiting elements to the new smaller array
+    for (int i = 0; i < _size; i++)
+        new_data[i] = _data[i];
+
+    delete[] _data;
+    _data = new_data;
+    _capacity = new_capacity;
+}
+
 /// @brief Default constructor for ArrayList: it initializes an empty ArrayList list object.
 ArrayList::ArrayList()
 {
@@ -52,6 +82,11 @@ int ArrayList::length()
     return _size;
 }
 
+int ArrayList::capacity()
+{
+    return _capacity;
+}
+
 void ArrayList::append(int element)
 {
     // Check if array _data need to be resized _resize
@@ -68,37 +103,6 @@ int ArrayList::get(int index)
         throw std::range_error("Index is out of bounds");
 
     return _data[index];
-}
-
-int &ArrayList::operator[](int index)
-{
-    if (index < 0 || index >= _size)
-        throw std::range_error("Index is out of bounds");
-
-    return _data[index];
-}
-
-const int &ArrayList::operator[](int index) const
-{
-    if (index < 0 || index >= _size)
-        throw std::range_error("Index is out of bounds");
-
-    return _data[index];
-}
-
-void ArrayList::print()
-{
-    std::cout << "ArrayList([";
-    if (_size > 0)
-    {
-        for (int i = 0; i < _size; i++)
-        {
-            std::cout << _data[i];
-            if (i + 1 < _size)
-                std::cout << ", ";
-        }
-    }
-    std::cout << "])\n";
 }
 
 void ArrayList::insert(int val, int index)
@@ -154,4 +158,35 @@ int ArrayList::pop()
     int value = _data[_size - 1];
     _size--;
     return value;
+}
+
+void ArrayList::print()
+{
+    std::cout << "ArrayList([";
+    if (_size > 0)
+    {
+        for (int i = 0; i < _size; i++)
+        {
+            std::cout << _data[i];
+            if (i + 1 < _size)
+                std::cout << ", ";
+        }
+    }
+    std::cout << "])\n";
+}
+
+int &ArrayList::operator[](int index)
+{
+    if (index < 0 || index >= _size)
+        throw std::range_error("Index is out of bounds");
+
+    return _data[index];
+}
+
+const int &ArrayList::operator[](int index) const
+{
+    if (index < 0 || index >= _size)
+        throw std::range_error("Index is out of bounds");
+
+    return _data[index];
 }
