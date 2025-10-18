@@ -41,6 +41,9 @@ public:
   /// @return Length of ArrayList object.
   int length();
 
+  /// @brief Get the current capacity of list.
+  int capacity();
+
   /**
    * @brief Appends a new element to the end of the ArrayList.
    *
@@ -116,4 +119,11 @@ public:
    * @throws std::range_error if the ArrayList list object is empty.
    */
   int pop();
+
+  /**
+   * @brief Shrinks th einternal storage of the arraylist to the smalles power of 2 that can fit all the elements currently in the list.
+   *
+   * For example: if _size = 47 and _capacity = 1024, shrink_to_fit will set _capacity = 64.
+   */
+  void _shrink_to_fit();
 };

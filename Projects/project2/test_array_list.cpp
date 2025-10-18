@@ -178,6 +178,26 @@ void test_pop()
               << std::endl;
 }
 
+void test_shrink_to_fit()
+{
+    std::cout << "Test shrinking capacity to fit elements.\n";
+    // Starting with initializing a large list:
+    ArrayList a;
+    for (int i = 0; i < 100; i++)
+        a.append(i);
+
+    // Pop elements to force shrink_to_fit funciton
+    for (int i = 0; i < 90; i++)
+        a.pop();
+
+    assert(a.length() == 10);
+    a._shrink_to_fit();
+    // Capacity should be 16 now
+    assert(a.capacity() == 16);
+    std::cout << "- Success: test_shrink_to_fit()\n"
+              << std::endl;
+}
+
 int main()
 {
     test_empty_array_has_length_zero();
@@ -189,6 +209,7 @@ int main()
     test_remove();
     test_pop_at_index();
     test_pop();
+    test_shrink_to_fit();
     std::cout << "All tests passed.\n";
     return 0;
 }
