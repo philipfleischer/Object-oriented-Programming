@@ -133,6 +133,10 @@ void ArrayList::remove(int index)
     for (int i = index + 1; i < _size; i++)
         _data[i - 1] = _data[i];
     _size--;
+
+    // Automatically shrinking ArrayList object if it is less than 25% capacity in use
+    if (_size < _capacity / 4)
+        _shrink_to_fit();
 }
 
 int ArrayList::pop(int index)
@@ -141,12 +145,7 @@ int ArrayList::pop(int index)
         throw std::range_error("Index out of bounds for pop(int index).");
 
     int value = _data[index];
-
-    // Shifting left
-    for (int i = index + 1; i < _size; i++)
-        _data[i - 1] = _data[i];
-
-    _size--;
+    remove(index);
     return value;
 }
 
@@ -157,6 +156,9 @@ int ArrayList::pop()
 
     int value = _data[_size - 1];
     _size--;
+    // Automatically shrinking ArrayList object if it is less than 25% capacity in use
+    if (_size < _capacity / 4)
+        _shrink_to_fit();
     return value;
 }
 
