@@ -86,4 +86,16 @@ public:
    * @return A const reference to the integer at the given index.
    */
   const int &operator[](int index) const;
+
+  /**
+   * @brief Inserts a value val at the index index in the list.
+   *
+   * The function shifts the elements at the index and all after the index one position to the right.
+   * Inserting at index == length() is allowed (same as append() funciton).
+   * Throws std::range_error if index > length().
+   *
+   * @param val The value to insert in the ArrayList object.
+   * @param index The position in the ArrayList object to insert at.
+   */
+  void insert(int val, int index);
 };

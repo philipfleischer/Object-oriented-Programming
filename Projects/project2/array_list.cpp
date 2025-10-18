@@ -106,3 +106,24 @@ void ArrayList::print()
     }
     std::cout << "])\n";
 }
+
+void ArrayList::insert(int val, int index)
+{
+    // Allowing insertions at the end of list
+    if (index < 0 || index > _size)
+    {
+        throw std::range_error("Index out of bounds in insertion.\n");
+    }
+
+    // We resize the array if necessary
+    if (_size == _capacity)
+        _resize();
+
+    // Shifting elements to the right
+    for (int i = _size; i > index; i--)
+        _data[i] = _data[i - 1];
+
+    // Inserting the new value into the array
+    _data[index] = val;
+    _size++;
+}
