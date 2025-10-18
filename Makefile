@@ -3,8 +3,8 @@ CXX      = g++
 CXXFLAGS = -std=c++14 -Wall -Wextra -O2
 
 # --- Default target ---
-all: array_list
-# Later: add 'linked_list' and 'compare_array_list_and_linked_list' here
+all: array_list linked_list
+# Later: add 'compare_array_list_and_linked_list' here
 
 # -------------------------------
 # Build ArrayList (enabled now)
@@ -13,10 +13,10 @@ array_list: array_list.h array_list.cpp test_array_list.cpp
 	$(CXX) $(CXXFLAGS) test_array_list.cpp array_list.cpp -o array_list
 
 # -------------------------------
-# Build LinkedList (enable later)
+# Build LinkedList (enabled now)
 # -------------------------------
-# linked_list: linked_list.h linked_list.cpp test_linked_list.cpp
-# 	$(CXX) $(CXXFLAGS) test_linked_list.cpp linked_list.cpp -o linked_list
+linked_list: linked_list.h linked_list.cpp test_linked_list.cpp
+	$(CXX) $(CXXFLAGS) test_linked_list.cpp linked_list.cpp -o linked_list
 
 # -------------------------------
 # Build comparison (enable later)
