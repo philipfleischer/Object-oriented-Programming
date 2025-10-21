@@ -1,8 +1,13 @@
+/** @file test_array_list.cpp
+ *  @brief Unit tests for the dynamic array list (ArrayList).
+ *  @details Verifies construction, append, indexing (read/write), insert/remove, pop(index) and pop(), shrink-to-fit behavior, argmin/argmax, min/max, count, and print formatting.
+ */
 #include <cassert>
 #include <iostream>
 
 #include "array_list.h"
 
+/// @brief Test that a newly constructed ArrayList object has length zero.
 void test_empty_array_has_length_zero()
 {
     ArrayList a = ArrayList();
@@ -13,6 +18,7 @@ void test_empty_array_has_length_zero()
     ;
 }
 
+/// @brief Test that appending two elements results in length==2.
 void test_array_with_two_elements_appended_has_length_two()
 {
     ArrayList a = ArrayList();
@@ -24,6 +30,7 @@ void test_array_with_two_elements_appended_has_length_two()
               << std::endl;
 }
 
+/// @brief Test to see if operator[] method supports reading and writing for mutable elements.
 void test_indexing_operator()
 {
     std::cout << "Test indexing operator.\n";
@@ -37,6 +44,7 @@ void test_indexing_operator()
               << std::endl;
 }
 
+/// @brief Test constructing from std::vector preserves order and length.
 void test_vector_constructor()
 {
     std::cout << "Testing vector constructor.\n";
@@ -49,26 +57,27 @@ void test_vector_constructor()
               << std::endl;
 }
 
+/// @brief Test insert at front, middle, and end for the ArrayList object.
 void test_insert()
 {
     std::cout << "Test insert at front, middle, and end.\n";
     ArrayList a = ArrayList({0, 1});
     assert(a.length() == 2);
 
-    a.insert(42, 0);
+    a.insert(42, 0); // front/head
     assert(a.length() == 3);
     assert(a[0] == 42);
     assert(a[1] == 0);
     assert(a[2] == 1);
 
-    a.insert(43, 1);
+    a.insert(43, 1); // middle
     assert(a.length() == 4);
     assert(a[0] == 42);
     assert(a[1] == 43);
     assert(a[2] == 0);
     assert(a[3] == 1);
 
-    a.insert(44, 4);
+    a.insert(44, 4); // end/tail
     assert(a.length() == 5);
     assert(a[0] == 42);
     assert(a[1] == 43);
@@ -80,6 +89,7 @@ void test_insert()
               << std::endl;
 }
 
+/// @brief Test that remove() funciton deletes element at the index and shifts elements left.
 void test_remove()
 {
     std::cout << "Test remove by index.\n";
@@ -108,6 +118,7 @@ void test_remove()
               << std::endl;
 }
 
+/// @brief Test pop(index) returns the removed element and shifts elements.
 void test_pop_at_index()
 {
     std::cout << "Test pop(index) returns removed element.\n";
@@ -132,6 +143,7 @@ void test_pop_at_index()
               << std::endl;
 }
 
+/// @brief Test pop() removes and returns the last element; throws range_error on empty list operations.
 void test_pop()
 {
     std::cout << "Test pop() removes last and returns it.\n";
@@ -166,6 +178,7 @@ void test_pop()
               << std::endl;
 }
 
+/// @brief Test that print() funciton prints in a nice and correct format.
 void test_print()
 {
     std::cout << "Test print.\n";
@@ -178,6 +191,7 @@ void test_print()
               << std::endl;
 }
 
+/// @brief Test that capacity shrinks to a small power-of-two after removals result in usage<25%.
 void test_shrink_to_fit()
 {
     std::cout << "Test shrinking capacity to fit elements.\n";
@@ -198,6 +212,7 @@ void test_shrink_to_fit()
               << std::endl;
 }
 
+/// @brief Test argmin returns index of the first minimum element in ArrayList.
 void test_argmin()
 {
     std::cout << "Test argmin.\n";
@@ -208,6 +223,7 @@ void test_argmin()
               << std::endl;
 }
 
+/// @brief Test argmax returns index of the first maximum element in ArrayList.
 void test_argmax()
 {
     std::cout << "Test argmax.\n";
@@ -218,6 +234,7 @@ void test_argmax()
               << std::endl;
 }
 
+/// @brief Test min returns the smallest value in the ArrayList object.
 void test_min()
 {
     std::cout << "Test min.\n";
@@ -228,6 +245,7 @@ void test_min()
               << std::endl;
 }
 
+/// @brief Test max returns the largest value in the ArrayList object.
 void test_max()
 {
     std::cout << "Test max.\n";
@@ -238,6 +256,7 @@ void test_max()
               << std::endl;
 }
 
+/// @brief Test count returns the number of occurrences of a value in the ArrayList object.
 void test_count()
 {
     std::cout << "Test count.\n";
@@ -248,6 +267,7 @@ void test_count()
               << std::endl;
 }
 
+/// @brief Runs all ArrayList unit tests in this file.
 int main()
 {
     test_empty_array_has_length_zero();
