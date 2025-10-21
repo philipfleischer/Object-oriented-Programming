@@ -1,0 +1,336 @@
+\doxysection{Linked\+List Class Reference}
+\hypertarget{class_linked_list}{}\label{class_linked_list}\index{LinkedList@{LinkedList}}
+
+
+A doubly linked list object of class \doxylink{class_linked_list}{Linked\+List}.  
+
+
+
+
+{\ttfamily \#include $<$linked\+\_\+list.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_linked_list_afe7f78983e173f8018927cf2ad11a5aa}{Linked\+List}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty list. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_linked_list_ab17bdc7d9380eb563e04cb73979164bd}{Linked\+List}} (const std\+::vector$<$ int $>$ \&values)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_linked_list}{Linked\+List} object and initializes it with elements from the integer values vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_linked_list_a35811ed58ff0d8d9cc9b309b8d8f5111}{\texorpdfstring{$\sim$}{\string~}\+Linked\+List}} ()
+\begin{DoxyCompactList}\small\item\em Destroys the list and releases all nodes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_linked_list_ac1fdfb17ef5cd45016f3f3b97e07154a}{append}} (int val)
+\begin{DoxyCompactList}\small\item\em Appends a value at the end of the list. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_linked_list_a19ca82688ead6118f7ae6182743c90e5}{length}} ()
+\begin{DoxyCompactList}\small\item\em Returns the current size of the list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_linked_list_ab4eadf177918231a59991a51bca24d9e}{print}} ()
+\begin{DoxyCompactList}\small\item\em Prints the list contents. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_linked_list_aa28d3880d9fd639adb1afa7a56ac0c43}{push\+\_\+front}} (int val)
+\begin{DoxyCompactList}\small\item\em Inserts a value at the front of the list. \end{DoxyCompactList}\item 
+int \& \mbox{\hyperlink{class_linked_list_a2cf446041d8119b3df3b178738987e99}{operator\mbox{[}$\,$\mbox{]}}} (int index)
+\begin{DoxyCompactList}\small\item\em Accesses the element at the specified index in the list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_linked_list_a35fe3ceb956fc394c81cf350c5bbd4a6}{insert}} (int value, int index)
+\begin{DoxyCompactList}\small\item\em Inserts a value at a specific index in the list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_linked_list_acdc7fd32ac8250d1676ff9ebfca30fa1}{remove}} (int index)
+\begin{DoxyCompactList}\small\item\em Removes the element at the given position index. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_linked_list_a66ffc10bda67c1256e6e243fc2f7431e}{pop}} (int index)
+\begin{DoxyCompactList}\small\item\em Remove and return the element at the given index. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_linked_list_adf599689880f94417e28de39df47fa82}{pop}} ()
+\begin{DoxyCompactList}\small\item\em Remove and return the element at the end of the list. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_linked_list_a9732fb58834cee1b3f95ae01a84daea0}{min}} ()
+\begin{DoxyCompactList}\small\item\em Return the smallest element in the list. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_linked_list_a556ec770517ba7a253530386f1f08cc0}{max}} ()
+\begin{DoxyCompactList}\small\item\em Return the largest element in the list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A doubly linked list object of class \doxylink{class_linked_list}{Linked\+List}. 
+
+It supports push to front, append to back, printing, and length queries. The list maintains pointers to both head and tail to make front/back operations efficient. 
+
+\label{doc-constructors}
+\Hypertarget{class_linked_list_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_linked_list_afe7f78983e173f8018927cf2ad11a5aa}\index{LinkedList@{LinkedList}!LinkedList@{LinkedList}}
+\index{LinkedList@{LinkedList}!LinkedList@{LinkedList}}
+\doxysubsubsection{\texorpdfstring{LinkedList()}{LinkedList()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_linked_list_afe7f78983e173f8018927cf2ad11a5aa} 
+Linked\+List\+::\+Linked\+List (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty list. 
+
+Constructs an empty \doxylink{class_linked_list}{Linked\+List}.
+
+\begin{DoxyPostcond}{Postcondition}
+on initialization\+: length == 0, \+\_\+head == nullptr, \+\_\+tail == nullptr.
+\end{DoxyPostcond}
+\begin{DoxyNote}{Note}
+Sets head and tail to nullptr and size to 0. 
+\end{DoxyNote}
+\Hypertarget{class_linked_list_ab17bdc7d9380eb563e04cb73979164bd}\index{LinkedList@{LinkedList}!LinkedList@{LinkedList}}
+\index{LinkedList@{LinkedList}!LinkedList@{LinkedList}}
+\doxysubsubsection{\texorpdfstring{LinkedList()}{LinkedList()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_linked_list_ab17bdc7d9380eb563e04cb73979164bd} 
+Linked\+List\+::\+Linked\+List (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ int $>$ \&}]{values}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{class_linked_list}{Linked\+List} object and initializes it with elements from the integer values vector. 
+
+Each element in the vector gets appended to the dll (doubly linked list) in order, thereby preserving the order of inserts.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & A std\+::vector containing the initial values for the list.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+If the vector is empty, the constructed list will also be empty. 
+\end{DoxyNote}
+\Hypertarget{class_linked_list_a35811ed58ff0d8d9cc9b309b8d8f5111}\index{LinkedList@{LinkedList}!````~LinkedList@{\texorpdfstring{$\sim$}{\string~}LinkedList}}
+\index{````~LinkedList@{\texorpdfstring{$\sim$}{\string~}LinkedList}!LinkedList@{LinkedList}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}LinkedList()}{\string~LinkedList()}}
+{\footnotesize\ttfamily \label{class_linked_list_a35811ed58ff0d8d9cc9b309b8d8f5111} 
+Linked\+List\+::\texorpdfstring{$\sim$}{\string~}\+Linked\+List (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destroys the list and releases all nodes. 
+
+Destructor\+: Deletes all nodes and resets the states.
+
+\begin{DoxyPostcond}{Postcondition}
+All dynamically allocated nodes are deleted. 
+\end{DoxyPostcond}
+
+
+\label{doc-func-members}
+\Hypertarget{class_linked_list_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_linked_list_ac1fdfb17ef5cd45016f3f3b97e07154a}\index{LinkedList@{LinkedList}!append@{append}}
+\index{append@{append}!LinkedList@{LinkedList}}
+\doxysubsubsection{\texorpdfstring{append()}{append()}}
+{\footnotesize\ttfamily \label{class_linked_list_ac1fdfb17ef5cd45016f3f3b97e07154a} 
+void Linked\+List\+::append (\begin{DoxyParamCaption}\item[{int}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Appends a value at the end of the list. 
+
+Appends a new value at the end of the list.
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The value of the element to append. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+length increments by 1 and new value is at index \mbox{[}length-\/1\mbox{]}.
+\end{DoxyPostcond}
+\begin{DoxyNote}{Note}
+Handles the empty list case by setting both the head and tail. 
+\end{DoxyNote}
+\Hypertarget{class_linked_list_a35fe3ceb956fc394c81cf350c5bbd4a6}\index{LinkedList@{LinkedList}!insert@{insert}}
+\index{insert@{insert}!LinkedList@{LinkedList}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily \label{class_linked_list_a35fe3ceb956fc394c81cf350c5bbd4a6} 
+void Linked\+List\+::insert (\begin{DoxyParamCaption}\item[{int}]{value}{, }\item[{int}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Inserts a value at a specific index in the list. 
+
+The element at the given index and all elements to the to its right will be shifted one position forward. Insertion at head is the same as \doxylink{class_linked_list_aa28d3880d9fd639adb1afa7a56ac0c43}{push\+\_\+front()} and insertion at tail is the same as \doxylink{class_linked_list_ac1fdfb17ef5cd45016f3f3b97e07154a}{append()}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to insert into the linked list. \\
+\hline
+{\em index} & The position to insert the value.\\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::range\+\_\+error} & if the index is out of range.\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Note}
+The function has linear time complexity in the worst case, O(n). 
+\end{DoxyNote}
+\Hypertarget{class_linked_list_a19ca82688ead6118f7ae6182743c90e5}\index{LinkedList@{LinkedList}!length@{length}}
+\index{length@{length}!LinkedList@{LinkedList}}
+\doxysubsubsection{\texorpdfstring{length()}{length()}}
+{\footnotesize\ttfamily \label{class_linked_list_a19ca82688ead6118f7ae6182743c90e5} 
+int Linked\+List\+::length (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Returns the current size of the list. 
+
+\begin{DoxyReturn}{Returns}
+The number of elements in the dll. 
+\end{DoxyReturn}
+\Hypertarget{class_linked_list_a556ec770517ba7a253530386f1f08cc0}\index{LinkedList@{LinkedList}!max@{max}}
+\index{max@{max}!LinkedList@{LinkedList}}
+\doxysubsubsection{\texorpdfstring{max()}{max()}}
+{\footnotesize\ttfamily \label{class_linked_list_a556ec770517ba7a253530386f1f08cc0} 
+int Linked\+List\+::max (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Return the largest element in the list. 
+
+\begin{DoxyReturn}{Returns}
+The largest element value. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::range\+\_\+error} & if the list is empty. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_linked_list_a9732fb58834cee1b3f95ae01a84daea0}\index{LinkedList@{LinkedList}!min@{min}}
+\index{min@{min}!LinkedList@{LinkedList}}
+\doxysubsubsection{\texorpdfstring{min()}{min()}}
+{\footnotesize\ttfamily \label{class_linked_list_a9732fb58834cee1b3f95ae01a84daea0} 
+int Linked\+List\+::min (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Return the smallest element in the list. 
+
+\begin{DoxyReturn}{Returns}
+The smallest element value. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::range\+\_\+error} & if the list is empty. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_linked_list_a2cf446041d8119b3df3b178738987e99}\index{LinkedList@{LinkedList}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!LinkedList@{LinkedList}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \label{class_linked_list_a2cf446041d8119b3df3b178738987e99} 
+int \& Linked\+List\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Accesses the element at the specified index in the list. 
+
+Provides both read and write functionality to elements using the brackets. Operation running in linear time complexity, O(n) in worst case if we need to traverse through the whole list from head to tail.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The position of the element to access. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to the element at the given index.
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::range\+\_\+error} & if the index is out of bounds. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_linked_list_adf599689880f94417e28de39df47fa82}\index{LinkedList@{LinkedList}!pop@{pop}}
+\index{pop@{pop}!LinkedList@{LinkedList}}
+\doxysubsubsection{\texorpdfstring{pop()}{pop()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_linked_list_adf599689880f94417e28de39df47fa82} 
+int Linked\+List\+::pop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Remove and return the element at the end of the list. 
+
+\begin{DoxyReturn}{Returns}
+The value of the removed element. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::range\+\_\+error} & if the list is empty. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_linked_list_a66ffc10bda67c1256e6e243fc2f7431e}\index{LinkedList@{LinkedList}!pop@{pop}}
+\index{pop@{pop}!LinkedList@{LinkedList}}
+\doxysubsubsection{\texorpdfstring{pop()}{pop()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_linked_list_a66ffc10bda67c1256e6e243fc2f7431e} 
+int Linked\+List\+::pop (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Remove and return the element at the given index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the element to pop. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value of the removed element. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::range\+\_\+error} & if the list is empty. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_linked_list_ab4eadf177918231a59991a51bca24d9e}\index{LinkedList@{LinkedList}!print@{print}}
+\index{print@{print}!LinkedList@{LinkedList}}
+\doxysubsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily \label{class_linked_list_ab4eadf177918231a59991a51bca24d9e} 
+void Linked\+List\+::print (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Prints the list contents. 
+
+Prints list contents in the format \mbox{[}a0, a1, ..., an\mbox{]}.
+
+The format is \mbox{[}a0, a1, ..., an\mbox{]}. \Hypertarget{class_linked_list_aa28d3880d9fd639adb1afa7a56ac0c43}\index{LinkedList@{LinkedList}!push\_front@{push\_front}}
+\index{push\_front@{push\_front}!LinkedList@{LinkedList}}
+\doxysubsubsection{\texorpdfstring{push\_front()}{push\_front()}}
+{\footnotesize\ttfamily \label{class_linked_list_aa28d3880d9fd639adb1afa7a56ac0c43} 
+void Linked\+List\+::push\+\_\+front (\begin{DoxyParamCaption}\item[{int}]{val}{}\end{DoxyParamCaption})}
+
+
+
+Inserts a value at the front of the list. 
+
+Inserts a new value at the front of the list.
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The value to be pushed at the front, replacing original head. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+length increments by 1 and new value at index 0.
+\end{DoxyPostcond}
+\begin{DoxyNote}{Note}
+Handles the empty list case by setting the head and tail. 
+\end{DoxyNote}
+\Hypertarget{class_linked_list_acdc7fd32ac8250d1676ff9ebfca30fa1}\index{LinkedList@{LinkedList}!remove@{remove}}
+\index{remove@{remove}!LinkedList@{LinkedList}}
+\doxysubsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily \label{class_linked_list_acdc7fd32ac8250d1676ff9ebfca30fa1} 
+void Linked\+List\+::remove (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Removes the element at the given position index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the element to remove. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::range\+\_\+error} & if index is out of bounds. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+linked\+\_\+list.\+h\item 
+linked\+\_\+list.\+cpp\end{DoxyCompactItemize}

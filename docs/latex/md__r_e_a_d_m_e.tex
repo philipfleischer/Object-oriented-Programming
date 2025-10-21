@@ -1,0 +1,162 @@
+\chapter{H25\+\_\+project2\+\_\+philipef\+\_\+stanisok\+\_\+susanhop }
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{H25\_project2\_philipef\_stanisok\_susanhop@{H25\_project2\_philipef\_stanisok\_susanhop}}
+\label{md__r_e_a_d_m_e_autotoc_md0}%
+\Hypertarget{md__r_e_a_d_m_e_autotoc_md0}%
+
+
+Project 2 for philipef (\href{mailto:philipef@mail.uio.no}{\texttt{philipef@mail.\+uio.\+no}}) and stanisok (\href{mailto:stanisok@mail.uio.no}{\texttt{stanisok@mail.\+uio.\+no}}) and susanhop (\href{mailto:susanhop@mail.uio.no}{\texttt{susanhop@mail.\+uio.\+no}})
+
+Git\+Hub UIO URL\+: \href{https://github.uio.no/IN1910/H25_project2_philipef_stanisok_susanhop/tree/main}{\texttt{https\+://github.\+uio.\+no/\+IN1910/\+H25\+\_\+project2\+\_\+philipef\+\_\+stanisok\+\_\+susanhop/tree/main}}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysection{\texorpdfstring{Commands}{Commands}}\label{md__r_e_a_d_m_e_autotoc_md2}
+To compile the project\+:
+
+
+\begin{DoxyItemize}
+\item Write \textquotesingle{}make all\textquotesingle{} in terminal to make all the files that shall be used in the project. This entails all the files for all the exercises.
+\end{DoxyItemize}
+
+To run the project\+:
+
+
+\begin{DoxyItemize}
+\item Write \textquotesingle{}make run-\/all\textquotesingle{} in terminal to run all the main functions. This runs all the programs in the projects simultaneously.
+\item If you want to run the files one-\/by-\/one, simply write \textquotesingle{}./path/chosen\+\_\+file\textquotesingle{} in the terminal.
+\begin{DoxyItemize}
+\item Note\+: The path may be /build/ if you want to run the output files generated. If you want to run the test-\/files, simply write \textquotesingle{}./test\+\_\+chosen\+\_\+file\textquotesingle{} in terminal.
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+To clean the project\+:
+
+
+\begin{DoxyItemize}
+\item Write \textquotesingle{}make clean\textquotesingle{} in the terminal. This removes all the output files generated in the /build/ directory.
+\item Note\+: It does not remove the genereated files like the .txt-\/ and .png-\/file(s).
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md3}{}\doxysection{\texorpdfstring{List of exercises I managed to run and compile}{List of exercises I managed to run and compile}}\label{md__r_e_a_d_m_e_autotoc_md3}
+We managed to run and compile all the files for all the parts. Furthermore, all the tests work without problem and looks correct. The generated files also look sound and align with expectations.
+
+List\+:
+
+
+\begin{DoxyItemize}
+\item \doxylink{class_array_list}{Array\+List} (Part 1)
+\item \doxylink{class_linked_list}{Linked\+List} (Part 2)
+\item Timing and comparison (Part 3)
+\item \doxylink{class_linked_array_list}{Linked\+Array\+List} (Part 4)
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysection{\texorpdfstring{Task 3a}{Task 3a}}\label{md__r_e_a_d_m_e_autotoc_md4}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md5}{}\doxysubsection{\texorpdfstring{Algorithm analyses for Array\+List and Linked\+List}{Algorithm analyses for Array\+List and Linked\+List}}\label{md__r_e_a_d_m_e_autotoc_md5}
+When analyzing algorithms, it is beneficial to have a way to describe the cost of the operations it needs in terms of time complexity for the algorithm. We use Big-\/O notation to abstract over the results.
+
+
+\begin{DoxyItemize}
+\item Big O notation gives us an upper-\/bound regarding the time complexity´s increment in accordance with the increase of input n. An example is that O(1), which is constant time complexity will be constant regardless of the input. O(n), linear time complexity constitutes a linear growth in accordance to the input n.
+\item Amortized complexity is used when the worst case happens occasionally and the average running time is lower. By doing this we can get a clear grasp of the difference in theory and the algorithms used in the real world. It is important to have this kind of algorithm analysis with big-\/O and amortized complexity, since we can learn which operations and datastructures to use in different contexts.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysubsection{\texorpdfstring{Functions analyzed}{Functions analyzed}}\label{md__r_e_a_d_m_e_autotoc_md6}
+
+\begin{DoxyEnumerate}
+\item Get element at index i
+\begin{DoxyItemize}
+\item \doxylink{class_array_list}{Array\+List}\+: Time complexity of O(1), constant time. The reason is that the elements are directly next to each other in memory, therefore we can access the elements using pointers, thereby jumping straight to the element instead of traversing the list.
+\item \doxylink{class_linked_list}{Linked\+List}\+: Time complexity of O(n), linear time. The reason is that why dont store elements contiguosly in memory, but rather having pointers from the nodes to the next nodes. This means that in the worst case, we need to traverse the whole list to find an element. We can minimize the cost in a doubly linked list by choosing either head or tail, but it will still grow in linear time.
+\end{DoxyItemize}
+\item Insert at front
+\begin{DoxyItemize}
+\item \doxylink{class_array_list}{Array\+List}\+: Time complexity of O(n), linear time. The reason is that when we insert an element at the front of the arraylist, we need to shift the position of all the other nodes.
+\item \doxylink{class_linked_list}{Linked\+List}\+: Time complexity of O(1), constant time. The rason is that the header pointer can be replaced by the new element, and the original header can set it previous pointer to point at the new header. This means no other ondes need to be shifted.
+\end{DoxyItemize}
+\item Insert at back (append)
+\begin{DoxyItemize}
+\item \doxylink{class_array_list}{Array\+List}\+: Time complexity of O(n), linear time in the worst case, but O(1) amortized time complexity for average cases. The reason is that for the constant time complexity method, we just select the tail node to be the new element and assign prev and next pointers to it. This is the average case, but we can also have the case where the \doxylink{class_array_list}{Array\+List} object is full and when we try to append, we end up having to resize the array. Resizing takes O(n) time, so O(1) time for the append plus O(n) time for the copy into a new array equals a total time complexity of O(n) in the worst case.
+\item \doxylink{class_linked_list}{Linked\+List}\+: Time complexity of O(1), constant time. The reason is that we can just update the tail pointer for the newly allocated node and do the pointer updates.
+\end{DoxyItemize}
+\item Insert in the middle (at index i)
+\begin{DoxyItemize}
+\item \doxylink{class_array_list}{Array\+List}\+: Time complexity of O(n), linear time. The reason is the same as for insertion at the front, since we need to shift all elements occuring after one position.
+\item \doxylink{class_linked_list}{Linked\+List}\+: Time complexity of O(n), linear time. The same reason as insertion at front, since we need to traverse from head or tail node until we reach node at index i and then do a insertion that takes O(1) time (neighbour relinking only here). The cost can be reduced by selecting a smarter start pointer here as well.
+\end{DoxyItemize}
+\item Remove from front
+\begin{DoxyItemize}
+\item \doxylink{class_array_list}{Array\+List}\+: Time complexity of O(n), linear time. The reason is that we need to shift the position of all elements occurring later one position to the left.
+\item \doxylink{class_linked_list}{Linked\+List}\+: Time complexity of O(1), constant time. The reason is that we can just change the header pointer to the new element and update the next node to point to the new node and vice versa.
+\end{DoxyItemize}
+\item Remove from back
+\begin{DoxyItemize}
+\item \doxylink{class_array_list}{Array\+List}\+: Time complexity of O(n), linear time complexity in the worst case. O(1), amortized constant time complexity on average. The reason is that normally we will just decrement the size counter for the array, but if we end up under 25\% capacity usage, the \+\_\+shrink\+\_\+to\+\_\+fit() function gets called, which copies all elements over in a smaller array, which takes O(n) time.
+\item \doxylink{class_linked_list}{Linked\+List}\+: Time complexity of O(1), constant time. The reason it is constant time is just that we can update the tail pointer to be tail-\/\texorpdfstring{$>$}{>}prev.
+\end{DoxyItemize}
+\item Remove from middle (at index i)
+\begin{DoxyItemize}
+\item \doxylink{class_array_list}{Array\+List}\+: Time complexity of O(n), linear time complexity. The reason is that we need to shift all elements one position from the middle to the right.
+\item \doxylink{class_linked_list}{Linked\+List}\+: Time complexity of O(n), linear time complexity. The reason is that we need to traverse the list to the index to remove it.
+\end{DoxyItemize}
+\item Print the list
+\begin{DoxyItemize}
+\item \doxylink{class_array_list}{Array\+List}\+: Time complexity of O(n), linear time complexity. The reason is simply that we need to visit every node in the array and print it.
+\item \doxylink{class_linked_list}{Linked\+List}\+: Time complexity of O(n), linear time complexity. The reason is that we need to visit every node in the linked list and print it.
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{md__r_e_a_d_m_e_autotoc_md7}{}\doxysubsection{\texorpdfstring{Conclusion\+:}{Conclusion\+:}}\label{md__r_e_a_d_m_e_autotoc_md7}
+
+\begin{DoxyItemize}
+\item \doxylink{class_array_list}{Array\+List} has contiguos memory placement, which gives it constant time lookup and appending, however operations on other parts of the array as front and middle require shifting of the other elements which results in linear time complexity.
+\item \doxylink{class_linked_list}{Linked\+List} excels at insertions and deletions at the ends in constant time, it is also efficient at middle access operations since it does not need to shift indexes. Traversal cost is linear. So choosing between the two datastructures is up to the developers´ goals, where \doxylink{class_array_list}{Array\+List} is beneficial for many lookups and appends, while \doxylink{class_linked_list}{Linked\+List} is beneficial for insertions and removals from various parts of the list.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysection{\texorpdfstring{Task 3c}{Task 3c}}\label{md__r_e_a_d_m_e_autotoc_md8}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md9}{}\doxysubsection{\texorpdfstring{Predictions and result}{Predictions and result}}\label{md__r_e_a_d_m_e_autotoc_md9}
+From task 3a we predicted that\+:
+
+
+\begin{DoxyItemize}
+\item Arraylist\+: get() -\/\texorpdfstring{$>$}{>} O(1) and insert\+\_\+front() -\/\texorpdfstring{$>$}{>} O(n)
+\item \doxylink{class_linked_list}{Linked\+List}\+: get() -\/\texorpdfstring{$>$}{>} O(n) and insert\+\_\+front() -\/\texorpdfstring{$>$}{>} O(1)
+\end{DoxyItemize}
+
+From task 3b we measured these results\+:
+
+
+\begin{DoxyItemize}
+\item \doxylink{class_array_list}{Array\+List} get()-\/function for average microseconds per access\+:
+\begin{DoxyItemize}
+\item 100 -\/\texorpdfstring{$>$}{>} 0.\+003
+\item 1000 -\/\texorpdfstring{$>$}{>} 0.\+003
+\item 10000 -\/\texorpdfstring{$>$}{>} 0.\+002
+\item 100000 -\/\texorpdfstring{$>$}{>} 0.\+002
+\item These values represent a "{}flat"{} line on the graph, meaning it is in constant time complexity.
+\end{DoxyItemize}
+\item \doxylink{class_array_list}{Array\+List} insert\+\_\+front()-\/function for average microseconds per insert\+:
+\begin{DoxyItemize}
+\item 100 -\/\texorpdfstring{$>$}{>} 0.\+06
+\item 1000 -\/\texorpdfstring{$>$}{>} 0.\+117
+\item 10000 -\/\texorpdfstring{$>$}{>} 0.\+7773
+\item 100000 -\/\texorpdfstring{$>$}{>} 4.\+38338
+\item These values represent a linear line on the graph, meaning it is in linear time complexity.
+\end{DoxyItemize}
+\item \doxylink{class_linked_list}{Linked\+List} get()-\/function for average microseconds per access\+:
+\begin{DoxyItemize}
+\item 100 -\/\texorpdfstring{$>$}{>} 0.\+02
+\item 1000 -\/\texorpdfstring{$>$}{>} 0.\+171
+\item 10000 -\/\texorpdfstring{$>$}{>} 5.\+625
+\item 100000 -\/\texorpdfstring{$>$}{>} 53.\+903
+\item These values represent a linear line on the graph, meaning it is in linear time complexity.
+\end{DoxyItemize}
+\item \doxylink{class_linked_list}{Linked\+List} insert\+\_\+front()-\/function for average microseconds per insert\+:
+\begin{DoxyItemize}
+\item 100 -\/\texorpdfstring{$>$}{>} 0.\+01
+\item 1000 -\/\texorpdfstring{$>$}{>} 0.\+0012
+\item 10000 -\/\texorpdfstring{$>$}{>} 0.\+0094
+\item 100000 -\/\texorpdfstring{$>$}{>} 0.\+0081
+\item These values represent a "{}flat"{} line on the graph (Even decreasing as N grows), meaning it is in constant time complexity.
+\end{DoxyItemize}
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md10}{}\doxysubsection{\texorpdfstring{Conclusion\+:}{Conclusion\+:}}\label{md__r_e_a_d_m_e_autotoc_md10}
+The predictions from task 3a corresponds with the results from task 3b. There were some small surprises that was unexpected, but after reading some articles it seems the likely cause might be hardware, cache effects and pointer chasing, there was also decrease in the constant trend for insert-\/front, but that may be due to more efficient lookups and warmer components that increases the efficiency and reduces latency. Overall the outputs to the txt files and the graphs from plot looks as expected and natural.\hypertarget{md__r_e_a_d_m_e_autotoc_md11}{}\doxysection{\texorpdfstring{Documentation Notes}{Documentation Notes}}\label{md__r_e_a_d_m_e_autotoc_md11}
+
+\begin{DoxyItemize}
+\item The documentations for the functions and classes were written extensively in the header files, and just short one-\/liners in the source files.
+\item The reason was to avoid duplication of documentation and unnecessarily long source files that become unorganized. I read that this was the way to do it in real life as well, in other words that this is the best documenation convention.
+\end{DoxyItemize}\hypertarget{md__r_e_a_d_m_e_autotoc_md12}{}\doxysection{\texorpdfstring{Use of AI}{Use of AI}}\label{md__r_e_a_d_m_e_autotoc_md12}
+
+\begin{DoxyItemize}
+\item Some of the Doxygen documentation structure and README wording was generated and refined with Open\+AI´s Chat\+GPT.
+\item All documentation and comments were revised and edited to accurately represent our projects files and structure.
+\item All source files, header files and test files were programmed by us. AI was only used for occasional debugging and explanation support. 
+\end{DoxyItemize}
