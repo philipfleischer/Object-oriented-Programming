@@ -4,83 +4,69 @@
 #include <vector>
 
 /**
- * @brief Node in a doubly linked list.
+ * @brief Node structure in a doubly linked list, of LinkedList class.
  *
  * @details
- * Holds an integer value and links to the previous and next nodes.
- * This type is an implementation detail of @ref LinkedList and is not intended for direct use by client code.
+ * It holds an integer and links to the previous and next nodes using pointers.
  *
- * @see LinkedList
+ * @see LinkedList class for more details.
  */
 struct Node
 {
     /**
      * @brief Stored value for the node.
-     *
-     * @note Value of an element in the list (default: most negative 32-bit int). Real values are set by the linked list.
      */
     int value = 0;
 
     /**
      * @brief Pointer to the next node in the list.
-     *
-     * @note nullptr if this is the tail (or the list is empty).
      */
     Node *next = nullptr;
 
     /**
      * @brief Pointer to the previous node in the list.
-     *
-     * @note nullptr if this is the head (or the list is empty).
      */
     Node *prev = nullptr;
 };
 
 /**
- * @brief A doubly linked list.
+ * @brief A doubly linked list object of class LinkedList.
  *
  * @details
- * Supports push to front, append to back, printing, and length queries.
+ * It supports push to front, append to back, printing, and length queries.
  * The list maintains pointers to both head and tail to make front/back operations efficient.
- *
- * @invariant
- *  - (_size == 0) - (_head == nullptr && _tail == nullptr)
- *  - (_size > 0) - (_head != nullptr && _tail != nullptr)
- *  - (_size == 1) - (_head == _tail)
- *  - For any list not empty: _head->prev == nullptr and _tail->next == nullptr
  */
 class LinkedList
 {
 private:
-    /// @internal Pointer to the first element in the list (head), nullptr on empty
+    /// @internal Pointer to the first element in the list (head), nullptr on empty.
     Node *_head;
 
-    /// @internal Pointer to the last element in the list (tail), nullptr on empty
+    /// @internal Pointer to the last element in the list (tail), nullptr on empty.
     Node *_tail;
 
     /**
      * @internal Tracks the number of elements in the list.
-     * @see length().
      */
     int _size;
 
     /**
      * Check whether the given index is out of bounds and throw a range error if it is.
      *
-     * @param index The index to be checked
+     * @param index The index to be used for the check.
      * @throws std::range_error Thrown if the index is negative or
-     *         outside the list
+     *         outside the list.
      */
     void _check_index_out_of_bounds(int index);
 
     /**
      * @brief Returns a pointer to the node at the index.
      *
-     * Used internally to access the node corresponding to an index.
-     * Traversing from head or tail, depending on which is the closest one, this is done to reduce the average time complexity.
+     * This helper function is used to access the node on an index.
+     * Traversing from head or tail, depending on which is the closest one, this is done to reduce the average time complexity of the function.
      *
      * @param index The index of the node to be retrieved.
-     * @return A pointer to the node at the given index.
+     * @return A pointer to the node at the given index, we are pointing at.
      */
     Node *_node_at(int index);
 
@@ -88,14 +74,14 @@ public:
     /**
      * @brief Constructs an empty list.
      *
-     * @post length == 0, _head == nullptr, _tail == nullptr.
+     * @post on initialization: length == 0, _head == nullptr, _tail == nullptr.
      */
     LinkedList();
 
     /**
      * @brief Constructs a LinkedList object and initializes it with elements from the integer values vector.
      *
-     * Each element in the vector gets appended to the dll in order, thereby preserving the order of inserts.
+     * Each element in the vector gets appended to the dll (doubly linked list) in order, thereby preserving the order of inserts.
      *
      * @param value A std::vector containing the initial values for the list.
      *
@@ -114,11 +100,11 @@ public:
      * @brief Appends a value at the end of the list.
      *
      * @param val The value of the element to append.
-     * @post length increments by 1 and new value is at index length-1
+     * @post length increments by 1 and new value is at index [length-1].
      */
     void append(int val);
 
-    /// @return The number of elements in the list.
+    /// @return The number of elements in the dll.
     int length();
 
     /**
@@ -132,7 +118,7 @@ public:
     /**
      * @brief Inserts a value at the front of the list.
      *
-     * @param val The value to be pushed at the head.
+     * @param val The value to be pushed at the front, replacing original head.
      * @post length increments by 1 and new value at index 0.
      */
     void push_front(int val);
@@ -140,7 +126,7 @@ public:
     /**
      * @brief Accesses the element at the specified index in the list.
      *
-     * Provides both read and write functionality to telements using the brackets. Operation running in linear time complexity, O(n) in worst case if we need to traverse through the whole list from head to tail.
+     * Provides both read and write functionality to elements using the brackets. Operation running in linear time complexity, O(n) in worst case if we need to traverse through the whole list from head to tail.
      *
      * @param index The position of the element to access.
      * @return A reference to the element at the given index.
