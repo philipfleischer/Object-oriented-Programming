@@ -59,3 +59,51 @@ When analyzing algorithms, it is beneficial to have a way to describe the cost o
 - ArrayList has contiguos memory placement, which gives it constant time lookup and appending, however operations on other parts of the array as front and middle require shifting of the other elements which results in linear time complexity.
 - LinkedList excels at insertions and deletions at the ends in constant time, it is also efficient at middle access operations since it does not need to shift indexes. Traversal cost is linear.
   So choosing between the two datastructures is up to the developers´ goals, where ArrayList is beneficial for many lookups and appends, while LinkedList is beneficial for insertions and removals from various parts of the list.
+
+## Task 3c
+
+### Predictions and result
+
+From task 3a we predicted that:
+
+- Arraylist: get() -> O(1) and insert_front() -> O(n)
+- LinkedList: get() -> O(n) and insert_front() -> O(1)
+
+From task 3b we measured these results:
+
+- ArrayList get()-function for average microseconds per access:
+
+  - 100 -> 0.003
+  - 1000 -> 0.003
+  - 10000 -> 0.002
+  - 100000 -> 0.002
+  - These values represent a "flat" line on the graph, meaning it is in constant time complexity.
+
+- ArrayList insert_front()-function for average microseconds per insert:
+
+  - 100 -> 0.06
+  - 1000 -> 0.117
+  - 10000 -> 0.7773
+  - 100000 -> 4.38338
+  - These values represent a linear line on the graph, meaning it is in linear time complexity.
+
+- LinkedList get()-function for average microseconds per access:
+
+  - 100 -> 0.02
+  - 1000 -> 0.171
+  - 10000 -> 5.625
+  - 100000 -> 53.903
+  - These values represent a linear line on the graph, meaning it is in linear time complexity.
+
+- LinkedList insert_front()-function for average microseconds per insert:
+  - 100 -> 0.01
+  - 1000 -> 0.0012
+  - 10000 -> 0.0094
+  - 100000 -> 0.0081
+  - These values represent a "flat" line on the graph (Even decreasing as N grows), meaning it is in constant time complexity.
+
+### Conclusion:
+
+The predictions from task 3a corresponds with the results from task 3b.
+There were some small surprises that was unexpected, but after reading some articles it seems the likely cause might be hardware, cache effects and pointer chasing, there was also decrease in the constant trend for insert-front, but that may be due to more efficient lookups and warmer components that increases the efficiency and reduces latency.
+Overall the outputs to the txt files and the graphs from plot looks as expected and natural.
