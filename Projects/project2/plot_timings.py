@@ -2,11 +2,15 @@
 
 import matplotlib.pyplot as plt
 import numpy as np
+from pathlib import Path
 
-array_list_get = np.loadtxt("array_list_get.txt")
-array_list_insert = np.loadtxt("array_list_insert.txt")
-linked_list_get = np.loadtxt("linked_list_get.txt")
-linked_list_insert = np.loadtxt("linked_list_insert.txt")
+BASE = Path(__file__).resolve().parent  # folder containing this script
+GEN = BASE / "gen"  # absolute path to gen/
+
+array_list_get = np.loadtxt(GEN / "array_list_get.txt")
+array_list_insert = np.loadtxt(GEN / "array_list_insert.txt")
+linked_list_get = np.loadtxt(GEN / "linked_list_get.txt")
+linked_list_insert = np.loadtxt(GEN / "linked_list_insert.txt")
 
 fig, ax = plt.subplots(2, 2, sharex=True, sharey=True)
 
@@ -54,4 +58,4 @@ for axi in ax.flatten():
     axi.legend()
     axi.grid()
 
-fig.savefig("arraylist_vs_linkedlist.png")
+fig.savefig(GEN / "arraylist_vs_linkedlist.png")
