@@ -1,8 +1,13 @@
+/** @file test_linked_list.cpp
+ *  @brief Unit tests for the doubly linked list (LinkedList).
+ *  @details Verifies construction from empty list and vector, push_front, append, printing, indexing (read/write), insert at front/middle/end, remove, pop(index), pop() and min/max utilities.
+ */
 #include <cassert>
 #include <iostream>
 
 #include "linked_list.h"
 
+/// @brief Test that a newly constructed LinkedList object has length zero.
 void test_empty_list_has_zero_length()
 {
     LinkedList dll = LinkedList();
@@ -12,6 +17,7 @@ void test_empty_list_has_zero_length()
     ;
 }
 
+/// @brief Test that push_front inserts at the head and preserves the order [1,2,3].
 void test_push_front()
 {
     std::cout << "Test push_front.\n";
@@ -28,6 +34,7 @@ void test_push_front()
               << std::endl;
 }
 
+/// @brief Test that append adds element to the tail and updates length and values.
 void test_append()
 {
     LinkedList dll;
@@ -41,6 +48,7 @@ void test_append()
               << std::endl;
 }
 
+/// @brief Test that print outputs in a nice format.
 void test_print()
 {
     std::cout << "Test print.\n";
@@ -54,6 +62,7 @@ void test_print()
     std::cout << "- Success: test_print()\n";
 }
 
+/// @brief Test operator[] for read and write access to elements in the LinkedList object.
 void test_index_operator()
 {
     LinkedList dll;
@@ -70,6 +79,7 @@ void test_index_operator()
               << std::endl;
 }
 
+/// @brief Test insert at front, middle, and end for the LinkedList object.
 void test_insert()
 {
     LinkedList dll;
@@ -96,6 +106,7 @@ void test_insert()
               << std::endl;
 }
 
+/// @brief Test construction from std::vector preserves order and length for the LinkedList object.
 void test_vector_constructor()
 {
     std::cout << "Test vector constructor\n";
@@ -107,6 +118,7 @@ void test_vector_constructor()
               << std::endl;
 }
 
+/// @brief Test_remove deletes the element at a given index and compacts links for the LinkedList object.
 void test_remove()
 {
     std::cout << "Test remove\n";
@@ -120,6 +132,7 @@ void test_remove()
               << std::endl;
 }
 
+/// @brief Test pop(int) returns the removed value and updates list structure.
 void test_pop_at_index()
 {
     std::cout << "Test pop at index\n";
@@ -133,6 +146,7 @@ void test_pop_at_index()
               << std::endl;
 }
 
+/// @brief Test pop() removes and returns the last element.
 void test_pop()
 {
     std::cout << "Test pop last element\n";
@@ -146,6 +160,7 @@ void test_pop()
               << std::endl;
 }
 
+/// @brief Test min() returns the smallest value in the list.
 void test_min()
 {
     std::cout << "Test min\n";
@@ -155,6 +170,7 @@ void test_min()
               << std::endl;
 }
 
+/// @brief Test max() returns the largest value in the list.
 void test_max()
 {
     std::cout << "Test max\n";
@@ -164,6 +180,7 @@ void test_max()
               << std::endl;
 }
 
+/// @brief Main function runs all LinkedList unit tests in this file.
 int main()
 {
     test_empty_list_has_zero_length();
