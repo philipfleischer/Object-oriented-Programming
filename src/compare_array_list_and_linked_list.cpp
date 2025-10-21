@@ -47,7 +47,7 @@ void run_array_list_get()
         // Get value in the middle
         for (int run = 0; run < runs; run++)
         {
-            auto value = a[N / 2];
+            (void)a[N / 2];
         }
 
         auto stop = high_resolution_clock::now();
