@@ -97,6 +97,27 @@ public:
     ~LinkedList();
 
     /**
+    * @brief Deleted copy constructor (non-copyable: list owns its nodes).
+    */
+    LinkedList(const LinkedList&) = delete;
+
+    /**
+    * @brief Deleted copy assignment (non-copyable: prevents shallow copies and double-free).
+    */
+    LinkedList& operator=(const LinkedList&) = delete;
+
+    /**
+     * @brief Defaulted move constructor (transfers ownership; source becomes empty).
+    */
+    LinkedList(LinkedList&&) = default;
+
+    /**
+    * @brief Defaulted move assignment (transfers ownership; source becomes empty).
+    */
+    LinkedList& operator=(LinkedList&&) = default;
+
+
+    /**
      * @brief Appends a value at the end of the list.
      *
      * @param val The value of the element to append.
