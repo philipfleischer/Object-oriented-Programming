@@ -5,7 +5,6 @@ import numpy.random as npr
 from functools import partial
 from timeit import timeit
 from matplotlib import pyplot as plt
-from sphinx import ret
 
 for i in range(3):
     kast = randint(0, 1)  # Fra og med 0, til og med 1
@@ -52,3 +51,13 @@ def best_av_to_d20(nkast: int) -> np.ndarray:
     # axis = 0: best av nkast (ikke relevant), axis=1: best av 2
     beste_kast = np.amax(kast, axis=1)
     return beste_kast  # Array med alle de beste kastene: size(nkast, 1) (nkast*1)
+
+
+terningkast = best_av_to_d20(10000)
+for resultat in range(1, 21):
+    print(resultat, np.sum(terningkast == resultat))
+print()
+print("Gjennomsnitt: ", np.sum(terningkast) / len(terningkast))
+
+plt.hist(terningkast, bins=20, rwidth=0.7)
+plt.show()
