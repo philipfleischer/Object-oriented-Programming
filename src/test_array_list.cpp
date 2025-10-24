@@ -267,6 +267,89 @@ void test_count()
               << std::endl;
 }
 
+/// @brief Test that out-of-bounds access and invalid operations throw range_error.
+void test_out_of_bounds_exceptions()
+{
+    std::cout << "Test out-of-bounds exceptions.\n";
+
+    ArrayList a({10, 20, 30});
+
+    // operator[] out of range
+    bool threw_index = false;
+    try
+    {
+        int x = a[5];
+        (void)x;
+    }
+    catch (const std::range_error &)
+    {
+        threw_index = true;
+    }
+    assert(threw_index && "operator[] should throw on invalid index");
+
+    // insert with bad index
+    bool threw_insert = false;
+    try
+    {
+        a.insert(999, -1);
+    }
+    catch (const std::range_error &)
+    {
+        threw_insert = true;
+    }
+    assert(threw_insert && "insert() should throw on invalid index");
+
+    // remove with bad index
+    bool threw_remove = false;
+    try
+    {
+        a.remove(10);
+    }
+    catch (const std::range_error &)
+    {
+        threw_remove = true;
+    }
+    assert(threw_remove && "remove() should throw on invalid index");
+
+    // pop(index) with bad index
+    bool threw_pop_index = false;
+    try
+    {
+        a.pop(100);
+    }
+    catch (const std::range_error &)
+    {
+        threw_pop_index = true;
+    }
+    assert(threw_pop_index && "pop(index) should throw on invalid index");
+
+    std::cout << "- Success: test_out_of_bounds_exceptions()\n"
+              << std::endl;
+}
+
+/// @brief Test that capacity actually grows when we append lots of elements.
+void test_capacity_grows()
+{
+    std::cout << "Test capacity grows on append.\n";
+
+    ArrayList a;
+    int initial_capacity = a.capacity();
+    assert(initial_capacity >= 1);
+
+    // Append enough elements to force at least one resize
+    for (int i = 0; i < 100; i++)
+        a.append(i);
+
+    assert(a.length() == 100);
+    // After appending 100 elements, capacity should be >= length
+    assert(a.capacity() >= a.length());
+    // And capacity should have increased from the initial capacity
+    assert(a.capacity() > initial_capacity);
+
+    std::cout << "- Success: test_capacity_grows()\n"
+              << std::endl;
+}
+
 /// @brief Runs all ArrayList unit tests in this file.
 int main()
 {
@@ -285,6 +368,8 @@ int main()
     test_min();
     test_max();
     test_count();
+    test_out_of_bounds_exceptions();
+    test_capacity_grows();
     std::cout << "All tests passed.\n";
     return 0;
 }
