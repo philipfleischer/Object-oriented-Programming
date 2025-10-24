@@ -80,11 +80,115 @@ void test_LinkedArrayList()
     std::cout << "\n--- All LinkedArrayList tests passed.\n";
 }
 
+/// @brief Out-of-bounds on operator[] should throw std::range_error.
+void test_out_of_bounds_exceptions()
+{
+    std::cout << "Test out-of-bounds exceptions\n";
+
+    LinkedArrayList lal;
+    lal.append({10});
+    lal.append({20, 21});
+
+    bool threw_low = false;
+    try {
+        auto &x = lal[-1]; (void)x;
+    } catch (const std::range_error&) { threw_low = true; }
+    assert(threw_low && "operator[] should throw on negative index");
+
+    bool threw_high = false;
+    try {
+        auto &y = lal[5]; (void)y;
+    } catch (const std::range_error&) { threw_high = true; }
+    assert(threw_high && "operator[] should throw on too-large index");
+
+    std::cout << " - Success: test_out_of_bounds_exceptions()\n\n";
+}
+
+/// @brief After multiple appends, head points to first and tail to last.
+void test_head_tail_after_appends()
+{
+    std::cout << "Test head/tail after appends\n";
+
+    LinkedArrayList lal;
+    lal.append({1});          // idx 0
+    lal.append({2, 3});       // idx 1
+    lal.append({4, 5, 6});    // idx 2
+
+    // Check first sublist
+    assert((*lal[0])[0] == 1);
+    // Check last sublist
+    assert((*lal[2])[0] == 4);
+    assert(lal[2]->length() == 3);
+
+    // Mutate tail and ensure it's still last and correct
+    lal[2]->append(7);
+    assert(lal[2]->length() == 4);
+    assert((*lal[2])[3] == 7);
+
+    std::cout << " - Success: test_head_tail_after_appends()\n\n";
+}
+
+/// @brief Changing one nested ArrayList must not affect others.
+void test_mutating_nested_lists_is_local()
+{
+    std::cout << "Test independence of nested lists\n";
+
+    LinkedArrayList lal;
+    lal.append({1, 2});         // idx 0
+    lal.append({10, 20, 30});   // idx 1
+
+    // Change only idx 1
+    lal[1]->insert(15, 1);      // {10,15,20,30}
+    lal[1]->append(40);         // {10,15,20,30,40}
+
+    // Ensure idx 0 stayed the same
+    assert(lal[0]->length() == 2);
+    assert((*lal[0])[0] == 1);
+    assert((*lal[0])[1] == 2);
+
+    // Ensure idx 1 has the new values
+    assert(lal[1]->length() == 5);
+    assert((*lal[1])[1] == 15);
+    assert((*lal[1])[4] == 40);
+
+    std::cout << " - Success: test_mutating_nested_lists_is_local()\n\n";
+}
+
+/// @brief Append many sublists and sample a few indices via operator[].
+void test_append_many_and_indexing()
+{
+    std::cout << "Test append many and random indexing\n";
+
+    LinkedArrayList lal;
+    for (int i = 0; i < 50; ++i) {
+        // each sublist: {i, i+1}
+        lal.append({i, i + 1});
+    }
+    assert((*lal[0])[0] == 0);
+    assert((*lal[10])[1] == 11);
+    assert((*lal[49])[0] == 49);
+
+    // Mutate a couple of inner lists
+    lal[0]->append(99);       // {0,1,99}
+    lal[49]->insert(77, 1);   // {49,77,50}
+
+    assert(lal[0]->length() == 3);
+    assert((*lal[0])[2] == 99);
+
+    assert(lal[49]->length() == 3);
+    assert((*lal[49])[1] == 77);
+
+    std::cout << " - Success: test_append_many_and_indexing()\n\n";
+}
 /// @brief Runs all LinkedArrayList-related tests in this file.
 int main()
 {
     test_array_list_node();
     test_LinkedArrayList();
-    std::cout << "\n--- All tests for exercise 4 passed.\n";
+    test_out_of_bounds_exceptions();
+    test_head_tail_after_appends();
+    test_mutating_nested_lists_is_local();
+    test_append_many_and_indexing();
+    std::cout << "\n--- All tests passed.\n";
     return 0;
 }
