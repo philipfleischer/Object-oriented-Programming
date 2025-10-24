@@ -5,7 +5,9 @@
 #include "linked_list.h"
 
 /**
- * @brief throws if index is out of bounds.
+ * @brief Validate that an index is within bounds
+ * @param index Index to check.
+ * @throws std::range_error if @p index is out of bounds.
  * @note Private helper, called by methods that access elements by indexes.
  */
 void LinkedList::_check_index_out_of_bounds(int index)
@@ -14,7 +16,12 @@ void LinkedList::_check_index_out_of_bounds(int index)
         throw std::range_error("Index out of bounds");
 }
 
-// Return pointer to node at index (0.._size-1). Assumes index is valid.
+/**
+* @brief Return a pointer to the node at the given index (0.._size-1).
+* @param index Valid index; the caller must ensure bounds are checked.
+* @return Pointer to the node at @p index.
+* @note Chooses direction from head or tail to reduce traversal steps.
+*/
 Node *LinkedList::_node_at(int index)
 {
     // Choose shortest direction
@@ -93,6 +100,7 @@ int LinkedList::length()
 
 /**
  * @brief Inserts a new value at the front of the list.
+ * @param val Value to insert.
  * @note Handles the empty list case by setting the head and tail.
  */
 void LinkedList::push_front(int val)
@@ -120,6 +128,7 @@ void LinkedList::push_front(int val)
 
 /**
  * @brief Appends a new value at the end of the list.
+ * @param val Value to append.
  * @note Handles the empty list case by setting both the head and tail.
  */
 void LinkedList::append(int val)
@@ -145,12 +154,24 @@ void LinkedList::append(int val)
     _size++;
 }
 
+/**
+* @brief Indexed element access with bounds checking.
+* @param index Element index (0.._size-1).
+* @return Reference to the value at @p index.
+* @throws std::range_error if index is out of bounds.
+*/
 int &LinkedList::operator[](int index)
 {
     _check_index_out_of_bounds(index);
     return _node_at(index)->value;
 }
 
+/**
+* @brief Insert a value at a specific index, shifting subsequent nodes.
+* @param val Value to insert.
+* @param index Position at which to insert (0.._size). Inserting at _size appends.
+* @throws std::range_error if index is out of bounds.
+*/
 void LinkedList::insert(int val, int index)
 {
     // Allowed range is 0.._size
@@ -184,6 +205,10 @@ void LinkedList::insert(int val, int index)
     _size++;
 }
 
+/**
+* @brief Construct a list from an initializer vector, appending values in order.
+* @param values Values to append to the list.
+*/
 LinkedList::LinkedList(const std::vector<int> &values)
     : _head(nullptr), _tail(nullptr), _size(0)
 {
@@ -191,6 +216,11 @@ LinkedList::LinkedList(const std::vector<int> &values)
         append(value);
 }
 
+/**
+* @brief Remove the element at a given index.
+* @param index Index of the element to remove (0.._size-1).
+* @throws std::range_error if index is out of bounds.
+*/
 void LinkedList::remove(int index)
 {
     _check_index_out_of_bounds(index);
@@ -213,6 +243,12 @@ void LinkedList::remove(int index)
     _size--;
 }
 
+/**
+* @brief Remove and return the element at the given index.
+* @param index Index of the element to pop (0.._size-1).
+* @return The removed value.
+* @throws std::range_error if index is out of bounds.
+*/
 int LinkedList::pop(int index)
 {
     _check_index_out_of_bounds(index);
@@ -235,6 +271,11 @@ int LinkedList::pop(int index)
     return node_value;
 }
 
+/**
+* @brief Remove and return the last element of the list.
+* @return The removed value.
+* @throws std::range_error if the list is empty.
+*/
 int LinkedList::pop()
 {
     if (_size == 0)
@@ -260,6 +301,11 @@ int LinkedList::pop()
     return node_value;
 }
 
+/**
+* @brief Compute the minimum element value in the list.
+* @return The smallest value.
+* @throws std::range_error if the list is empty.
+*/
 int LinkedList::min()
 {
     if (_size == 0)
@@ -276,6 +322,11 @@ int LinkedList::min()
     return min_value;
 }
 
+/**
+* @brief Compute the maximum element value in the list.
+* @return The largest value.
+* @throws std::range_error if the list is empty.
+*/
 int LinkedList::max()
 {
     if (_size == 0)

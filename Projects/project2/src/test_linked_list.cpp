@@ -180,6 +180,105 @@ void test_max()
               << std::endl;
 }
 
+/// @brief Test that invalid indices throw std::range_error for several methods.
+void test_out_of_bounds_exceptions()
+{
+    std::cout << "Test out-of-bounds exceptions\n";
+
+    LinkedList ll({10, 20, 30});
+
+    bool threw_index = false;
+    try {
+        int x = ll[10]; // invalid read
+        (void)x;
+    } catch (const std::range_error&) {
+        threw_index = true;
+    }
+    assert(threw_index && "operator[] should throw on invalid index");
+
+    bool threw_insert_low = false;
+    try {
+        ll.insert(999, -1); // invalid insert
+    } catch (const std::range_error&) {
+        threw_insert_low = true;
+    }
+    assert(threw_insert_low && "insert() should throw on negative index");
+
+    bool threw_insert_high = false;
+    try {
+        ll.insert(999, 100); // invalid insert too large
+    } catch (const std::range_error&) {
+        threw_insert_high = true;
+    }
+    assert(threw_insert_high && "insert() should throw on too-large index");
+
+    bool threw_remove = false;
+    try {
+        ll.remove(100); // invalid remove
+    } catch (const std::range_error&) {
+        threw_remove = true;
+    }
+    assert(threw_remove && "remove() should throw on invalid index");
+
+    bool threw_pop_index = false;
+    try {
+        ll.pop(42); // invalid pop(index)
+    } catch (const std::range_error&) {
+        threw_pop_index = true;
+    }
+    assert(threw_pop_index && "pop(index) should throw on invalid index");
+
+    std::cout << " - Success: test_out_of_bounds_exceptions()\n" << std::endl;
+}
+
+/// @brief Specifically test removing head and removing tail keeps links correct.
+void test_remove_head_and_tail()
+{
+    std::cout << "Test remove head and tail\n";
+
+    LinkedList ll({10, 20, 30, 40});
+    // remove head (index 0, value 10)
+    ll.remove(0);
+    assert(ll.length() == 3);
+    assert(ll[0] == 20);
+    assert(ll[1] == 30);
+    assert(ll[2] == 40);
+
+    // remove tail (last index, currently 2 -> value 40)
+    ll.remove(ll.length() - 1);
+    assert(ll.length() == 2);
+    assert(ll[0] == 20);
+    assert(ll[1] == 30);
+
+    std::cout << " - Success: test_remove_head_and_tail()\n" << std::endl;
+}
+
+/// @brief Pop repeatedly until empty, then confirm pop() throws on empty list.
+void test_pop_until_empty()
+{
+    std::cout << "Test pop until empty\n";
+
+    LinkedList ll({100, 200, 300});
+    int v1 = ll.pop();
+    int v2 = ll.pop();
+    int v3 = ll.pop();
+    assert(v1 == 300);
+    assert(v2 == 200);
+    assert(v3 == 100);
+    assert(ll.length() == 0);
+
+    bool threw = false;
+    try {
+        ll.pop(); // should now throw
+    } catch (const std::range_error&) {
+        threw = true;
+    }
+    assert(threw && "pop() on empty list should throw");
+
+    std::cout << " - Success: test_pop_until_empty()\n" << std::endl;
+}
+
+
 /// @brief Main function runs all LinkedList unit tests in this file.
 int main()
 {
@@ -195,6 +294,9 @@ int main()
     test_pop();
     test_min();
     test_max();
+    test_remove_head_and_tail();
+    test_pop_until_empty();
+    test_out_of_bounds_exceptions();
     std::cout << "All Doubly Linked List tests passed.\n";
     return 0;
 }
