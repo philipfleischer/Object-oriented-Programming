@@ -4,7 +4,10 @@
 #include <stdexcept>
 #include "array_list.h"
 
-/// @brief Resizes the internal array to a larger capacity.
+/**
+* @brief Resize the internal storage to a larger capacity.
+*
+*/
 void ArrayList::_resize()
 {
     _capacity *= _growth_factor;
@@ -23,6 +26,14 @@ void ArrayList::_resize()
     _data = new_data;
 }
 
+/**
+* @brief Reduce capacity to the smallest power of two that can hold the current size.
+*
+* If the list is empty, capacity becomes 1. Otherwise, compute the smallest power of two
+* >= _size, and if it differs from the current capacity, reallocate and copy elements.
+*
+* @post _capacity may be reduced while preserving all elements.
+*/
 void ArrayList::_shrink_to_fit()
 {
     if (_size == 0)
@@ -34,7 +45,7 @@ void ArrayList::_shrink_to_fit()
         return;
     }
 
-    // Finding the smallest pwer of 2 to contain elements
+    // Finding the smallest power of 2 to contain elements
     int new_capacity = 1;
     while (new_capacity < _size)
         new_capacity *= 2;
@@ -53,7 +64,9 @@ void ArrayList::_shrink_to_fit()
     _capacity = new_capacity;
 }
 
-/// @brief Default constructor for ArrayList: it initializes an empty ArrayList list object.
+/**
+* @brief Default constructor. Initializes an empty list with capacity 1.
+*/
 ArrayList::ArrayList()
 {
     _capacity = 1;
@@ -62,7 +75,13 @@ ArrayList::ArrayList()
     _growth_factor = 2;
 }
 
-/// @brief Constructs ArrayList list with initial vector values.
+/**
+* @brief Construct a list from an initial vector of values.
+*
+* @param init Initial values to copy into the list.
+*
+* Capacity is set to at least 1 and at least the number of elements in @p init.
+*/
 ArrayList::ArrayList(const std::vector<int> &init)
 {
     _growth_factor = 2;
@@ -73,22 +92,39 @@ ArrayList::ArrayList(const std::vector<int> &init)
         _data[i] = init[static_cast<size_t>(i)];
 }
 
-/// @brief Destructor that frees the allocated memory.
+/**
+* @brief Destructor. Releases allocated memory.
+*/
 ArrayList::~ArrayList()
 {
     delete[] _data;
 }
 
+/**
+* @brief Get the number of elements currently stored in the list.
+* @return Current size (number of elements).
+*/
 int ArrayList::length()
 {
     return _size;
 }
 
+/**
+* @brief Get the current capacity of the internal array.
+* @return Allocated capacity (in number of elements).
+*/
 int ArrayList::capacity()
 {
     return _capacity;
 }
 
+/**
+* @brief Append an element at the end of the list.
+*
+* Resizes the internal storage if necessary.
+*
+* @param element Value to append.
+*/
 void ArrayList::append(int element)
 {
     // Check if array _data need to be resized _resize
@@ -99,6 +135,13 @@ void ArrayList::append(int element)
     _size++;
 }
 
+/**
+* @brief Insert a value at the given index, shifting subsequent elements right.
+*
+* @param val Value to insert.
+* @param index Position at which to insert (0.._size).
+* @throws std::range_error if index is out of bounds.
+*/
 void ArrayList::insert(int val, int index)
 {
     // Allowing insertions at the end of list
@@ -118,6 +161,14 @@ void ArrayList::insert(int val, int index)
     _size++;
 }
 
+/**
+* @brief Remove the element at the given index, shifting elements left.
+*
+* @param index Position of the element to remove (0.._size-1).
+* @throws std::range_error if index is out of bounds.
+*
+* If usage drops below 25% of capacity, shrink-to-fit is triggered.
+*/
 void ArrayList::remove(int index)
 {
     if (index < 0 || index >= _size)
@@ -133,6 +184,13 @@ void ArrayList::remove(int index)
         _shrink_to_fit();
 }
 
+/**
+* @brief Remove and return the element at the given index.
+*
+* @param index Position of the element to pop (0.._size-1).
+* @return The removed value.
+* @throws std::range_error if index is out of bounds.
+*/
 int ArrayList::pop(int index)
 {
     if (index < 0 || index >= _size)
@@ -143,6 +201,12 @@ int ArrayList::pop(int index)
     return value;
 }
 
+/**
+* @brief Remove and return the last element of the list.
+*
+* @return The removed value.
+* @throws std::range_error if the list is empty.
+*/
 int ArrayList::pop()
 {
     if (_size == 0)
@@ -156,6 +220,9 @@ int ArrayList::pop()
     return value;
 }
 
+/**
+* @brief Print the contents in a Python-like list format to std::cout.
+*/
 void ArrayList::print()
 {
     std::cout << "ArrayList([";
@@ -171,6 +238,13 @@ void ArrayList::print()
     std::cout << "])\n";
 }
 
+/**
+* @brief Random access operator with bounds checking.
+*
+* @param index Index of the element to access (0.._size-1).
+* @return Reference to the element at @p index.
+* @throws std::range_error if index is out of bounds.
+*/
 int &ArrayList::operator[](int index)
 {
     if (index < 0 || index >= _size)
@@ -179,6 +253,12 @@ int &ArrayList::operator[](int index)
     return _data[index];
 }
 
+/**
+* @brief Return the index of the minimum element.
+*
+* @return Index of the smallest value.
+* @throws std::range_error if the list is empty.
+*/
 int ArrayList::argmin()
 {
     if (_size == 0)
@@ -198,6 +278,12 @@ int ArrayList::argmin()
     return min_elem_index;
 }
 
+/**
+* @brief Return the index of the maximum element.
+*
+* @return Index of the largest value.
+* @throws std::range_error if the list is empty.
+*/
 int ArrayList::argmax()
 {
     if (_size == 0)
@@ -217,6 +303,12 @@ int ArrayList::argmax()
     return max_elem_index;
 }
 
+/**
+* @brief Return the minimum element value.
+*
+* @return Smallest value in the list.
+* @throws std::range_error if the list is empty.
+*/
 int ArrayList::min()
 {
     if (_size == 0)
@@ -230,6 +322,12 @@ int ArrayList::min()
     return min_value;
 }
 
+/**
+* @brief Return the maximum element value.
+*
+* @return Largest value in the list.
+* @throws std::range_error if the list is empty.
+*/
 int ArrayList::max()
 {
     if (_size == 0)
@@ -243,6 +341,12 @@ int ArrayList::max()
     return max_value;
 }
 
+/**
+* @brief Count occurrences of a given value in the list.
+*
+* @param value The value to count.
+* @return Number of occurrences of @p value.
+*/
 int ArrayList::count(int value)
 {
     int counter = 0;
