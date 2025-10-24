@@ -92,6 +92,14 @@ When analyzing algorithms, it is beneficial to have a way to describe the cost o
 - LinkedList excels at insertions and deletions at the ends in constant time, it is also efficient at middle access operations since it does not need to shift indexes. Traversal cost is linear.
   So choosing between the two datastructures is up to the developers´ goals, where ArrayList is beneficial for many lookups and appends, while LinkedList is beneficial for insertions and removals from various parts of the list.
 
+## Task 3b
+
+### Estimated runtime expressions
+   - ArrayList get: `T(N)` is approximately constant
+   - ArrayList insert_front: `T(N)` is approximately `a*N + b`
+   - LinkedList get: `T(N)` is approximately `a*N + b`
+   - LinkedList insert_front: `T(N)` is approximately constant
+
 ## Task 3c
 
 ### Predictions and result
