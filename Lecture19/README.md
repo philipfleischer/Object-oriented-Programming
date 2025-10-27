@@ -30,7 +30,7 @@ while the RMS is given by
 $$
     \sqrt{\langle x_n^2 \rangle}
     = \sqrt{\langle x_{n-1} + \Delta x_n^2 \rangle}
-    = \sqrt{\langle x_{n-1}^2 + x_{n-1}\cdot\Delta x_n + \Delta x_n^2\rangle}
+    = \sqrt{\langle (x_{n-1})^2 + x_{n-1}\cdot\Delta x_n + \Delta x_n^2\rangle}
     = \sqrt{\langle x_{n-1}^2 \rangle + \langle x_{n-1}\cdot\Delta x_n \rangle + \langle\Delta x_n^2\rangle}
 $$
 
@@ -49,4 +49,20 @@ $$
     = \frac{1}{3} \cdot (-1)^2 + \frac{1}{3} \cdot 0^2 + \frac{1}{3} \cdot 1^2
     = \frac{1}{3} + \frac{1}{3}
     = \frac{2}{3}
+$$
+
+What we have now is
+
+$$
+    \langle x_n^2 \rangle
+    = \langle x_{n-1}^2 \rangle + \frac{2}{3}
+    = \langle x_0^2 \rangle + n\cdot\frac{2}{3}
+    = n\cdot\frac{2}{3}
+$$
+
+Therefore the RMS is
+
+$$
+    \sqrt{\langle x_n^2 \rangle}
+    = \sqrt{n\cdot\frac{2}{3}}
 $$
