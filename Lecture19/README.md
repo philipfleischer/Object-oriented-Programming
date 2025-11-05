@@ -8,7 +8,7 @@ $$
     \langle x_n \rangle
     = \langle x_{n-1} + \Delta x_n \rangle
     = \langle x_n \rangle
-    = \langle x_{n-1} \rangle
+    = \langle x_{n-1} \rangle \langle Delta x_n \rangle
 $$
 
 Since $\Delta x_n$ has an equal chance of being -1, 0, or 1
@@ -22,23 +22,26 @@ $$
 Which means that
 
 $$
-    \langle x_n \rangle = \langle x_{n-1} \rangle = \langle x_0 \rangle = 0
+    \langle x_n \rangle
+    = \langle x_{n-1} \rangle
+    = \langle x_0 \rangle
+    = 0
 $$
 
 while the RMS is given by
 
 $$
     \sqrt{\langle x_n^2 \rangle}
-    = \sqrt{\langle x_{n-1} + \Delta x_n^2 \rangle}
-    = \sqrt{\langle (x_{n-1})^2 + x_{n-1}\cdot\Delta x_n + \Delta x_n^2\rangle}
+    = \sqrt{\langle (x_{n-1} + \Delta x_n)^2 \rangle}
+    = \sqrt{\langle x_{n-1}^2 + x_{n-1}\cdot\Delta x_n + \Delta x_n^2\rangle}
     = \sqrt{\langle x_{n-1}^2 \rangle + \langle x_{n-1}\cdot\Delta x_n \rangle + \langle\Delta x_n^2\rangle}
 $$
 
-Where, because $x_{n-1}$ and &\Delta x_n$ are independent (the direction next step doesnt care what your position is at all),
+Where, because $x_{n-1}$ and &\Delta x_n$ are independent (the direction next step doesn't care what your position is at all),
 
 $$
     \langle x_{n-1}\cdot\Delta x_n \rangle
-    = \langle x_{n-1} \rangle\cdot\langle\Delta x_n\rangle = 0
+    = \langle x_{n-1} \rangle\cdot\langle\Delta x_n\rangle
     = 0 \cdot 0 = 0
 $$
 

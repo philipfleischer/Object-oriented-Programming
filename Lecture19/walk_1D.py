@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from pyparsing import alphanums
 
 seed = 1916
 
