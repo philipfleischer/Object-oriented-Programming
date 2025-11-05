@@ -16,7 +16,7 @@ def walker2D():
     @returns None
     Displays a plot figure showing the 2D random walk.
     """
-    num_steps = 50
+    num_steps = 500
 
     # Storing positions in x and y arrays
     x = np.zeros(num_steps + 1)
@@ -43,7 +43,49 @@ def walker2D():
     plt.ylabel("y")
     plt.title("2D random walk (1 walker, N=50)")
     plt.legend()
-    # Using this, so that the steps look square
+    # Using this for accurate visual representation purposes
+    plt.axis("equal")
+    plt.grid(True)
+    plt.show()
+
+
+def many_walkers_2D():
+    """
+    @brief This function simulates and plots multiple 2D random walkers.
+
+    It simulates M=5 walkers taking N=500 steps in 2D. Each walker starts at position (0, 0). At every time step, Δx and Δy are chosen
+    independently from the set of: {-1, 0, +1}, with an equal probability.
+
+    All five walker trajectories are plotted in the same figure with unique colors. The figure displays the displacement: y versus x.
+
+    @returns None
+    Displays a plotted figure with all 5 walker trajectories.
+    """
+    num_steps = 500
+    num_walkers = 5
+
+    # Initialized some colors to use
+    colors = ["blue", "red", "green", "orange", "purple"]
+
+    plt.figure(figsize=(6, 6))
+
+    for i in range(num_walkers):
+        # Generating the random steps
+        dx = rng.integers(low=-1, high=2, size=num_steps)
+        dy = rng.integers(low=-1, high=2, size=num_steps)
+
+        x = np.zeros(num_steps + 1)
+        y = np.zeros(num_steps + 1)
+        x[1:] = np.cumsum(dx)
+        y[1:] = np.cumsum(dy)
+
+        # Plotting each individual walker
+        plt.plot(x, y, color=colors[i], label=f"Walker {i+1}")
+
+    plt.xlabel("x")
+    plt.ylabel("y")
+    plt.title("2D random walk (5 walkers, N=500)")
+    plt.legend()
     plt.axis("equal")
     plt.grid(True)
     plt.show()
@@ -51,3 +93,4 @@ def walker2D():
 
 if __name__ == "__main__":
     walker2D()
+    many_walkers_2D()
