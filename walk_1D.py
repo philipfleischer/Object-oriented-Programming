@@ -12,24 +12,47 @@ The function uses NumPy's pseudo-random number generator to ensure reproducibili
 @returns None
 Displays a Matplotlib plot showing the 1D random walk trajectory.
 """
+seed = 1234
+rng = np.random.default_rng(seed)
 
 
 def walker1D():
-    seed = 1234
-    rng = np.random.default_rng(seed)
+    num_steps = 50
+    posisions = np.zeros(num_steps + 1)
+    step_indices = np.arange(num_steps + 1)
+    steps = rng.integers(low=-1, high=2, size=num_steps)
+    posisions[1:] = np.cumsum(steps)
 
-    N = 50
-    Xs = np.zeros(N + 1)
-    ns = np.arange(N + 1)
-    dxs = rng.integers(low=-1, high=2, size=N)
-    Xs[1:] = np.cumsum(dxs)
-
-    plt.step(ns, Xs, color="blue")
+    plt.step(step_indices, posisions, color="blue")
     plt.xlabel(r"Step number $n$")
     plt.ylabel(r"Position $x_n$")
     plt.title("1D random walk (1 walker, N=50)")
     plt.show()
 
 
+"""
+@brief This functions simulates and plot many 1D random walkers.
+Using M = 1000 walkers and N = 500 time steps. All trajectories are plotted in the same figure with the use of transparency.
+"""
+
+
+def many_walkers_1D():
+    num_steps = 500
+    num_walkers = 1000
+    positions = np.zeros((num_steps + 1, num_walkers))
+    step_indices = np.arange(num_steps + 1)
+    steps = rng.integers(low=-1, high=2, size=(num_steps, num_walkers))
+    positions[1:, :] = np.cumsum(steps, axis=0)
+
+    for walker_idx in range(num_walkers):
+        plt.plot(step_indices, positions[:, walker_idx], color="blue", alpha=0.02)
+
+    plt.xlabel(r"Step number $n$")
+    plt.ylabel(r"Position $x_n$")
+    plt.title(f"1D random walk ({num_walkers} walkers, N={num_steps})")
+    plt.show()
+
+
 if __name__ == "__main__":
     walker1D()
+    many_walkers_1D()
