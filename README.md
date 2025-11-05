@@ -70,3 +70,9 @@ $$
     \sqrt{\langle x_n^2 \rangle}
     = \sqrt{n\cdot\frac{2}{3}}
 $$
+
+## Task 1d
+
+As the number of walkers M increases, the mean and RMS from the simulations approach the analytical curves more closely.
+For small M's, random fluctuations dominates the plot, thereby causing visible rise.
+For larger walks, the simulated mean remains near zero and the RMS follows the sqrt(2/3) line near perfectly.
