@@ -139,3 +139,7 @@ and the RMS distance from the origin is
 $$
 \sqrt{\langle |\vec r_n|^2 \rangle} = \sqrt{\frac{4}{3}n}.
 $$
+
+## Task 2d
+
+At n = 500, the points are roughly centered around the origin position (0,0), which is expected given the analytical mean $\langle \vec r_n \rangle = (0, 0).$ The spread of the cloud reflects the RMS distance growing with $\sqrt{\frac{4}{3}n}.$

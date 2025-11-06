@@ -91,6 +91,96 @@ def many_walkers_2D():
     plt.show()
 
 
+def simulate_2d_walkers(num_steps: int, num_walkers: int, rng):
+    """
+    @brief This function simulates 2D random walks for many walkers.
+
+    Each walker starts at position (0,0) and at every step moves by (Δx, Δy), where Δx, Δy are chosen independently from {-1, 0, +1} with equal probability.
+
+    @param num_steps Number of time steps N.
+    @param num_walkers Number of walkers M.
+    @param rng NumPy random Generator instance.
+
+    @return positions of array of shape (num_steps+1, num_walkers, 2) where positions[n, m] = (x_n, y_n) for walker m at time n.
+    """
+    # Shape format: (num_steps, num_walkers, 2)
+    dx = rng.integers(low=-1, high=2, size=(num_steps, num_walkers))
+    dy = rng.integers(low=-1, high=2, size=(num_steps, num_walkers))
+
+    positions = np.zeros((num_steps + 1, num_walkers, 2))
+    # Cumulative sum over the time (axis=0)
+    positions[1:, :, 0] = np.cumsum(dx, axis=0)  # x-array
+    positions[1:, :, 1] = np.cumsum(dy, axis=0)  # y-array
+
+    # Returning current position
+    return positions
+
+
+def plot_positions_at_final_time(positions, final_step: int):
+    """
+    @brief This function scatters the plot to all walker positions at a given time.
+
+    @param positions Array of shape (num_steps+1, M, 2).
+    @param final_step Time index to be plotted (e.g. 500).
+    """
+    xy = positions[final_step]
+    x_final = xy[:, 0]
+    y_final = xy[:, 1]
+
+    plt.figure(figsize=(6, 6))
+    plt.scatter(x_final, y_final, s=10, alpha=0.6)
+    plt.xlabel("x")
+    plt.ylabel("y")
+    plt.title(f"2D random walk: positions at step n={final_step}")
+    plt.axis("equal")
+    plt.grid(True)
+    plt.show()
+
+
+def plot_rms_vs_time(positions):
+    """
+    @brief This function plots the RMS as a function of time for different sample sizes, together with the analytical RMS.
+
+    It uses M=10,100,1000.
+
+    @param positions Array of shape (num_steps+1, M, 2) with M >= 1000.
+    """
+    num_steps = positions.shape[0] - 1
+    step_indices = np.arange(num_steps + 1)
+
+    # analytical RMS in 2D: sqrt( <x_n^2> + <y_n^2> ) = sqrt(4/3 * n)
+    analytical_rms = np.sqrt((4.0 / 3.0) * step_indices)
+
+    plt.figure(figsize=(7, 5))
+
+    for M in [10, 100, 1000]:
+        # slice first M walkers
+        pos_M = positions[:, :M, :]  # (N+1, M, 2)
+        # squared distance from origin for each walker, each time
+        r2 = pos_M[:, :, 0] ** 2 + pos_M[:, :, 1] ** 2  # (N+1, M)
+        # mean over walkers
+        mean_r2 = np.mean(r2, axis=1)  # (N+1,)
+        rms = np.sqrt(mean_r2)
+        plt.plot(step_indices, rms, label=f"Simulated M={M}")
+
+    # plot analytical
+    plt.plot(step_indices, analytical_rms, "k--", label="Analytical RMS = √(4n/3)")
+
+    plt.xlabel("Step number n")
+    plt.ylabel("RMS distance")
+    plt.title("RMS of 2D random walk vs time")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+
 if __name__ == "__main__":
     walker2D()
     many_walkers_2D()
+
+    N = 500
+    M = 1000
+    positions = simulate_2d_walkers(N, M, rng)
+    plot_positions_at_final_time(positions, final_step=500)
+    plot_rms_vs_time(positions)
