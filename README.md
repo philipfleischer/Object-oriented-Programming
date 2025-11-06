@@ -143,3 +143,18 @@ $$
 ## Task 2d
 
 At n = 500, the points are roughly centered around the origin position (0,0), which is expected given the analytical mean $\langle \vec r_n \rangle = (0, 0).$ The spread of the cloud reflects the RMS distance growing with $\sqrt{\frac{4}{3}n}.$
+
+## Task 4a
+
+When running the maze walker program, the move() function performs the following operations for each time step:
+
+1. It generates N number of random steps for all M walkers.
+2. It checks M position tuples to see if it is a valid move.
+3. It then updates the M walkers using boolean indexing computed from the legal moves computation.
+
+Each of these three operations on the maze walker instance scales linearly with the number of walkers M. That means the computational work per time step increases proportionally with M.
+
+The time complexity of a single step is in O(M). Note, that the meaning of single step, means that we never enter a loop inside the move() function.
+On the other hand, when we run the simulation for N steps, it will grow linearly with M and N. That means, the time complexity for N=1000 steps is: O(N \* M).
+
+This is reasonable considering the displayed plot and '4a.png' we get from running the 'time_complexity_mw.py' source file.
