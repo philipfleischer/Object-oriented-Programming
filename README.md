@@ -76,3 +76,66 @@ $$
 As the number of walkers M increases, the mean and RMS from the simulations approach the analytical curves more closely.
 For small M's, random fluctuations dominates the plot, thereby causing visible rise.
 For larger walks, the simulated mean remains near zero and the RMS follows the sqrt(2/3) line near perfectly.
+
+## Task 2c
+
+We write the 2D random walk as
+
+$$
+\vec r_n = \vec r_{n-1} + \Delta \vec r_n, \qquad
+\vec r_0 = (0,0),
+$$
+
+with
+
+$$
+\Delta \vec r_n = (\Delta x_n, \Delta y_n), \qquad
+\Delta x_n, \Delta y_n \in \\{-1, 0, 1\\},
+$$
+
+and the x- and y-steps are independent and identically distributed.
+
+Since
+
+$$
+\langle \Delta x_n \rangle = \langle \Delta y_n \rangle = \tfrac{1}{3}(-1) + \tfrac{1}{3}(0) + \tfrac{1}{3}(1) = 0,
+$$
+
+we obtain
+
+$$
+\langle x_n \rangle = 0, \qquad \langle y_n \rangle = 0,
+$$
+
+and therefore
+
+$$
+\langle \vec r_n \rangle = (0, 0).
+$$
+
+From the 1D case we have that
+
+$$
+\langle x_n^2 \rangle = \frac{2}{3}n.
+$$
+
+By symmetry the same holds for $y_n$
+
+$$
+\langle y_n^2 \rangle = \frac{2}{3}n.
+$$
+
+Thus
+
+$$
+\langle |\vec r_n|^2 \rangle
+= \langle x_n^2 \rangle + \langle y_n^2 \rangle
+= \frac{2}{3}n + \frac{2}{3}n
+= \frac{4}{3}n,
+$$
+
+and the RMS distance from the origin is
+
+$$
+\sqrt{\langle |\vec r_n|^2 \rangle} = \sqrt{\frac{4}{3}n}.
+$$
