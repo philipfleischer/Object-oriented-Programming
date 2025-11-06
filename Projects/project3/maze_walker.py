@@ -1,6 +1,5 @@
 from __future__ import annotations
 import numpy as np
-
 from labyrinth import InvalidSquareError
 
 
@@ -31,16 +30,17 @@ class MazeWalker:
         self._M = M
         self._maze = maze
         self._rng = rng
-        self._r0 = r0
-        x0, y0 = r0
+        # self._r0 = r0
+        # x0, y0 = r0
 
         # Checking that the starting square is valid
-        if not self._maze[x0, y0]:
+        if not self._maze[r0[0], r0[1]]:
             raise InvalidSquareError(f"Starting position {r0} is not a legal square.")
 
         # positions of all walkers; shape (M,x/y)
-        self.x = np.full(M, x0, dtype=int)
-        self.y = np.full(M, y0, dtype=int)
+        # self.x = np.full(M, x0, dtype=int)
+        # self.y = np.full(M, y0, dtype=int)
+        self.initialize_walkers(r0)
 
     @property
     def M(self) -> int:
@@ -51,6 +51,31 @@ class MazeWalker:
     def maze(self) -> np.ndarray:
         """@brief Property for the maze array object."""
         return self._maze
+
+    def initialize_walkers(self, r0: tuple[int, int]) -> None:
+        """
+        @brief This function initializes all walkers at the start position r0=(x0,y0).
+
+        @param r0 This is a tuple of integers (x0,y0) representing the starting position.
+
+        @raises InvalidSquareError If the start position is not valid.
+        """
+        x0, y0 = r0
+        if not self._maze[x0, y0]:
+            raise InvalidSquareError(f"Starting position {r0} is not a legal square.")
+
+        self._x = np.full(self._M, x0, dtype=int)
+        self._y = np.full(self._M, y0, dtype=int)
+
+    @property
+    def x(self) -> np.ndarray:
+        """@brief X-position of all walkers."""
+        return self._x
+
+    @property
+    def y(self) -> np.ndarray:
+        """@brief X-position of all walkers."""
+        return self._y
 
     # move() will be implemented in later tasks
     def move(self) -> None:
