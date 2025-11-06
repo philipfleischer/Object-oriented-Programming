@@ -2,6 +2,7 @@ from __future__ import annotations
 import numpy as np
 from labyrinth import InvalidSquareError, circular, example
 from animation import Animation
+import pstats
 
 
 class MazeWalker:
@@ -200,3 +201,7 @@ if __name__ == "__main__":
     walker = MazeWalker(M=1, maze=maze, rng=rng, r0=(1, 1), endpoints=[(5, 5)])
     animation = Animation(walker)
     animation.animate(N=100, interval=200, size=200)
+
+    # Task 4b:
+    p = pstats.Stats("maze.cprof")
+    p.sort_stats("cumtime").print_stats(20)
