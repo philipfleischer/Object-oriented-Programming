@@ -84,7 +84,7 @@ with
 
 $$
 \Delta \vec r_n = (\Delta x_n, \Delta y_n), \qquad
-\Delta x_n, \Delta y_n \in \{{-1, 0, 1\}},
+\Delta x_n, \Delta y_n \in \\{-1, 0, 1\\},
 $$
 
 and the x- and y-steps are independent and identically distributed.
