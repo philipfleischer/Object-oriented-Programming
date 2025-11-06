@@ -1,6 +1,7 @@
 from __future__ import annotations
 import numpy as np
-from labyrinth import InvalidSquareError
+from labyrinth import InvalidSquareError, circular
+from animation import Animation
 
 
 class MazeWalker:
@@ -30,16 +31,11 @@ class MazeWalker:
         self._M = M
         self._maze = maze
         self._rng = rng
-        # self._r0 = r0
-        # x0, y0 = r0
 
         # Checking that the starting square is valid
         if not self._maze[r0[0], r0[1]]:
             raise InvalidSquareError(f"Starting position {r0} is not a legal square.")
 
-        # positions of all walkers; shape (M,x/y)
-        # self.x = np.full(M, x0, dtype=int)
-        # self.y = np.full(M, y0, dtype=int)
         self.initialize_walkers(r0)
 
     @property
@@ -91,3 +87,22 @@ class MazeWalker:
         # Updating the positions
         self._x += dx
         self._y += dy
+
+
+if __name__ == "__main__":
+    rng = np.random.default_rng(1234)
+
+    # Constructing the circular maze
+    maze = circular()
+
+    # Making the maze walker with 500 walkers and start position (100, 100).
+    maze_walk_inst = MazeWalker(
+        M=500,
+        maze=maze,
+        rng=rng,
+        r0=(100, 100),
+    )
+
+    # Animating the maze walker with 200 time steps.
+    animate = Animation(maze_walk_inst)
+    animate.animate(N=200, size=10, interval=30)
