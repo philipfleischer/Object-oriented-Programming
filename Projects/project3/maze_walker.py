@@ -17,20 +17,23 @@ class MazeWalker:
         M: int,
         maze: np.ndarray,
         rng: np.random.Generator,
-        # rng,
         r0: tuple[int, int] = (1, 1),
+        endpoints: list[tuple[int, int]] | None = None,
     ) -> None:
         """
         @param M Number of walkers.
         @param maze 2D boolean array representing the labyrinth.
         @param rng Pseudo-random number generator to use.
         @param r0 Starting position (x0, y0) for all walkers. Defaults to (1, 1).
+        @param endpoints List of coordinates that are endpoints in the maze.
 
         @raises InvalidSquareError: if the starting square is not accessible.
         """
         self._M = M
         self._maze = maze
         self._rng = rng
+        # if endpoints list is not given, we initialize it as an empty list.
+        self._endpoints = endpoints or []
 
         # Checking that the starting square is valid
         if not self._maze[r0[0], r0[1]]:
@@ -130,6 +133,24 @@ class MazeWalker:
 
         return dr
 
+    def not_finished(self) -> np.ndarray:
+        """
+        @brief Return a boolean array of walkers that may still move. A walker is finished if it is currently standing on one of the endpoint coordinates. Finished walkers get bool False, others get True.
+
+        @return np.ndarray object with shape (M, ).
+        """
+        movable_walkers = np.ones(self._M, dtype=bool)
+        if not self._endpoints:
+            # No endpoints defined -> everyone can move
+            return movable_walkers
+
+        # For each endpoint, mark walkers that are there as finished.
+        for x_endpoint, y_endpoint in self._endpoints:
+            at_endpoint = (self._x == x_endpoint) & (self._y == y_endpoint)
+            movable_walkers[at_endpoint] = False
+
+        return movable_walkers
+
     def move(self) -> None:
         """
         @brief This function moves all walkers by one random step in 2D.
@@ -147,9 +168,12 @@ class MazeWalker:
         # removing and replacing illegal moves before updating the walkers.
         dr = self._remove_illegal(dr)
 
+        # Figuring out which wealkers are still allowed to move
+        movable_walkers = self.not_finished()
+
         # Updating all the walker positions
-        self._x += dr[:, 0]
-        self._y += dr[:, 1]
+        self._x[movable_walkers] += dr[movable_walkers, 0]
+        self._y[movable_walkers] += dr[movable_walkers, 1]
 
 
 if __name__ == "__main__":
@@ -164,6 +188,7 @@ if __name__ == "__main__":
         maze=maze,
         rng=rng,
         r0=(100, 100),
+        endpoints=[],
     )
 
     # Animating the maze walker with 200 time steps.
@@ -172,6 +197,6 @@ if __name__ == "__main__":
 
     # Running the debugging tip here:
     maze = example()
-    walker = MazeWalker(M=1, maze=maze, rng=rng, r0=(1, 1))
+    walker = MazeWalker(M=1, maze=maze, rng=rng, r0=(1, 1), endpoints=[(5, 5)])
     animation = Animation(walker)
     animation.animate(N=100, interval=200, size=200)
