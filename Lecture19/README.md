@@ -107,13 +107,13 @@ $$
 \langle \vec r_n \rangle = (0, 0).
 $$
 
-From the 1D case we had
+From the 1D case we have that
 
 $$
 \langle x_n^2 \rangle = \frac{2}{3}n.
 $$
 
-By symmetry the same holds for \(y_n\):
+By symmetry the same holds for (y_n):
 
 $$
 \langle y_n^2 \rangle = \frac{2}{3}n.
