@@ -170,7 +170,7 @@ The profile output had these characteristics:
 - Most of the top entries (ranked by cumtime) were imports.
 - Ordered by cumulative time, because that tells us what dominates the total runtime.
 
-# 1. Difference between tottime and cumtime
+### 1. Difference between tottime and cumtime
 
 - tottime is the time spent only inside that function itself, excluding any time in functions that gets called from it.
 - cumtime (cumulative time) includes the time spent in that function and in all the functions it calls.
@@ -178,30 +178,30 @@ The profile output had these characteristics:
 They will be the same when a function performs all of its work internally (does not call other functions). They will differ when a function that imports or delegates work to other functions.
 An example of this from the cProfile output is:
 
-- cumtime: 0.001, tottime: 0.458, <frozen importlib._bootstrap>:1349(\_find_and_load)
-- cumtime: 0.001, tottime: 0.458, <frozen importlib._bootstrap>:1304(\_find_and_load_unlocked)
+- cumtime: 0.001, tottime: 0.458, &lt;frozen importlib.\_bootstrap&gt;:1349(\_find_and_load)
+- cumtime: 0.001, tottime: 0.458, &lt;frozen importlib.\_bootstrap&gt;:1304(\_find_and_load_unlocked)
 
 They have small tottime but large cumtime, because they call many other functions during module imports.
 
-# 2. Functions consuming the most time.
+### 2. Functions consuming the most time.
 
 Based on the output from 'maze.cprof':
 | Rank | Function | tottime (s) | cumtime (s) |
 | ---- | -------- | ----------- | ----------- |
-| 1 | <frozen importlib._bootstrap>:1349(\_find_and_load) | 0.001 | 0.458 |
-| 2 | <frozen importlib._bootstrap>:1304(\_find_and_load_unlocked) | 0.001 | 0.458 |
-| 3 | <frozen importlib._bootstrap>:911(\_load_unlocked) | 0.001 | 0.457 |
+| 1 | &lt;frozen importlib.\_bootstrap&gt;:1349(\_find_and_load) | 0.001 | 0.458 |
+| 2 | &lt;frozen importlib.\_bootstrap&gt;:1304(\_find_and_load_unlocked) | 0.001 | 0.458 |
+| 3 | &lt;frozen importlib.\_bootstrap&gt;:911(\_load_unlocked) | 0.001 | 0.457 |
 
 These three functions show up high, because on the first run of the program, Python imports matplotlib via the labyrinth.py file and other functions (one-time cost, but still expensive compared to the rest for the small N and M).
 So, even though we removed the animation and plotting, it still takes quite a bit of time.
 Our own functions like the MazeWalker.move() and \_remove_illegal() do not even show up in the top 20 cumulative time entries.
 Since we want to know which parts dominate the total runtime, it makes more sense here to look at cumulative time instead of total time.
 
-# 3. Suggested changes to make it faster
+### 3. Suggested changes to make it faster
 
 From the cProfile output results, we can suggest:
 
-1. Avoiding to import Matplotlib in labyrinth.py. By either removing or encapsulating the import to only be enacted when necessary would be for the best to avoid the startup imports taking up the majority of the top 20 in relation to cumtime.
+1. Avoid importing Matplotlib in labyrinth.py. By either removing or encapsulating the import to only be enacted when necessary would be for the best to avoid the startup imports taking up the majority of the top 20 in relation to cumtime.
 2. We should avoid making new temporary arrays in \_remove_illegal() function and rather have one on initialization that gets cleaned up during runs when that is possible.
 3. When checking the out of bounds and wall coordinate moves we do some operations that also make temporary arrays. I am not sure how it could be optimized, but there should be some better ways to this, but I do not know of any.
 4. In the not_finished() function we do a explicit and relatively computationally "hard" == chack and AND operator check to make sure the endpoints are in the end position. Using an np.ndarray that is vectorized might be better. Could also use a better datastructure for comparisons like a hashmap.
