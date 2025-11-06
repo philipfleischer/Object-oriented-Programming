@@ -6,7 +6,10 @@ import numpy as np
 
 from matplotlib.animation import FuncAnimation
 
-from .labyrinth import plot
+try:
+    from .labyrinth import plot
+except ImportError:
+    from labyrinth import plot
 
 
 class MazeWalker(Protocol):
