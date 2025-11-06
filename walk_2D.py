@@ -5,7 +5,7 @@ seed = 1234
 rng = np.random.default_rng(seed)
 
 
-def walker2D():
+def walker2D() -> None:
     """
     @brief This function simulates and plots a 2D random walker.
 
@@ -49,7 +49,7 @@ def walker2D():
     plt.show()
 
 
-def many_walkers_2D():
+def many_walkers_2D() -> None:
     """
     @brief This function simulates and plots multiple 2D random walkers.
 
@@ -91,7 +91,9 @@ def many_walkers_2D():
     plt.show()
 
 
-def simulate_2d_walkers(num_steps: int, num_walkers: int, rng):
+def simulate_2d_walkers(
+    num_steps: int, num_walkers: int, rng: np.random.Generator
+) -> np.ndarray:
     """
     @brief This function simulates 2D random walks for many walkers.
 
@@ -116,7 +118,7 @@ def simulate_2d_walkers(num_steps: int, num_walkers: int, rng):
     return positions
 
 
-def plot_positions_at_final_time(positions, final_step: int):
+def plot_positions_at_final_time(positions: np.ndarray, final_step: int) -> None:
     """
     @brief This function scatters the plot to all walker positions at a given time.
 
@@ -137,7 +139,7 @@ def plot_positions_at_final_time(positions, final_step: int):
     plt.show()
 
 
-def plot_rms_vs_time(positions):
+def plot_rms_vs_time(positions: np.ndarray) -> None:
     """
     @brief This function plots the RMS as a function of time for different sample sizes, together with the analytical RMS.
 
