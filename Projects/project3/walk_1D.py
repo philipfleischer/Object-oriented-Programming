@@ -6,7 +6,7 @@ seed = 1234
 rng = np.random.default_rng(seed)
 
 
-def walker1D():
+def walker1D() -> None:
     """
     @brief The walker1D() function initializes and plots a one-dimensional random walker. This function performs a stochastic simulation of a single random walker in one dimension. The walker starts at position x_0 = 0 and takes N = 50 steps. the walker can move move left, right, or remain still.
 
@@ -32,7 +32,7 @@ def walker1D():
     plt.show()
 
 
-def many_walkers_1D():
+def many_walkers_1D() -> tuple[np.ndarray, int]:
     """
     @brief This function simulates and plot many 1D random walkers.
     Using M = 1000 walkers and N = 500 time steps. All trajectories are plotted in the same figure with the use of transparency.
@@ -58,7 +58,7 @@ def many_walkers_1D():
     return positions, num_steps
 
 
-def compare_walkers_to_analytic(positions, num_steps):
+def compare_walkers_to_analytic(positions: np.ndarray, num_steps: int) -> None:
     """
     @brief This function compares simulated random-walk statistics to analytical results.
     It computes the mean displacement and RMS from the simulated random walk data for values of M = 10, 100, and 1000 walkers, and compares them with the analytical expectations.

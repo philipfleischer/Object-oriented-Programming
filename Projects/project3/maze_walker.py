@@ -1,6 +1,6 @@
 from __future__ import annotations
 import numpy as np
-from labyrinth import InvalidSquareError, circular
+from labyrinth import InvalidSquareError, circular, example
 from animation import Animation
 
 
@@ -73,20 +73,83 @@ class MazeWalker:
         """@brief Y-position of all walkers."""
         return self._y
 
+    def _remove_illegal(self, dr: np.ndarray) -> np.ndarray:
+        """
+        @brief This function filters out steps that would move walkers into walls or outside of the maze.
+
+        @details
+        This helper function checks each proposed step (Δx, Δy) in the dr array      and replaces any non-valid steps with (0, 0).
+        A step is considered illegal if it moves a walker:
+          - Outside the maze boundary, or
+          - Into a wall: a cell where maze[x, y] == False.
+
+        The function supports both:
+          - The standard case (K == M): one proposed step per walker, and
+          - The testing case (K != M): multiple trial steps from a single position.
+
+        @param dr Array of shape (K, 2), where each row is a proposed (Δx, Δy) step.
+
+        @return Array of shape (K, 2) where illegal steps have been replaced by (0, 0).
+        """
+        # Number of rows and columns in the maze.
+        nrows, ncols = self._maze.shape
+        # The number of proposed steps to take.
+        K = dr.shape[0]
+
+        # This is the case for when it is one proposed step per walker
+        if K == self._M:
+            cur_x = self._x
+            cur_y = self._y
+        else:
+            # Testing case: use position of first walker for all proposed steps
+            cur_x = np.full(K, self._x[0], dtype=int)
+            cur_y = np.full(K, self._y[0], dtype=int)
+
+        # This is the proposed new positions to be computed
+        new_x = cur_x + dr[:, 0]
+        new_y = cur_y + dr[:, 1]
+
+        # Initialize all moves to be legal, then update
+        legal = np.ones(K, dtype=bool)
+
+        # Checking to see if moves is inside bounds?
+        inside_x = (new_x >= 0) & (new_x < nrows)
+        inside_y = (new_y >= 0) & (new_y < ncols)
+        inside = inside_x & inside_y
+
+        # Keep only those that are inside (bitwise AND operator)
+        legal = legal & inside
+
+        # For the positions that are valid, we check they also land on True (open pathway cell).
+        legal[inside] &= self._maze[new_x[inside], new_y[inside]]
+
+        # Identifying illegal moves (legal==False)
+        illegal = np.logical_not(legal)
+        # Replacing all illegal steps with (0,0)
+        dr[illegal, :] = 0
+
+        return dr
+
     def move(self) -> None:
         """
-        @brief This function moves all walkers by one step in 2D.
+        @brief This function moves all walkers by one random step in 2D.
 
+        @details
         Each walker takes one step following the 2D random walk where the trajectory directions are Delta(x), Delta(y) element {-1, 0, 1}
-        It updates the positions for the x and y arrays.
+        Before it updates the positions for the x and y arrays, illegal steps are replaced with (0,0) using the _remove_illegal_moves() method.
         """
         # Drawing the random step components for all the walkers
         dx = self._rng.integers(-1, 2, size=self._M)
         dy = self._rng.integers(-1, 2, size=self._M)
 
-        # Updating the positions
-        self._x += dx
-        self._y += dy
+        # Stacking (dx, dy) into array for proposed next steps.
+        dr = np.stack((dx, dy), axis=1)
+        # removing and replacing illegal moves before updating the walkers.
+        dr = self._remove_illegal(dr)
+
+        # Updating all the walker positions
+        self._x += dr[:, 0]
+        self._y += dr[:, 1]
 
 
 if __name__ == "__main__":
@@ -106,3 +169,9 @@ if __name__ == "__main__":
     # Animating the maze walker with 200 time steps.
     animate = Animation(maze_walk_inst)
     animate.animate(N=200, size=10, interval=30)
+
+    # Running the debugging tip here:
+    maze = example()
+    walker = MazeWalker(M=1, maze=maze, rng=rng, r0=(1, 1))
+    animation = Animation(walker)
+    animation.animate(N=100, interval=200, size=200)
