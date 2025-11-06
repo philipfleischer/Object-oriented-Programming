@@ -74,10 +74,20 @@ class MazeWalker:
 
     @property
     def y(self) -> np.ndarray:
-        """@brief X-position of all walkers."""
+        """@brief Y-position of all walkers."""
         return self._y
 
-    # move() will be implemented in later tasks
     def move(self) -> None:
-        """Placeholder move method to avoid errors occuring in the test_task3a.py file."""
-        pass
+        """
+        @brief This function moves all walkers by one step in 2D.
+
+        Each walker takes one step following the 2D random walk where the trajectory directions are Delta(x), Delta(y) element {-1, 0, 1}
+        It updates the positions for the x and y arrays.
+        """
+        # Drawing the random step components for all the walkers
+        dx = self._rng.integers(-1, 2, size=self._M)
+        dy = self._rng.integers(-1, 2, size=self._M)
+
+        # Updating the positions
+        self._x += dx
+        self._y += dy
