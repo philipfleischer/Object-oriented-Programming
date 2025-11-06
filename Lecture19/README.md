@@ -113,7 +113,7 @@ $$
 \langle x_n^2 \rangle = \frac{2}{3}n.
 $$
 
-By symmetry the same holds for $\langle y_n \rangle$:
+By symmetry the same holds for $y_n$:
 
 $$
 \langle y_n^2 \rangle = \frac{2}{3}n.
