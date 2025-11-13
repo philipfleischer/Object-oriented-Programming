@@ -1,6 +1,7 @@
 import numpy as np
 import labyrinth
 from maze_walker import MazeWalker
+import pytest
 
 
 def test_remove_illegal() -> None:
@@ -54,3 +55,60 @@ def test_remove_illegal() -> None:
         else:
             # Legal move is being kept
             assert np.all(corrected[i] == np.array([dx, dy]))
+
+def test_endpoint_stops_walker(circle):
+    """
+    Test that walkers placed on an endpoint do not move.
+    """
+    endpoint = (100, 100)
+    mw = MazeWalker(5, circle, np.random.default_rng(2), r0=endpoint, endpoints=[endpoint])
+
+    before_x = mw.x.copy()
+    before_y = mw.y.copy()
+
+    for _ in range(5):
+        mw.move()
+
+    assert np.all(mw.x == before_x)
+    assert np.all(mw.y == before_y)
+
+def test_not_finished_no_endpoints(circle):
+    """
+    Test that not_finished() returns True for all walkers when there
+    are no endpoints defined in the maze.
+    """
+    mw = MazeWalker(10, circle, np.random.default_rng(3), r0=(100, 100), endpoints=[])
+    finished_mask = mw.not_finished()
+    assert finished_mask.dtype == bool
+    assert np.all(finished_mask)
+
+def test_remove_illegal_keeps_legal_steps(circle):
+    """
+    Test that _remove_illegal() does not alter legal step vectors.
+
+    A step that leads to a free square in the maze should remain unchanged
+    after validation.
+    """
+    mw = MazeWalker(1, circle, np.random.default_rng(4), r0=(100, 100))
+
+    dr = np.array([[1, 0]], dtype=int)  # step to the right
+    filtered = mw._remove_illegal(dr.copy())
+
+    assert np.array_equal(dr, filtered)
+
+def test_remove_illegal_out_of_bounds(circle):
+    """
+    Test that steps leading outside the maze boundaries
+    are replaced with (0,0).
+    """
+    mw = MazeWalker(1, circle, np.random.default_rng(5), r0=(100, 100))
+
+    dr = np.array([[2000, 0]], dtype=int)  # huge step outside maze
+    filtered = mw._remove_illegal(dr.copy())
+
+    assert np.array_equal(filtered, np.array([[0, 0]]))
+
+@pytest.fixture
+def circle():
+    """Return the circular maze used in the original tests."""
+    return labyrinth.circular()
