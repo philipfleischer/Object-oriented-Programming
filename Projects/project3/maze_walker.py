@@ -1,6 +1,14 @@
 from __future__ import annotations
+import matplotlib.pyplot as plt
 import numpy as np
-from labyrinth import InvalidSquareError, circular, example
+from labyrinth import (
+    InvalidSquareError,
+    circular,
+    example,
+    layered_labyrinth,
+    get_legal_line,
+    plot,
+)
 from animation import Animation
 import pstats
 
@@ -205,3 +213,45 @@ if __name__ == "__main__":
     # Task 4b:
     p = pstats.Stats("maze.cprof")
     p.sort_stats("cumtime").print_stats(20)
+
+    # Task 3h:
+    maze = layered_labyrinth(layers=2)
+
+    fig, ax = plt.subplots(figsize=(8, 6))
+    plot(maze, ax=ax)
+
+    line = maze.shape[1] - 2
+    start_points = get_legal_line(maze, y=line)
+    endpoints = get_legal_line(maze, y=1)
+
+    ax.plot(*zip(*start_points), "go")
+    ax.plot(*zip(*endpoints), "r.")
+    plt.show()  
+
+    # Choose a starting point
+    r0 = start_points[len(start_points) // 2]
+
+    M = 100_000
+    walker = MazeWalker(M=M, maze=maze, rng=rng, r0=r0, endpoints=endpoints)
+
+    anim = Animation(walker)
+    anim.animate(N=2000, interval=1, size=5)
+
+    # Find walkers that reached an endpoint
+    finished_mask = ~walker.not_finished()
+    finished_x = walker.x[finished_mask]
+    print("Number of walkers that reached an endpoint:", finished_x.size)
+
+    # Histogram of x-positions at endpoints
+    plt.figure()
+    plt.hist(
+        finished_x,
+        bins=maze.shape[0],
+        range=(0, maze.shape[0]),
+    )
+    plt.xlabel("x-position at endpoint")
+    plt.ylabel("Number of walkers")
+    plt.title("Task 3h: x-positions of walkers at endpoints")
+    plt.savefig("3h.png", dpi=150, bbox_inches="tight")
+    plt.close()
+
