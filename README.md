@@ -144,6 +144,12 @@ $$
 
 At n = 500, the points are roughly centered around the origin position (0,0), which is expected given the analytical mean $\langle \vec r_n \rangle = (0, 0).$ The spread of the cloud reflects the RMS distance growing with $\sqrt{\frac{4}{3}n}.$
 
+## Task 3h
+
+In task 3h, with 100000 walkers and 2000 time steps, 2675 walkers reached an endpoint.
+
+![_](3h.png)
+
 ## Task 4a
 
 When running the maze walker program, the move() function performs the following operations for each time step:
