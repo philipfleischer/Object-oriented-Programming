@@ -5,8 +5,6 @@
 This repository contains my work from the IN1910 course at the University of Oslo (UiO), focused on object-oriented programming (OOP) and scientific computing in Python.
 The course combines programming concepts, mathematical modeling, and numerical methods used in natural sciences.
 
-⸻
-
 ## Course Overview
 
 Course name: Programming for Scientific Applications
@@ -20,8 +18,6 @@ Focus areas:
 - Numerical computation and visualization
 - Simulation and data analysis
 
-⸻
-
 ## Learning Outcomes
 
 After completing this course, I can:
@@ -32,8 +28,6 @@ After completing this course, I can:
 - Write maintainable and well-documented code for research and engineering contexts
 - Integrate simulation results with analytical and visual components
 
-⸻
-
 ## Project Folder
 
 ### Projects/
@@ -42,9 +36,7 @@ This folder contains the three major course projects that demonstrate the practi
 
 Each project includes a detailed report, source code, and results illustrating both theoretical understanding and practical programming skills.
 
-⸻
-
-Technologies and Tools
+#### Technologies and Tools
 
 - Language: Python 3
 - Libraries: NumPy, Matplotlib, SciPy
@@ -52,9 +44,7 @@ Technologies and Tools
 - Version control: Git + GitHub
 - Documentation: docstrings and Markdown
 
-⸻
-
-Example Topics Covered
+#### Example Topics Covered
 
 - Object-Oriented Programming (OOP)
 - Classes, methods, attributes, and inheritance
@@ -64,17 +54,14 @@ Example Topics Covered
 - Random processes and Monte Carlo methods
 - Visualization and scientific plotting
 
-⸻
-
 ## Structure
 
+Lectures/ # Notes during lectures and Live Coding tracing
 Projects/
 project1/
 project2/
 project3/
 README.md # This file
-
-⸻
 
 ## Purpose
 
@@ -83,8 +70,6 @@ This repository serves as a demonstration of:
 - My ability to combine programming and mathematics to solve scientific problems
 - Clean, modular, and reproducible code practices in Python
 - A foundation for future work in scientific computing, data analysis, and software development
-
-⸻
 
 ## Author
 
