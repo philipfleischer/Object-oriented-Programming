@@ -1,0 +1,67 @@
+\doxysection{test\+\_\+array\+\_\+list.\+cpp File Reference}
+\hypertarget{test__array__list_8cpp}{}\label{test__array__list_8cpp}\index{test\_array\_list.cpp@{test\_array\_list.cpp}}
+
+
+Unit tests for the dynamic array list (\doxylink{class_array_list}{Array\+List}).  
+
+
+{\ttfamily \#include $<$cassert$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include "{}array\+\_\+list.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{test__array__list_8cpp_aaf4a52f4078623fd7a0163ffd2feb83c}\label{test__array__list_8cpp_aaf4a52f4078623fd7a0163ffd2feb83c} 
+void {\bfseries test\+\_\+empty\+\_\+array\+\_\+has\+\_\+length\+\_\+zero} ()
+\begin{DoxyCompactList}\small\item\em Test that a newly constructed \doxylink{class_array_list}{Array\+List} object has length zero. \end{DoxyCompactList}\item 
+\Hypertarget{test__array__list_8cpp_a62f075a2d37cbf8f7fbd2248684aa1c8}\label{test__array__list_8cpp_a62f075a2d37cbf8f7fbd2248684aa1c8} 
+void {\bfseries test\+\_\+array\+\_\+with\+\_\+two\+\_\+elements\+\_\+appended\+\_\+has\+\_\+length\+\_\+two} ()
+\begin{DoxyCompactList}\small\item\em Test that appending two elements results in length==2. \end{DoxyCompactList}\item 
+\Hypertarget{test__array__list_8cpp_a05f46786a9d23c52df01e720a8a83a4b}\label{test__array__list_8cpp_a05f46786a9d23c52df01e720a8a83a4b} 
+void {\bfseries test\+\_\+indexing\+\_\+operator} ()
+\begin{DoxyCompactList}\small\item\em Test to see if operator\mbox{[}\mbox{]} method supports reading and writing for mutable elements. \end{DoxyCompactList}\item 
+\Hypertarget{test__array__list_8cpp_ae2267c7db2b9a05b330609c2225af0b0}\label{test__array__list_8cpp_ae2267c7db2b9a05b330609c2225af0b0} 
+void {\bfseries test\+\_\+vector\+\_\+constructor} ()
+\begin{DoxyCompactList}\small\item\em Test constructing from std\+::vector preserves order and length. \end{DoxyCompactList}\item 
+\Hypertarget{test__array__list_8cpp_a7302ec264fcad0463d93251ee9ecaf7c}\label{test__array__list_8cpp_a7302ec264fcad0463d93251ee9ecaf7c} 
+void {\bfseries test\+\_\+insert} ()
+\begin{DoxyCompactList}\small\item\em Test insert at front, middle, and end for the \doxylink{class_array_list}{Array\+List} object. \end{DoxyCompactList}\item 
+\Hypertarget{test__array__list_8cpp_a1da79732717337e8731f76c7a155c24a}\label{test__array__list_8cpp_a1da79732717337e8731f76c7a155c24a} 
+void {\bfseries test\+\_\+remove} ()
+\begin{DoxyCompactList}\small\item\em Test that remove() funciton deletes element at the index and shifts elements left. \end{DoxyCompactList}\item 
+\Hypertarget{test__array__list_8cpp_ade50a57f09d5c9ebd927be20622539a5}\label{test__array__list_8cpp_ade50a57f09d5c9ebd927be20622539a5} 
+void {\bfseries test\+\_\+pop\+\_\+at\+\_\+index} ()
+\begin{DoxyCompactList}\small\item\em Test pop(index) returns the removed element and shifts elements. \end{DoxyCompactList}\item 
+\Hypertarget{test__array__list_8cpp_a6f6684ec1e35ac5ca07fb69d4638e4b7}\label{test__array__list_8cpp_a6f6684ec1e35ac5ca07fb69d4638e4b7} 
+void {\bfseries test\+\_\+pop} ()
+\begin{DoxyCompactList}\small\item\em Test pop() removes and returns the last element; throws range\+\_\+error on empty list operations. \end{DoxyCompactList}\item 
+\Hypertarget{test__array__list_8cpp_aea501d43e11c2b8425817f98beacb498}\label{test__array__list_8cpp_aea501d43e11c2b8425817f98beacb498} 
+void {\bfseries test\+\_\+print} ()
+\begin{DoxyCompactList}\small\item\em Test that print() funciton prints in a nice and correct format. \end{DoxyCompactList}\item 
+\Hypertarget{test__array__list_8cpp_a319d01fb66a72e7c07f6d468ec5de671}\label{test__array__list_8cpp_a319d01fb66a72e7c07f6d468ec5de671} 
+void {\bfseries test\+\_\+shrink\+\_\+to\+\_\+fit} ()
+\begin{DoxyCompactList}\small\item\em Test that capacity shrinks to a small power-\/of-\/two after removals result in usage\texorpdfstring{$<$}{<}25\%. \end{DoxyCompactList}\item 
+\Hypertarget{test__array__list_8cpp_ab447b16afae3a0bd69fe627377e940a8}\label{test__array__list_8cpp_ab447b16afae3a0bd69fe627377e940a8} 
+void {\bfseries test\+\_\+argmin} ()
+\begin{DoxyCompactList}\small\item\em Test argmin returns index of the first minimum element in \doxylink{class_array_list}{Array\+List}. \end{DoxyCompactList}\item 
+\Hypertarget{test__array__list_8cpp_aeb0fa0b74215bbcd69cd9d17b002e365}\label{test__array__list_8cpp_aeb0fa0b74215bbcd69cd9d17b002e365} 
+void {\bfseries test\+\_\+argmax} ()
+\begin{DoxyCompactList}\small\item\em Test argmax returns index of the first maximum element in \doxylink{class_array_list}{Array\+List}. \end{DoxyCompactList}\item 
+\Hypertarget{test__array__list_8cpp_a2cc026ed7fb9538100ede74211c4711a}\label{test__array__list_8cpp_a2cc026ed7fb9538100ede74211c4711a} 
+void {\bfseries test\+\_\+min} ()
+\begin{DoxyCompactList}\small\item\em Test min returns the smallest value in the \doxylink{class_array_list}{Array\+List} object. \end{DoxyCompactList}\item 
+\Hypertarget{test__array__list_8cpp_a8ec26b0afe28679eb5abc8ec3b68930a}\label{test__array__list_8cpp_a8ec26b0afe28679eb5abc8ec3b68930a} 
+void {\bfseries test\+\_\+max} ()
+\begin{DoxyCompactList}\small\item\em Test max returns the largest value in the \doxylink{class_array_list}{Array\+List} object. \end{DoxyCompactList}\item 
+\Hypertarget{test__array__list_8cpp_ae1c643a8745a6f3d75f5e55808ff9926}\label{test__array__list_8cpp_ae1c643a8745a6f3d75f5e55808ff9926} 
+void {\bfseries test\+\_\+count} ()
+\begin{DoxyCompactList}\small\item\em Test count returns the number of occurrences of a value in the \doxylink{class_array_list}{Array\+List} object. \end{DoxyCompactList}\item 
+\Hypertarget{test__array__list_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{test__array__list_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+int {\bfseries main} ()
+\begin{DoxyCompactList}\small\item\em Runs all \doxylink{class_array_list}{Array\+List} unit tests in this file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Unit tests for the dynamic array list (\doxylink{class_array_list}{Array\+List}). 
+
+Verifies construction, append, indexing (read/write), insert/remove, pop(index) and pop(), shrink-\/to-\/fit behavior, argmin/argmax, min/max, count, and print formatting. 
