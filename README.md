@@ -5,6 +5,22 @@
 This repository contains my work from the IN1910 course at the University of Oslo (UiO), focused on object-oriented programming (OOP) and scientific computing in Python.
 The course combines programming concepts, mathematical modeling, and numerical methods used in natural sciences.
 
+## Project Histories
+
+### Projects (with full original history)
+
+Each project below was originally developed as part of the IN1910 — Object-Oriented Programming for Scientific Applications course at the University of Oslo.
+The full development history (commits, merges, authorship, and evolution) has been preserved using git filter-repo.
+
+All projects are preserved with complete Git history from the original UiO repositories.
+
+| Project   | Description                                    | Browse                                                                                              | Commit History                                                                                           |
+| --------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Project 0 | Numerical modeling basics                      | [Files](https://github.com/philipfleischer/Object-oriented-Programming/tree/main/Projects/project0) | [Commits](https://github.com/philipfleischer/Object-oriented-Programming/commits/main/Projects/project0) |
+| Project 1 | Classical mechanics and ODE solvers            | [Files](https://github.com/philipfleischer/Object-oriented-Programming/tree/main/Projects/project1) | [Commits](https://github.com/philipfleischer/Object-oriented-Programming/commits/main/Projects/project1) |
+| Project 2 | Simulation and energy analysis                 | [Files](https://github.com/philipfleischer/Object-oriented-Programming/tree/main/Projects/project2) | [Commits](https://github.com/philipfleischer/Object-oriented-Programming/commits/main/Projects/project2) |
+| Project 3 | Advanced OOP project with plotting and physics | [Files](https://github.com/philipfleischer/Object-oriented-Programming/tree/main/Projects/project3) | [Commits](https://github.com/philipfleischer/Object-oriented-Programming/commits/main/Projects/project3) |
+
 ## Course Overview
 
 Course name: Programming for Scientific Applications
@@ -76,23 +92,3 @@ This repository serves as a demonstration of:
 Philip Elias Fleischer
 Bachelor’s student in Informatics: Programming and System Architecture
 University of Oslo (UiO)
-
-## Project Histories
-
-### Projects (with full original history)
-
-## 🧩 Projects (with full commit history)
-
-Each project below was originally developed as part of the IN1910 — Object-Oriented Programming for Scientific Applications course at the University of Oslo.
-The full development history (commits, merges, authorship, and evolution) has been preserved using git filter-repo.
-
-All projects are preserved with complete Git history from the original UiO repositories.
-
-| Project   | Description                                    | Browse                                                 | Commit History                            |
-| --------- | ---------------------------------------------- | ------------------------------------------------------ | ----------------------------------------- |
-| Project 0 | Numerical modeling basics                      | [Files](../../tree/project0-history/Projects/project0) | [Commits](../../commits/project0-history) |
-| Project 1 | Classical mechanics and ODE solvers            | [Files](../../tree/project1-history/Projects/project1) | [Commits](../../commits/project1-history) |
-| Project 2 | Simulation and energy analysis                 | [Files](../../tree/project2-history/Projects/project2) | [Commits](../../commits/project2-history) |
-| Project 3 | Advanced OOP project with plotting and physics | [Files](../../tree/project3-history/Projects/project3) | [Commits](../../commits/project3-history) |
-
-To verify individual contributions, see the [commit history per project](#projects-with-full-commit-history).
