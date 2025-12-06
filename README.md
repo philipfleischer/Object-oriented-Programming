@@ -76,3 +76,12 @@ This repository serves as a demonstration of:
 Philip Elias Fleischer
 Bachelor’s student in Informatics: Programming and System Architecture
 University of Oslo (UiO)
+
+## Project Histories
+
+### Project histories
+
+- [Project 0 full commit history (branch)](../../tree/project0-history)
+- [Project 1 full commit history (branch)](../../tree/project1-history)
+- [Project 2 full commit history (branch)](../../tree/project2-history)
+- [Project 3 full commit history (branch)](../../tree/project3-history)
