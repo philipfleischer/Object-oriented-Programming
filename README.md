@@ -56,12 +56,12 @@ Each project includes a detailed report, source code, and results illustrating b
 
 ## Structure
 
-Lectures/ # Notes during lectures and Live Coding tracing
-Projects/
-project1/
-project2/
-project3/
-README.md # This file
+- Lectures/ # Notes during lectures and Live Coding tracing
+- Projects/
+  - project1/
+  - project2/
+  - project3/
+- README.md # This file
 
 ## Purpose
 
