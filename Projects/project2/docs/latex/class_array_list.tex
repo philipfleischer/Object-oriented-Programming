@@ -1,0 +1,305 @@
+\doxysection{Array\+List Class Reference}
+\hypertarget{class_array_list}{}\label{class_array_list}\index{ArrayList@{ArrayList}}
+
+
+A dynamic array-\/based list that grows automatically as elements are added.  
+
+
+
+
+{\ttfamily \#include $<$array\+\_\+list.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_array_list_a89393b81f4288f91da93c8c5c46d4468}{Array\+List}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{class_array_list}{Array\+List} with an initial capacity of 1. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_array_list_a038f05d618b86e38afb2826ee5609554}{Array\+List}} (const std\+::vector$<$ int $>$ \&init)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{class_array_list}{Array\+List} from a vector of integers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_array_list_a72ef74d5f31b6b1f8b3d2d29d584499c}{\texorpdfstring{$\sim$}{\string~}\+Array\+List}} ()
+\begin{DoxyCompactList}\small\item\em Destroys the \doxylink{class_array_list}{Array\+List} object and frees the dynamically allocated internal array. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_array_list_ae54946fed62e0f4bd65653e76d04914f}{length}} ()
+\item 
+\Hypertarget{class_array_list_a2d9067bb1acd0b52d198f555131afcc4}\label{class_array_list_a2d9067bb1acd0b52d198f555131afcc4} 
+int {\bfseries capacity} ()
+\begin{DoxyCompactList}\small\item\em Get the current capacity of list. \end{DoxyCompactList}\item 
+int \& \mbox{\hyperlink{class_array_list_aa9be37a8efd8141ee7da752e36f427bc}{operator\mbox{[}$\,$\mbox{]}}} (int)
+\begin{DoxyCompactList}\small\item\em Returns a reference to the element at a given index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_array_list_a56e9d38dd83e044b683d343e11bf6893}{insert}} (int val, int index)
+\begin{DoxyCompactList}\small\item\em Inserts a value val at the index index in the list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_array_list_aef10b72fd561de8f16b06bebc0273023}{remove}} (int index)
+\begin{DoxyCompactList}\small\item\em Remove element at index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_array_list_a59cabf7b863031b0d9e71fea5899816b}{append}} (int element)
+\begin{DoxyCompactList}\small\item\em Appends a new element to the end of the \doxylink{class_array_list}{Array\+List}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_array_list_accc0d88f535d5723c5bf4ab649992333}{print}} ()
+\begin{DoxyCompactList}\small\item\em prints the contents of the list to standard output. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_array_list_a9440300385cafa265d7320a5dc56274e}{pop}} (int)
+\begin{DoxyCompactList}\small\item\em Remove and return element at index. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_array_list_a2bd3f7a1dacb0f567ffff0098716ea8c}{pop}} ()
+\begin{DoxyCompactList}\small\item\em Remove and return the last element. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_array_list_ae978ddfa3b7f05c03abe7b4e2a55e1b8}{argmin}} ()
+\begin{DoxyCompactList}\small\item\em Returns the index of the smallest element in the array. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_array_list_af6c5e07d985458bc9a147db6abd286a4}{argmax}} ()
+\begin{DoxyCompactList}\small\item\em Returns the index of the largest element in the array. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_array_list_a371d9ef327a77e79296a6aa5ca330616}{min}} ()
+\begin{DoxyCompactList}\small\item\em Returns the smallest element in the array. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_array_list_a6f6becd145fb800eb30a79893f40c86e}{max}} ()
+\begin{DoxyCompactList}\small\item\em Returns the largest element in the array. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_array_list_a8f1d59f20815118e33e01d2d68932d7b}{count}} (int)
+\begin{DoxyCompactList}\small\item\em Returns the number of times a given element occurs in the array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A dynamic array-\/based list that grows automatically as elements are added. 
+
+The \doxylink{class_array_list}{Array\+List} stores integers and uses a fixed-\/size underlying array. When capacity is reached, the internal array is resized using a growth factor. It supports indexing, element retrieval, and printing. 
+
+\label{doc-constructors}
+\Hypertarget{class_array_list_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_array_list_a89393b81f4288f91da93c8c5c46d4468}\index{ArrayList@{ArrayList}!ArrayList@{ArrayList}}
+\index{ArrayList@{ArrayList}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{ArrayList()}{ArrayList()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_array_list_a89393b81f4288f91da93c8c5c46d4468} 
+Array\+List\+::\+Array\+List (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{class_array_list}{Array\+List} with an initial capacity of 1. 
+
+Default constructor for \doxylink{class_array_list}{Array\+List}\+: it initializes an empty \doxylink{class_array_list}{Array\+List} list object. \Hypertarget{class_array_list_a038f05d618b86e38afb2826ee5609554}\index{ArrayList@{ArrayList}!ArrayList@{ArrayList}}
+\index{ArrayList@{ArrayList}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{ArrayList()}{ArrayList()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_array_list_a038f05d618b86e38afb2826ee5609554} 
+Array\+List\+::\+Array\+List (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ int $>$ \&}]{init}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an \doxylink{class_array_list}{Array\+List} from a vector of integers. 
+
+Constructs \doxylink{class_array_list}{Array\+List} list with initial vector values.
+
+
+\begin{DoxyParams}{Parameters}
+{\em init} & A vector used to initialize the array list. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_array_list_a72ef74d5f31b6b1f8b3d2d29d584499c}\index{ArrayList@{ArrayList}!````~ArrayList@{\texorpdfstring{$\sim$}{\string~}ArrayList}}
+\index{````~ArrayList@{\texorpdfstring{$\sim$}{\string~}ArrayList}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ArrayList()}{\string~ArrayList()}}
+{\footnotesize\ttfamily \label{class_array_list_a72ef74d5f31b6b1f8b3d2d29d584499c} 
+Array\+List\+::\texorpdfstring{$\sim$}{\string~}\+Array\+List (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destroys the \doxylink{class_array_list}{Array\+List} object and frees the dynamically allocated internal array. 
+
+Destructor that frees the allocated memory. 
+
+\label{doc-func-members}
+\Hypertarget{class_array_list_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_array_list_a59cabf7b863031b0d9e71fea5899816b}\index{ArrayList@{ArrayList}!append@{append}}
+\index{append@{append}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{append()}{append()}}
+{\footnotesize\ttfamily \label{class_array_list_a59cabf7b863031b0d9e71fea5899816b} 
+void Array\+List\+::append (\begin{DoxyParamCaption}\item[{int}]{element}{}\end{DoxyParamCaption})}
+
+
+
+Appends a new element to the end of the \doxylink{class_array_list}{Array\+List}. 
+
+If the internal array is full, it is automatically resized.
+
+
+\begin{DoxyParams}{Parameters}
+{\em element} & An integer to be appended. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_array_list_af6c5e07d985458bc9a147db6abd286a4}\index{ArrayList@{ArrayList}!argmax@{argmax}}
+\index{argmax@{argmax}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{argmax()}{argmax()}}
+{\footnotesize\ttfamily \label{class_array_list_af6c5e07d985458bc9a147db6abd286a4} 
+int Array\+List\+::argmax (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Returns the index of the largest element in the array. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if the list is empty. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_array_list_ae978ddfa3b7f05c03abe7b4e2a55e1b8}\index{ArrayList@{ArrayList}!argmin@{argmin}}
+\index{argmin@{argmin}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{argmin()}{argmin()}}
+{\footnotesize\ttfamily \label{class_array_list_ae978ddfa3b7f05c03abe7b4e2a55e1b8} 
+int Array\+List\+::argmin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Returns the index of the smallest element in the array. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if the list is empty. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_array_list_a8f1d59f20815118e33e01d2d68932d7b}\index{ArrayList@{ArrayList}!count@{count}}
+\index{count@{count}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{count()}{count()}}
+{\footnotesize\ttfamily \label{class_array_list_a8f1d59f20815118e33e01d2d68932d7b} 
+int Array\+List\+::count (\begin{DoxyParamCaption}\item[{int}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Returns the number of times a given element occurs in the array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Value to be counted in the array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns number of occurences. 
+\end{DoxyReturn}
+\Hypertarget{class_array_list_a56e9d38dd83e044b683d343e11bf6893}\index{ArrayList@{ArrayList}!insert@{insert}}
+\index{insert@{insert}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily \label{class_array_list_a56e9d38dd83e044b683d343e11bf6893} 
+void Array\+List\+::insert (\begin{DoxyParamCaption}\item[{int}]{val}{, }\item[{int}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Inserts a value val at the index index in the list. 
+
+The function shifts the elements at the index and all after the index one position to the right. Inserting at index == \doxylink{class_array_list_ae54946fed62e0f4bd65653e76d04914f}{length()} is allowed (same as \doxylink{class_array_list_a59cabf7b863031b0d9e71fea5899816b}{append()} funciton). Throws std\+::range\+\_\+error if index \texorpdfstring{$>$}{>} \doxylink{class_array_list_ae54946fed62e0f4bd65653e76d04914f}{length()}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em val} & The value to insert in the \doxylink{class_array_list}{Array\+List} object. \\
+\hline
+{\em index} & The position in the \doxylink{class_array_list}{Array\+List} object to insert at. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_array_list_ae54946fed62e0f4bd65653e76d04914f}\index{ArrayList@{ArrayList}!length@{length}}
+\index{length@{length}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{length()}{length()}}
+{\footnotesize\ttfamily \label{class_array_list_ae54946fed62e0f4bd65653e76d04914f} 
+int Array\+List\+::length (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+Length of \doxylink{class_array_list}{Array\+List} object. 
+\end{DoxyReturn}
+\Hypertarget{class_array_list_a6f6becd145fb800eb30a79893f40c86e}\index{ArrayList@{ArrayList}!max@{max}}
+\index{max@{max}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{max()}{max()}}
+{\footnotesize\ttfamily \label{class_array_list_a6f6becd145fb800eb30a79893f40c86e} 
+int Array\+List\+::max (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Returns the largest element in the array. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if the list is empty. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_array_list_a371d9ef327a77e79296a6aa5ca330616}\index{ArrayList@{ArrayList}!min@{min}}
+\index{min@{min}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{min()}{min()}}
+{\footnotesize\ttfamily \label{class_array_list_a371d9ef327a77e79296a6aa5ca330616} 
+int Array\+List\+::min (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Returns the smallest element in the array. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if the list is empty. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_array_list_aa9be37a8efd8141ee7da752e36f427bc}\index{ArrayList@{ArrayList}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \label{class_array_list_aa9be37a8efd8141ee7da752e36f427bc} 
+int \& Array\+List\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Returns a reference to the element at a given index. 
+
+The function allows for both reading and writing to the mutable element. Throws\+: std\+::range\+\_\+error if the index is out of bounds.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index to access the \doxylink{class_array_list}{Array\+List} object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to the integer at the given index. 
+\end{DoxyReturn}
+\Hypertarget{class_array_list_a2bd3f7a1dacb0f567ffff0098716ea8c}\index{ArrayList@{ArrayList}!pop@{pop}}
+\index{pop@{pop}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{pop()}{pop()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_array_list_a2bd3f7a1dacb0f567ffff0098716ea8c} 
+int Array\+List\+::pop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Remove and return the last element. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::range\+\_\+error} & if the \doxylink{class_array_list}{Array\+List} list object is empty. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_array_list_a9440300385cafa265d7320a5dc56274e}\index{ArrayList@{ArrayList}!pop@{pop}}
+\index{pop@{pop}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{pop()}{pop()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_array_list_a9440300385cafa265d7320a5dc56274e} 
+int Array\+List\+::pop (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Remove and return element at index. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::range\+\_\+error} & if index is out of bounds. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_array_list_accc0d88f535d5723c5bf4ab649992333}\index{ArrayList@{ArrayList}!print@{print}}
+\index{print@{print}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily \label{class_array_list_accc0d88f535d5723c5bf4ab649992333} 
+void Array\+List\+::print (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+prints the contents of the list to standard output. 
+
+Print-\/\+Format\+: \doxylink{class_array_list_a89393b81f4288f91da93c8c5c46d4468}{Array\+List(\mbox{[}a, b, c\mbox{]})}. \Hypertarget{class_array_list_aef10b72fd561de8f16b06bebc0273023}\index{ArrayList@{ArrayList}!remove@{remove}}
+\index{remove@{remove}!ArrayList@{ArrayList}}
+\doxysubsubsection{\texorpdfstring{remove()}{remove()}}
+{\footnotesize\ttfamily \label{class_array_list_aef10b72fd561de8f16b06bebc0273023} 
+void Array\+List\+::remove (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Remove element at index. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::range\+\_\+error} & if index is out of bounds. \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+array\+\_\+list.\+h\item 
+array\+\_\+list.\+cpp\end{DoxyCompactItemize}
