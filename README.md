@@ -79,7 +79,7 @@ University of Oslo (UiO)
 
 ## Project Histories
 
-### Projects (with full origina l history)
+### Projects (with full original history)
 
 - **Project 0:** [browse files](../../tree/project0-history) • [commit history](../../commits/project0-history)
 - **Project 1:** [browse files](../../tree/project1-history) • [commit history](../../commits/project1-history)
