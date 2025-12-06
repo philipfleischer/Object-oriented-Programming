@@ -1,0 +1,41 @@
+\doxysection{linked\+\_\+array\+\_\+list.\+h}
+\hypertarget{linked__array__list_8h_source}{}\label{linked__array__list_8h_source}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}array\_list.h"{}}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_array_list_node_a24c56929f7febcd52ab394116cb1d8e2}{ArrayListNode}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ std::unique\_ptr<ArrayList>\ value;\ \textcolor{comment}{//\ The\ unique\ pointer\ where\ we\ store\ the\ ArrayList\ object}}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{struct_array_list_node_a24c56929f7febcd52ab394116cb1d8e2}{ArrayListNode}}\ *prev;}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{struct_array_list_node_a24c56929f7febcd52ab394116cb1d8e2}{ArrayListNode}}\ *next;}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{struct_array_list_node_a24c56929f7febcd52ab394116cb1d8e2}{ArrayListNode}}(std::vector<int>\ values,\ \mbox{\hyperlink{struct_array_list_node_a24c56929f7febcd52ab394116cb1d8e2}{ArrayListNode}}\ *prev,\ \mbox{\hyperlink{struct_array_list_node_a24c56929f7febcd52ab394116cb1d8e2}{ArrayListNode}}\ *next);}
+\DoxyCodeLine{00024\ \};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_linked_array_list_a43ab6a32d74d8429439a5e363a48542f}{LinkedArrayList}}}
+\DoxyCodeLine{00033\ \{}
+\DoxyCodeLine{00034\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{struct_array_list_node}{ArrayListNode}}\ *\_head;\ \textcolor{comment}{//\ Pointer\ to\ the\ first\ node\ (nullptr\ if\ empty).}}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{struct_array_list_node}{ArrayListNode}}\ *\_tail;\ \textcolor{comment}{//\ Pointer\ to\ the\ last\ node\ (nullptr\ if\ empty).}}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{int}\ \_size;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ nodes\ in\ the\ list.}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{struct_array_list_node}{ArrayListNode}}\ *\_node\_at(\textcolor{keywordtype}{int}\ index);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{class_linked_array_list_a43ab6a32d74d8429439a5e363a48542f}{LinkedArrayList}}();}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{class_linked_array_list_a4718a77a6e27df0f6b32365e8368faab}{\string~LinkedArrayList}}();}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_linked_array_list_abd505cd9207a29e875b6f9030d505a8e}{append}}(std::vector<int>\ values);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_linked_array_list_ae55e13a2abf6e1c844254a701eebf2b4}{print}}();}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00081\ \ \ \ \ std::unique\_ptr<ArrayList>\ \&\mbox{\hyperlink{class_linked_array_list_a1922eac2bfeef8921b0cf0528e707bab}{operator[]}}(\textcolor{keywordtype}{int}\ index);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_linked_array_list_acfcb35eda9537ef8102e0047db2be5ca}{length}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \_size;\ \}}
+\DoxyCodeLine{00085\ \};}
+
+\end{DoxyCode}
