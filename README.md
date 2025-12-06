@@ -81,7 +81,18 @@ University of Oslo (UiO)
 
 ### Projects (with full original history)
 
-- **Project 0:** [browse files](../../tree/project0-history) • [commit history](../../commits/project0-history)
-- **Project 1:** [browse files](../../tree/project1-history) • [commit history](../../commits/project1-history)
-- **Project 2:** [browse files](../../tree/project2-history) • [commit history](../../commits/project2-history)
-- **Project 3:** [browse files](../../tree/project3-history) • [commit history](../../commits/project3-history)
+## 🧩 Projects (with full commit history)
+
+Each project below was originally developed as part of the IN1910 — Object-Oriented Programming for Scientific Applications course at the University of Oslo.
+The full development history (commits, merges, authorship, and evolution) has been preserved using git filter-repo.
+
+All projects are preserved with complete Git history from the original UiO repositories.
+
+| Project   | Description                                    | Browse                                                 | Commit History                            |
+| --------- | ---------------------------------------------- | ------------------------------------------------------ | ----------------------------------------- |
+| Project 0 | Numerical modeling basics                      | [Files](../../tree/project0-history/Projects/project0) | [Commits](../../commits/project0-history) |
+| Project 1 | Classical mechanics and ODE solvers            | [Files](../../tree/project1-history/Projects/project1) | [Commits](../../commits/project1-history) |
+| Project 2 | Simulation and energy analysis                 | [Files](../../tree/project2-history/Projects/project2) | [Commits](../../commits/project2-history) |
+| Project 3 | Advanced OOP project with plotting and physics | [Files](../../tree/project3-history/Projects/project3) | [Commits](../../commits/project3-history) |
+
+To verify individual contributions, see the [commit history per project](#projects-with-full-commit-history).
