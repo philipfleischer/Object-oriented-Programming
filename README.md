@@ -79,9 +79,9 @@ University of Oslo (UiO)
 
 ## Project Histories
 
-### Project histories
+### Projects (with full original history)
 
-- [Project 0 full commit history (branch)](../../tree/project0-history)
-- [Project 1 full commit history (branch)](../../tree/project1-history)
-- [Project 2 full commit history (branch)](../../tree/project2-history)
-- [Project 3 full commit history (branch)](../../tree/project3-history)
+- **Project 0:** [browse files](../../tree/project0-history) • [commit history](../../commits/project0-history)
+- **Project 1:** [browse files](../../tree/project1-history) • [commit history](../../commits/project1-history)
+- **Project 2:** [browse files](../../tree/project2-history) • [commit history](../../commits/project2-history)
+- **Project 3:** [browse files](../../tree/project3-history) • [commit history](../../commits/project3-history)
