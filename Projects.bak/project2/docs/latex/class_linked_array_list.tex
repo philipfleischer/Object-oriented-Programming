@@ -1,0 +1,130 @@
+\doxysection{Linked\+Array\+List Class Reference}
+\hypertarget{class_linked_array_list}{}\label{class_linked_array_list}\index{LinkedArrayList@{LinkedArrayList}}
+
+
+A doubly linked list class, where each node holds an \doxylink{class_array_list}{Array\+List} object.  
+
+
+
+
+{\ttfamily \#include $<$linked\+\_\+array\+\_\+list.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_linked_array_list_a43ab6a32d74d8429439a5e363a48542f}{Linked\+Array\+List}} ()
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{class_linked_array_list}{Linked\+Array\+List} objcet. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_linked_array_list_a4718a77a6e27df0f6b32365e8368faab}{\texorpdfstring{$\sim$}{\string~}\+Linked\+Array\+List}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for \doxylink{class_linked_array_list}{Linked\+Array\+List} object that releases all the nodes from memory. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_linked_array_list_abd505cd9207a29e875b6f9030d505a8e}{append}} (std\+::vector$<$ int $>$ values)
+\begin{DoxyCompactList}\small\item\em Appends a new node with an \doxylink{class_array_list}{Array\+List} containing the given values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_linked_array_list_ae55e13a2abf6e1c844254a701eebf2b4}{print}} ()
+\begin{DoxyCompactList}\small\item\em Prints the entire \doxylink{class_linked_array_list}{Linked\+Array\+List} structure. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_array_list}{Array\+List}} $>$ \& \mbox{\hyperlink{class_linked_array_list_a1922eac2bfeef8921b0cf0528e707bab}{operator\mbox{[}$\,$\mbox{]}}} (int index)
+\begin{DoxyCompactList}\small\item\em This enters the \doxylink{class_array_list}{Array\+List} object at the node index given as an argument. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_linked_array_list_acfcb35eda9537ef8102e0047db2be5ca}{length}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A doubly linked list class, where each node holds an \doxylink{class_array_list}{Array\+List} object. 
+
+This class behaves similarly to \doxylink{class_linked_list}{Linked\+List}, but each element in the list is an instance of the datastructure \doxylink{class_array_list}{Array\+List}. 
+
+\label{doc-constructors}
+\Hypertarget{class_linked_array_list_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_linked_array_list_a43ab6a32d74d8429439a5e363a48542f}\index{LinkedArrayList@{LinkedArrayList}!LinkedArrayList@{LinkedArrayList}}
+\index{LinkedArrayList@{LinkedArrayList}!LinkedArrayList@{LinkedArrayList}}
+\doxysubsubsection{\texorpdfstring{LinkedArrayList()}{LinkedArrayList()}}
+{\footnotesize\ttfamily \label{class_linked_array_list_a43ab6a32d74d8429439a5e363a48542f} 
+Linked\+Array\+List\+::\+Linked\+Array\+List (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for \doxylink{class_linked_array_list}{Linked\+Array\+List} objcet. 
+
+Constructs an empty \doxylink{class_linked_array_list}{Linked\+Array\+List} object with currently no nodes. \Hypertarget{class_linked_array_list_a4718a77a6e27df0f6b32365e8368faab}\index{LinkedArrayList@{LinkedArrayList}!````~LinkedArrayList@{\texorpdfstring{$\sim$}{\string~}LinkedArrayList}}
+\index{````~LinkedArrayList@{\texorpdfstring{$\sim$}{\string~}LinkedArrayList}!LinkedArrayList@{LinkedArrayList}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}LinkedArrayList()}{\string~LinkedArrayList()}}
+{\footnotesize\ttfamily \label{class_linked_array_list_a4718a77a6e27df0f6b32365e8368faab} 
+Linked\+Array\+List\+::\texorpdfstring{$\sim$}{\string~}\+Linked\+Array\+List (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor for \doxylink{class_linked_array_list}{Linked\+Array\+List} object that releases all the nodes from memory. 
+
+Destructor that deallocates/frees all the nodes and their subsequent Array\+Lists. 
+
+\label{doc-func-members}
+\Hypertarget{class_linked_array_list_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_linked_array_list_abd505cd9207a29e875b6f9030d505a8e}\index{LinkedArrayList@{LinkedArrayList}!append@{append}}
+\index{append@{append}!LinkedArrayList@{LinkedArrayList}}
+\doxysubsubsection{\texorpdfstring{append()}{append()}}
+{\footnotesize\ttfamily \label{class_linked_array_list_abd505cd9207a29e875b6f9030d505a8e} 
+void Linked\+Array\+List\+::append (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int $>$}]{values}{}\end{DoxyParamCaption})}
+
+
+
+Appends a new node with an \doxylink{class_array_list}{Array\+List} containing the given values. 
+
+Appends a new \doxylink{struct_array_list_node}{Array\+List\+Node} at the end of the list with the parameter values.
+
+
+\begin{DoxyParams}{Parameters}
+{\em values} & A vector of integers to initialize the new \doxylink{class_array_list}{Array\+List} object. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_linked_array_list_acfcb35eda9537ef8102e0047db2be5ca}\index{LinkedArrayList@{LinkedArrayList}!length@{length}}
+\index{length@{length}!LinkedArrayList@{LinkedArrayList}}
+\doxysubsubsection{\texorpdfstring{length()}{length()}}
+{\footnotesize\ttfamily \label{class_linked_array_list_acfcb35eda9537ef8102e0047db2be5ca} 
+int Linked\+Array\+List\+::length (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Returns}
+Return the number of nodes in the list. 
+\end{DoxyReturn}
+\Hypertarget{class_linked_array_list_a1922eac2bfeef8921b0cf0528e707bab}\index{LinkedArrayList@{LinkedArrayList}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!LinkedArrayList@{LinkedArrayList}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \label{class_linked_array_list_a1922eac2bfeef8921b0cf0528e707bab} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_array_list}{Array\+List}} $>$ \& Linked\+Array\+List\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption})}
+
+
+
+This enters the \doxylink{class_array_list}{Array\+List} object at the node index given as an argument. 
+
+Returns a reference to the unique\+\_\+ptr$<$\+Array\+List$>$ object stored at the index in the list.
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the node to access. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to the unique\+\_\+ptr$<$\+Array\+List$>$ object contained in the node. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::range\+\_\+error} & if index is out of bounds. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{class_linked_array_list_ae55e13a2abf6e1c844254a701eebf2b4}\index{LinkedArrayList@{LinkedArrayList}!print@{print}}
+\index{print@{print}!LinkedArrayList@{LinkedArrayList}}
+\doxysubsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily \label{class_linked_array_list_ae55e13a2abf6e1c844254a701eebf2b4} 
+void Linked\+Array\+List\+::print (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Prints the entire \doxylink{class_linked_array_list}{Linked\+Array\+List} structure. 
+
+This prints all the \doxylink{class_array_list}{Array\+List} object in the Linked\+Arra\+List object in a nested list format.
+
+Output format for print\+: \mbox{[} \mbox{[}1, 2\mbox{]} \mbox{[}4, 5, 6\mbox{]} \mbox{]} 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+linked\+\_\+array\+\_\+list.\+h\item 
+linked\+\_\+array\+\_\+list.\+cpp\end{DoxyCompactItemize}
