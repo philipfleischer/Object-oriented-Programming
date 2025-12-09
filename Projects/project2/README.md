@@ -1,9 +1,5 @@
 # Project 2
 
-GitHub UIO URL: [https://github.uio.no/IN1910/H25_project2_philipef_stanisok_susanhop/tree/main](https://github.uio.no/IN1910/H25_project2_philipef_stanisok_susanhop/tree/main)
-
---
-
 ## Commands
 
 To compile the project:
