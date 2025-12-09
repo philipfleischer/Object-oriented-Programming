@@ -1,8 +1,4 @@
-# H25_project1_philipef_stanisok
-Project 1 for philipef (philipef@mail.uio.no) and stanisok (stanisok@mail.uio.no) and susanhop (susanhop@mail.uio.no)
-
-URL to GitHub: https://github.uio.no/IN1910/H25_project1_philipef_stanisok_susanhop
-
+# Project 1
 
 Exercise 2g Question:
     Is the energy conserved?
